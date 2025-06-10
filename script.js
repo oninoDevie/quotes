@@ -26,7 +26,8 @@ Reliable sources say
 (collected from Edmundo's texts in the New World)
 that Wagner's nightmares had been nothing more than an enchantment
 from the non-demiurge and the evils of death,
-and the comedy he didn't write [...]`
+and the comedy he didn't write [...]`,
+                audio: "audio/audio2.mp3"
             },
             {
                 id: "Supplizio",
@@ -247,27 +248,31 @@ For he always argued that he had already written everything in his notebook and 
             const quote = this.quotes[index];
             
             // Update title and counter
-            this.elements.quoteTitle.textContent = quote.id;
+            this.elements.quoteTitle.textContent = `Quote ${quote.id}`;
             this.elements.currentQuote.textContent = index + 1;
-
+            
             // Process and display text
-            this.processText(quote.text);
-            
-            // Reset progress
-            this.updateProgress(0);
-            
-            // Update button states
-            this.updateNavigationButtons();
+            this.words = this.processText(quote.text);
+            this.elements.quoteDisplay.innerHTML = this.words.map(word => 
+                `<span class="word">${this.escapeHtml(word)}</span>`
+            ).join(' ');
 
-            // Cargar audio automáticamente si existe
+            // Load audio if available
             if (quote.audio) {
                 this.elements.audioPlayer.src = quote.audio;
-                this.elements.audioPlayer.style.display = 'block';
                 this.loadAudioTimingsFromFile(quote.audio);
             } else {
                 this.elements.audioPlayer.src = '';
-                this.elements.audioPlayer.style.display = 'none';
+                this.audioTimings = [];
             }
+
+            // Reset state
+            this.currentWordIndex = 0;
+            this.clearHighlights();
+            this.updateProgress(0);
+            this.updateNavigationButtons();
+            this.updatePlayButton();
+
         } catch (error) {
             this.showError('Failed to load quote: ' + error.message);
         }
@@ -276,17 +281,8 @@ For he always argued that he had already written everything in his notebook and 
     processText(text) {
         // Clean and split text into words
         const cleanText = text.trim();
-        this.words = cleanText.split(/\s+/).filter(word => word.length > 0);
-
-        // Create HTML with wrapped words
-        const wrappedText = this.words.map((word, index) => {
-            const escapedWord = this.escapeHtml(word);
-            return `<span class="word" data-index="${index}">${escapedWord}</span>`;
-        }).join(' ');
-
-        // Update display
-        this.elements.quoteDisplay.innerHTML = wrappedText;
-        this.currentWordIndex = 0;
+        const words = cleanText.split(/\s+/).filter(word => word.length > 0);
+        return words;
     }
 
     escapeHtml(text) {
@@ -527,6 +523,48 @@ For he always argued that he had already written everything in his notebook and 
         setTimeout(() => {
             this.elements.errorMessage.classList.remove('show');
         }, 5000);
+    }
+
+    startSpeechSynthesis() {
+        if (!this.checkSpeechSynthesisSupport()) {
+            return;
+        }
+
+        // Cancel any ongoing speech
+        this.speechSynthesis.cancel();
+
+        // Create new utterance
+        const utterance = new SpeechSynthesisUtterance(this.quotes[this.currentQuoteIndex].text);
+        utterance.rate = this.speechRate;
+        
+        // Handle word boundaries
+        utterance.onboundary = (event) => {
+            if (event.name === 'word') {
+                const wordIndex = this.words.findIndex(word => 
+                    event.charIndex >= this.quotes[this.currentQuoteIndex].text.indexOf(word) &&
+                    event.charIndex < this.quotes[this.currentQuoteIndex].text.indexOf(word) + word.length
+                );
+                if (wordIndex >= 0) {
+                    this.highlightWord(wordIndex);
+                    this.updateProgress((wordIndex / this.words.length) * 100);
+                }
+            }
+        };
+
+        // Handle end of speech
+        utterance.onend = () => {
+            this.isPlaying = false;
+            this.isPaused = false;
+            this.updatePlayButton();
+            this.updateProgress(100);
+        };
+
+        // Start speaking
+        this.currentUtterance = utterance;
+        this.speechSynthesis.speak(utterance);
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.updatePlayButton();
     }
 }
 
