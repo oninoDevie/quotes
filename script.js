@@ -68,7 +68,8 @@ as something fictitious.
 But solitude cannot be fair,
 because the "Other" exists (who denies it at once)
 and is the most coveted by men:
-HELL.`
+HELL.`,
+                audio: "audio/audio5.mp3"
             },
             {
                 id: "V",
@@ -78,7 +79,8 @@ that has no fog,
 we are real
 like an old song,
 but if we awaken
-we wouldn't even know the name.`
+we wouldn't even know the name.`,
+                audio: "audio/audio6.mp3"
             },
             {
                 id: "VI",
