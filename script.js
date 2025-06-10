@@ -43,7 +43,8 @@ the unknown paths,
 the colors of bottles,
 the flavors of a "Forbidden Kiss"
 (which is probably a black and white movie)
-Or simply the variant of a poorly delivered speech`
+Or simply the variant of a poorly delivered speech`,
+                audio: "audio/audio3.mp3"
             },
             {
                 id: "INFIERNO XIII",
@@ -54,7 +55,8 @@ and, after six nights,
 there was no record of fantasies;
 your mother's torments and the cries of the stars
 have not aged like wine,
-neither in Hell nor in our memories.`
+neither in Hell nor in our memories.`,
+                audio: "audio/audio4.mp3"
             },
             {
                 id: "IV",
