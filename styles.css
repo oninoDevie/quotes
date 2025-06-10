@@ -885,6 +885,53 @@ body {
     .settings-panel.open {
         right: 0;
     }
+
+    /* Tracker specific responsive styles */
+    .objective-tracker-section .tracker-title {
+        font-size: 2rem;
+    }
+
+    .objective-tracker-section .tracker-subtitle {
+        font-size: 1rem;
+    }
+
+    .filter-priority-container,
+    .add-objective-form .form-fields-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .add-objective-form .form-fields-grid .btn-primary {
+        width: 100%;
+    }
+
+    .objectives-table-container {
+        overflow-x: auto; /* Enable horizontal scrolling for the table */
+    }
+
+    .objectives-table {
+        min-width: 600px; /* Ensure table doesn't collapse too much */
+    }
+
+    .objectives-table th,
+    .objectives-table td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .objectives-table input[type="text"],
+    .objectives-table select,
+    .objectives-table button {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .objectives-table .rename-btn,
+    .objectives-table .save-btn,
+    .objectives-table .delete-btn {
+        margin-right: 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -931,6 +978,33 @@ body {
     .modal-form button {
         padding: 0.8rem;
         font-size: 1rem;
+    }
+
+    /* Further adjustments for smaller screens (tracker) */
+    .objective-tracker-section .tracker-title {
+        font-size: 1.8rem;
+    }
+
+    .objective-tracker-section .tracker-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .objectives-table th,
+    .objectives-table td {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .objectives-table input[type="text"],
+    .objectives-table select,
+    .objectives-table button {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .add-objective-form,
+    .filter-priority-container {
+        padding: 1rem;
     }
 }
 

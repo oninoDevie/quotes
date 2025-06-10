@@ -23,174 +23,83 @@
                 </a>
                 <a href="quotes.html" class="nav-link">
                     <i data-feather="book"></i>
-                    <span>Quotes</span>
+                    <span>Citas</span>
                 </a>
                 <a href="progress.html" class="nav-link active">
                     <i data-feather="trending-up"></i>
-                    <span>Progress</span>
+                    <span>Progreso</span>
                 </a>
-                <a href="settings.html" class="nav-link">
+                <a href="#" class="nav-link" id="settingsLink">
                     <i data-feather="settings"></i>
-                    <span>Settings</span>
+                    <span>Ajustes</span>
                 </a>
             </div>
         </nav>
 
         <main class="main-content">
-            <section class="progress-header">
-                <h2>Track Your Progress</h2>
-                <p>Update your progress in different areas</p>
-            </section>
+            <section class="objective-tracker-section">
+                <h1 class="tracker-title">Tracker de Objetivos</h1>
+                <p class="tracker-subtitle">Matriz de Eisenhower - Máximo 3 objetivos por prioridad</p>
 
-            <section class="progress-sections">
-                <div class="progress-section reading">
-                    <div class="section-header">
-                        <h3>Reading Progress</h3>
-                        <button class="update-button" data-category="reading">
-                            <i data-feather="edit-2"></i>
-                            Update
-                        </button>
-                    </div>
-                    <div class="progress-details">
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-label">Books Read</span>
-                                <span class="stat-value">12</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Pages Today</span>
-                                <span class="stat-value">45</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Goal Progress</span>
-                                <span class="stat-value">75%</span>
-                            </div>
-                        </div>
-                        <div class="progress-chart">
-                            <!-- Chart will be added via JavaScript -->
-                        </div>
-                    </div>
+                <!-- Filtro de prioridad -->
+                <div class="filter-priority-container">
+                    <label for="filterPriority">Mostrar objetivos de prioridad:</label>
+                    <select id="filterPriority" class="select-field">
+                        <option value="1">1 (Alta)</option>
+                        <option value="2">2 (Media)</option>
+                        <option value="3">3 (Baja)</option>
+                    </select>
                 </div>
 
-                <div class="progress-section running">
-                    <div class="section-header">
-                        <h3>Running Progress</h3>
-                        <button class="update-button" data-category="running">
-                            <i data-feather="edit-2"></i>
-                            Update
-                        </button>
-                    </div>
-                    <div class="progress-details">
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-label">Total Distance</span>
-                                <span class="stat-value">120 km</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">This Week</span>
-                                <span class="stat-value">15 km</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Goal Progress</span>
-                                <span class="stat-value">60%</span>
-                            </div>
+                <!-- Formulario para agregar -->
+                <form id="addObjectiveForm" class="add-objective-form">
+                    <h2 class="form-title">Agregar Objetivo Nuevo</h2>
+                    <div class="form-fields-grid">
+                        <div>
+                            <label for="priorityForm">Prioridad:</label>
+                            <select id="priorityForm" class="select-field">
+                                <option value="1">1 (Alta)</option>
+                                <option value="2">2 (Media)</option>
+                                <option value="3">3 (Baja)</option>
+                            </select>
                         </div>
-                        <div class="progress-chart">
-                            <!-- Chart will be added via JavaScript -->
+                        
+                        <div>
+                            <label for="urgencyForm">Urgencia:</label>
+                            <select id="urgencyForm" class="select-field">
+                                <option value="+">+ (Baja)</option>
+                                <option value="++">++ (Media)</option>
+                                <option value="+++">+++ (Alta)</option>
+                            </select>
                         </div>
+                        
+                        <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
-                </div>
+                </form>
 
-                <div class="progress-section sports">
-                    <div class="section-header">
-                        <h3>Sports Progress</h3>
-                        <button class="update-button" data-category="sports">
-                            <i data-feather="edit-2"></i>
-                            Update
-                        </button>
-                    </div>
-                    <div class="progress-details">
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-label">Workouts</span>
-                                <span class="stat-value">24</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">This Week</span>
-                                <span class="stat-value">3</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Goal Progress</span>
-                                <span class="stat-value">45%</span>
-                            </div>
-                        </div>
-                        <div class="progress-chart">
-                            <!-- Chart will be added via JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="progress-section entertainment">
-                    <div class="section-header">
-                        <h3>Entertainment Progress</h3>
-                        <button class="update-button" data-category="entertainment">
-                            <i data-feather="edit-2"></i>
-                            Update
-                        </button>
-                    </div>
-                    <div class="progress-details">
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-label">Movies Watched</span>
-                                <span class="stat-value">45</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">This Month</span>
-                                <span class="stat-value">8</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Goal Progress</span>
-                                <span class="stat-value">90%</span>
-                            </div>
-                        </div>
-                        <div class="progress-chart">
-                            <!-- Chart will be added via JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="progress-section productivity">
-                    <div class="section-header">
-                        <h3>Productivity Progress</h3>
-                        <button class="update-button" data-category="productivity">
-                            <i data-feather="edit-2"></i>
-                            Update
-                        </button>
-                    </div>
-                    <div class="progress-details">
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-label">Tasks Completed</span>
-                                <span class="stat-value">156</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">This Week</span>
-                                <span class="stat-value">23</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-label">Goal Progress</span>
-                                <span class="stat-value">85%</span>
-                            </div>
-                        </div>
-                        <div class="progress-chart">
-                            <!-- Chart will be added via JavaScript -->
-                        </div>
-                    </div>
+                <!-- Tabla de objetivos filtrados -->
+                <div class="objectives-table-container">
+                    <p id="loadingMessage" class="loading-message" style="display: none;">Cargando objetivos...</p>
+                    <table class="objectives-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Prioridad</th>
+                                <th>Urgencia</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="objectivesTableBody">
+                            <!-- Objectives will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    <p id="noObjectivesMessage" class="no-objectives-message" style="display: none;">No hay objetivos con esta prioridad</p>
                 </div>
             </section>
         </main>
 
-        <!-- Progress Update Modal -->
+        <!-- Progress Update Modal (Keep this for now, it's not related to objectives directly) -->
         <div class="modal" id="progressModal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -199,25 +108,19 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="progressForm">
-                        <div class="form-group">
-                            <label for="progressValue">Progress Value</label>
-                            <input type="number" id="progressValue" min="0" max="100" step="1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="progressNote">Note (optional)</label>
-                            <textarea id="progressNote" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Save Progress</button>
-                    </form>
-                </div>
+                <form class="modal-form">
+                    <label for="updateValue">Value:</label>
+                    <input type="number" id="updateValue" placeholder="Enter value">
+                    <label for="updateNotes">Notes (Optional):</label>
+                    <textarea id="updateNotes" placeholder="Add any notes..."></textarea>
+                    <button type="submit">Update</button>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="progress.js"></script>
+    <script src="https://unpkg.com/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
 </body>
 </html> 

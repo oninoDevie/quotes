@@ -6,6 +6,7 @@ import { config } from './config/config';
 import quoteRoutes from './routes/quote.routes';
 import userRoutes from './routes/user.routes';
 import favoriteRoutes from './routes/favorite.routes';
+import objectiveRoutes from './routes/objective.routes';
 
 // Initialize Prisma client
 export const prisma = new PrismaClient();
@@ -31,6 +32,7 @@ app.use('/api', ClerkExpressRequireAuth());
 app.use('/api/quotes', quoteRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/favorites', favoriteRoutes);
+app.use('/api/objectives', objectiveRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
