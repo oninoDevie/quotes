@@ -85,14 +85,12 @@ we wouldn't even know the name.`,
             {
                 id: "VII",
                 text: `
-I had no choice but to open my backpack, take out the revolver, and shoot him exactly below the left eye. The choice of left or right was nothing more than a whim of a lady who wore red pants, a white shirt, black shoes (probably a luxury brand). Nothing more than a dark desire for a problem that began in the third week of the "Day of Dreams and Absurd Games." It's already dinnertime, and the coffee has no sugar. We hope that of the seven songs we chose the night before, all have lyrics that speak of women and forgotten wars. [...]`,
-                audio: "audio/audio5.mp3"
+I had no choice but to open my backpack, take out the revolver, and shoot him exactly below the left eye. The choice of left or right was nothing more than a whim of a lady who wore red pants, a white shirt, black shoes (probably a luxury brand). Nothing more than a dark desire for a problem that began in the third week of the "Day of Dreams and Absurd Games." It's already dinnertime, and the coffee has no sugar. We hope that of the seven songs we chose the night before, all have lyrics that speak of women and forgotten wars. [...]`
             },
             {
                 id: "VIII",
                 text: `
-It was that one could no longer write on the machine in this way because that's what they had told him in that house where everyone wrote like this: "To the rhythm of the triangle to the rhythm of another similar figure (which evidently wasn't a triangle, perhaps it was a black dog or our failure to shine)`,
-                audio: "audio/audio6.mp3"
+It was that one could no longer write on the machine in this way because that's what they had told him in that house where everyone wrote like this: "To the rhythm of the triangle to the rhythm of another similar figure (which evidently wasn't a triangle, perhaps it was a black dog or our failure to shine)`
             },
             {
                 id: "IX",
