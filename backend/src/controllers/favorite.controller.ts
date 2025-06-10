@@ -32,10 +32,14 @@ export const favoriteController = {
 
       res.status(201).json(favorite);
     } catch (error) {
-      if (error.code === 'P2002') {
+      if (error instanceof Error && (error as any).code === 'P2002') {
         return res.status(400).json({ error: 'Quote is already in favorites' });
       }
-      res.status(500).json({ error: 'Error adding to favorites' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error adding to favorites' });
+      }
     }
   },
 
@@ -64,7 +68,11 @@ export const favoriteController = {
 
       res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: 'Error removing from favorites' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error removing from favorites' });
+      }
     }
   },
 
@@ -83,7 +91,11 @@ export const favoriteController = {
 
       res.json({ isFavorite: !!favorite });
     } catch (error) {
-      res.status(500).json({ error: 'Error checking favorite status' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error checking favorite status' });
+      }
     }
   },
 }; 

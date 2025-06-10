@@ -20,7 +20,11 @@ export const quoteController = {
       });
       res.json(quotes);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching quotes' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error fetching quotes' });
+      }
     }
   },
 
@@ -45,7 +49,11 @@ export const quoteController = {
       }
       res.json(quote);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching quote' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error fetching quote' });
+      }
     }
   },
 
@@ -66,7 +74,11 @@ export const quoteController = {
       });
       res.status(201).json(quote);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating quote' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error creating quote' });
+      }
     }
   },
 
@@ -100,7 +112,11 @@ export const quoteController = {
       });
       res.json(updatedQuote);
     } catch (error) {
-      res.status(500).json({ error: 'Error updating quote' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error updating quote' });
+      }
     }
   },
 
@@ -127,7 +143,11 @@ export const quoteController = {
       });
       res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: 'Error deleting quote' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error deleting quote' });
+      }
     }
   },
 }; 

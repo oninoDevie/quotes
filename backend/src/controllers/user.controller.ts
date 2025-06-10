@@ -27,7 +27,11 @@ export const userController = {
 
       res.json(user);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching user profile' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error fetching user profile' });
+      }
     }
   },
 
@@ -56,7 +60,11 @@ export const userController = {
 
       res.json(user);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating/updating user profile' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error creating/updating user profile' });
+      }
     }
   },
 
@@ -77,7 +85,11 @@ export const userController = {
 
       res.json(user.quotes);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching user quotes' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error fetching user quotes' });
+      }
     }
   },
 
@@ -102,7 +114,11 @@ export const userController = {
 
       res.json(user.favorites);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching user favorites' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Error fetching user favorites' });
+      }
     }
   },
 }; 
