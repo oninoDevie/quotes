@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplizios enumerados - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="main-nav">
+            <div class="nav-brand">
+                <h1>Supplizios enumerados</h1>
+            </div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link active">
+                    <i data-feather="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="quotes.html" class="nav-link">
+                    <i data-feather="book"></i>
+                    <span>Quotes</span>
+                </a>
+                <a href="progress.html" class="nav-link">
+                    <i data-feather="trending-up"></i>
+                    <span>Progress</span>
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section class="welcome-section">
+                <h2>Welcome to Supplizios enumerados</h2>
+                <p>Track your progress and explore literary quotes</p>
+            </section>
+
+            <section class="progress-overview">
+                <h3>Your Progress</h3>
+                <div class="progress-cards">
+                    <div class="progress-card reading">
+                        <div class="card-icon">
+                            <i data-feather="book-open"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Reading</h4>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%"></div>
+                            </div>
+                            <span class="progress-text">75% Complete</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card running">
+                        <div class="card-icon">
+                            <i data-feather="activity"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Running</h4>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%"></div>
+                            </div>
+                            <span class="progress-text">60% Complete</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card sports">
+                        <div class="card-icon">
+                            <i data-feather="award"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Sports</h4>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%"></div>
+                            </div>
+                            <span class="progress-text">45% Complete</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card entertainment">
+                        <div class="card-icon">
+                            <i data-feather="film"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Entertainment</h4>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 90%"></div>
+                            </div>
+                            <span class="progress-text">90% Complete</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-card productivity">
+                        <div class="card-icon">
+                            <i data-feather="check-circle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Productivity</h4>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                            <span class="progress-text">85% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <a href="quotes.html" class="action-button">
+                        <i data-feather="book"></i>
+                        <span>Read Quotes</span>
+                    </a>
+                    <a href="progress.html" class="action-button">
+                        <i data-feather="trending-up"></i>
+                        <span>Update Progress</span>
+                    </a>
+                    <a href="settings.html" class="action-button">
+                        <i data-feather="settings"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="home.js"></script>
+</body>
+</html> 

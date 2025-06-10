@@ -304,6 +304,7 @@ For he always argued that he had already written everything in his notebook and 
         this.audioTimings = []; // Array to store word timings
         this.audioPlayer = null;
         this.currentLanguage = 'en';
+        this.smashCount = 0;
 
         // DOM elements
         this.elements = {
@@ -322,7 +323,8 @@ For he always argued that he had already written everything in his notebook and 
             errorMessage: document.getElementById('errorMessage'),
             audioFile: document.getElementById('audioFile'),
             audioPlayer: document.getElementById('audioPlayer'),
-            languageToggle: document.getElementById('languageToggle')
+            languageToggle: document.getElementById('languageToggle'),
+            smashButton: document.getElementById('smashButton')
         };
 
         this.init();
@@ -369,6 +371,7 @@ For he always argued that he had already written everything in his notebook and 
         this.elements.speechRate.addEventListener('input', () => this.updateSpeechRate());
         this.elements.audioFile.addEventListener('change', (e) => this.handleAudioFile(e));
         this.elements.languageToggle.addEventListener('click', () => this.toggleLanguage());
+        this.elements.smashButton.addEventListener('click', () => this.handleSmash());
 
         // Audio player events
         this.elements.audioPlayer.addEventListener('timeupdate', () => this.updateWordHighlight());
@@ -768,6 +771,29 @@ For he always argued that he had already written everything in his notebook and 
 
     updateTotalQuotes() {
         this.elements.totalQuotes.textContent = this.quotes[this.currentLanguage].length;
+    }
+
+    handleSmash() {
+        this.smashCount++;
+        const mascot = this.elements.smashButton.querySelector('.mascot');
+        const smashText = this.elements.smashButton.querySelector('.smash-text');
+        
+        // Add random rotation to the mascot
+        const randomRotation = Math.random() * 40 - 20; // Random rotation between -20 and 20 degrees
+        mascot.style.transform = `scale(0.8) rotate(${randomRotation}deg)`;
+        
+        // Update smash text with count
+        smashText.textContent = `SMASH! (${this.smashCount})`;
+        
+        // Add a small delay before resetting the mascot
+        setTimeout(() => {
+            mascot.style.transform = '';
+        }, 200);
+
+        // Play a sound effect if available
+        const audio = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU');
+        audio.volume = 0.2;
+        audio.play().catch(() => {}); // Ignore if audio fails to play
     }
 }
 
