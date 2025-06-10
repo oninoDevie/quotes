@@ -59,6 +59,10 @@
 
                 <div class="settings-panel">
                     <div class="setting-group">
+                        <label for="audioFile" class="setting-label">Audio File</label>
+                        <input type="file" id="audioFile" accept="audio/*" class="file-input">
+                    </div>
+                    <div class="setting-group">
                         <label for="highlightColor" class="setting-label">Highlight</label>
                         <div class="color-picker-wrapper">
                             <input type="color" id="highlightColor" value="#4f46e5" class="color-picker">
@@ -77,6 +81,7 @@
             </div>
         </main>
 
+        <audio id="audioPlayer" style="display: none;"></audio>
         <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
     </div>
 

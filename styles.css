@@ -446,9 +446,8 @@ body {
 
 .speed-value {
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
     color: var(--color-text-secondary);
-    min-width: 32px;
+    min-width: 3ch;
     text-align: right;
 }
 
@@ -609,4 +608,26 @@ body {
         text-decoration: underline;
         color: inherit;
     }
+}
+
+.file-input {
+    width: 100%;
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+}
+
+.file-input:hover {
+    border-color: var(--color-primary);
+}
+
+.file-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-light);
 }

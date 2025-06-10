@@ -12,7 +12,8 @@ And on the wall, in black ink, it read:
 The world
 is crumbling
 but in the shape
-of a square`
+of a square`,
+                audio: "audio/audio1.mp3"
             },
             {
                 id: "II",
@@ -149,6 +150,8 @@ For he always argued that he had already written everything in his notebook and 
         this.currentUtterance = null;
         this.speechRate = 1.0;
         this.highlightColor = '#4f46e5';
+        this.audioTimings = []; // Array to store word timings
+        this.audioPlayer = null;
 
         // DOM elements
         this.elements = {
@@ -164,7 +167,9 @@ For he always argued that he had already written everything in his notebook and 
             highlightColor: document.getElementById('highlightColor'),
             speechRate: document.getElementById('speechRate'),
             speedValue: document.getElementById('speedValue'),
-            errorMessage: document.getElementById('errorMessage')
+            errorMessage: document.getElementById('errorMessage'),
+            audioFile: document.getElementById('audioFile'),
+            audioPlayer: document.getElementById('audioPlayer')
         };
 
         this.init();
@@ -208,6 +213,12 @@ For he always argued that he had already written everything in his notebook and 
         // Settings
         this.elements.highlightColor.addEventListener('change', () => this.updateHighlightColor());
         this.elements.speechRate.addEventListener('input', () => this.updateSpeechRate());
+        this.elements.audioFile.addEventListener('change', (e) => this.handleAudioFile(e));
+
+        // Audio player events
+        this.elements.audioPlayer.addEventListener('timeupdate', () => this.updateWordHighlight());
+        this.elements.audioPlayer.addEventListener('ended', () => this.stopReading());
+        this.elements.audioPlayer.addEventListener('error', (e) => this.showError('Audio playback error: ' + e.message));
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => this.handleKeydown(e));
@@ -248,9 +259,15 @@ For he always argued that he had already written everything in his notebook and 
             // Update button states
             this.updateNavigationButtons();
 
-            // Stop any current speech
-            this.stopReading();
-
+            // Cargar audio automáticamente si existe
+            if (quote.audio) {
+                this.elements.audioPlayer.src = quote.audio;
+                this.elements.audioPlayer.style.display = 'block';
+                this.loadAudioTimingsFromFile(quote.audio);
+            } else {
+                this.elements.audioPlayer.src = '';
+                this.elements.audioPlayer.style.display = 'none';
+            }
         } catch (error) {
             this.showError('Failed to load quote: ' + error.message);
         }
@@ -278,103 +295,126 @@ For he always argued that he had already written everything in his notebook and 
         return div.innerHTML;
     }
 
-    togglePlayPause() {
-        if (!this.checkSpeechSynthesisSupport()) return;
+    handleAudioFile(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+            this.elements.audioPlayer.src = url;
+            this.loadAudioTimings(file);
+        }
+    }
 
+    async loadAudioTimings(file) {
         try {
-            if (this.isPlaying && !this.isPaused) {
+            // Here you would implement the logic to load word timings
+            // This could be from a separate JSON file or from the audio file metadata
+            // For now, we'll create dummy timings for demonstration
+            const duration = await this.getAudioDuration(file);
+            this.audioTimings = this.words.map((_, index) => {
+                return (duration / this.words.length) * index;
+            });
+        } catch (error) {
+            this.showError('Failed to load audio timings: ' + error.message);
+        }
+    }
+
+    getAudioDuration(file) {
+        return new Promise((resolve, reject) => {
+            const audio = new Audio();
+            audio.addEventListener('loadedmetadata', () => {
+                resolve(audio.duration);
+            });
+            audio.addEventListener('error', reject);
+            audio.src = URL.createObjectURL(file);
+        });
+    }
+
+    async loadAudioTimingsFromFile(audioPath) {
+        // Dummy timings igual que antes, pero usando el archivo de la ruta
+        try {
+            const duration = await this.getAudioDurationFromPath(audioPath);
+            this.audioTimings = this.words.map((_, index) => {
+                return (duration / this.words.length) * index;
+            });
+        } catch (error) {
+            this.showError('Failed to load audio timings: ' + error.message);
+        }
+    }
+
+    getAudioDurationFromPath(audioPath) {
+        return new Promise((resolve, reject) => {
+            const audio = new Audio();
+            audio.addEventListener('loadedmetadata', () => {
+                resolve(audio.duration);
+            });
+            audio.addEventListener('error', reject);
+            audio.src = audioPath;
+        });
+    }
+
+    updateWordHighlight() {
+        const currentTime = this.elements.audioPlayer.currentTime;
+        const wordIndex = this.audioTimings.findIndex(time => time > currentTime) - 1;
+        
+        if (wordIndex >= 0 && wordIndex < this.words.length) {
+            this.highlightWord(wordIndex);
+            this.updateProgress((wordIndex / this.words.length) * 100);
+        }
+    }
+
+    togglePlayPause() {
+        if (this.elements.audioPlayer.src) {
+            if (this.isPlaying) {
                 this.pauseReading();
-            } else if (this.isPaused) {
-                this.resumeReading();
             } else {
                 this.startReading();
             }
-        } catch (error) {
-            this.showError('Failed to control playback: ' + error.message);
+        } else {
+            // Fallback to speech synthesis if no audio file is loaded
+            if (this.isPlaying) {
+                this.pauseReading();
+            } else {
+                this.startReading();
+            }
         }
     }
 
     startReading() {
-        if (!this.checkSpeechSynthesisSupport()) return;
-
-        const quote = this.quotes[this.currentQuoteIndex];
-        this.words = quote.text.split(/\s+/);
-        this.currentWordIndex = 0;
-
-        // Create new utterance
-        this.currentUtterance = new SpeechSynthesisUtterance(quote.text);
-        this.currentUtterance.rate = this.speechRate;
-        
-        // Get available voices and select a good one
-        const voices = this.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => voice.lang === 'en-US' && voice.name.includes('Google')) || 
-                             voices.find(voice => voice.lang === 'en-US') || 
-                             voices[0];
-        
-        if (preferredVoice) {
-            this.currentUtterance.voice = preferredVoice;
+        if (this.elements.audioPlayer.src) {
+            this.elements.audioPlayer.play();
+            this.isPlaying = true;
+            this.isPaused = false;
+            this.updatePlayButton();
+        } else {
+            // Fallback to speech synthesis
+            this.startSpeechSynthesis();
         }
-
-        // Add event listeners for better synchronization
-        this.currentUtterance.onboundary = (event) => {
-            if (event.name === 'word') {
-                this.highlightWord(this.currentWordIndex);
-                this.currentWordIndex++;
-                this.updateProgress((this.currentWordIndex / this.words.length) * 100);
-            }
-        };
-
-        this.currentUtterance.onend = () => {
-            this.isPlaying = false;
-            this.isPaused = false;
-            this.currentWordIndex = 0;
-            this.updatePlayButton();
-            this.clearHighlights();
-            this.updateProgress(100);
-        };
-
-        this.currentUtterance.onpause = () => {
-            this.isPaused = true;
-            this.updatePlayButton();
-        };
-
-        this.currentUtterance.onresume = () => {
-            this.isPaused = false;
-            this.updatePlayButton();
-        };
-
-        // Start reading
-        this.speechSynthesis.speak(this.currentUtterance);
-        this.isPlaying = true;
-        this.updatePlayButton();
     }
 
     pauseReading() {
-        if (this.currentUtterance) {
+        if (this.elements.audioPlayer.src) {
+            this.elements.audioPlayer.pause();
+        } else {
             this.speechSynthesis.pause();
-            this.isPaused = true;
-            this.updatePlayButton();
         }
-    }
-
-    resumeReading() {
-        if (this.currentUtterance) {
-            this.speechSynthesis.resume();
-            this.isPaused = false;
-            this.updatePlayButton();
-        }
+        this.isPlaying = false;
+        this.isPaused = true;
+        this.updatePlayButton();
     }
 
     stopReading() {
-        if (this.currentUtterance) {
+        if (this.elements.audioPlayer.src) {
+            this.elements.audioPlayer.pause();
+            this.elements.audioPlayer.currentTime = 0;
+        } else {
             this.speechSynthesis.cancel();
-            this.isPlaying = false;
-            this.isPaused = false;
-            this.currentWordIndex = 0;
-            this.updatePlayButton();
-            this.clearHighlights();
-            this.updateProgress(0);
         }
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.currentWordIndex = 0;
+        this.clearHighlights();
+        this.updateProgress(0);
+        this.updatePlayButton();
     }
 
     highlightWord(index) {
