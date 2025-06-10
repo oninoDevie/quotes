@@ -30,7 +30,7 @@ and the comedy he didn't write [...]`,
                 audio: "audio/audio2.mp3"
             },
             {
-                id: "Supplizio",
+                id: "III",
                 text: `
 The man stated
 that his wife
@@ -47,7 +47,7 @@ Or simply the variant of a poorly delivered speech`,
                 audio: "audio/audio3.mp3"
             },
             {
-                id: "INFIERNO XIII",
+                id: "IV",
                 text: `
 The enigma of the just
 was denied by the Heaven's dreamer
@@ -59,7 +59,7 @@ neither in Hell nor in our memories.`,
                 audio: "audio/audio4.mp3"
             },
             {
-                id: "IV",
+                id: "V",
                 text: `
 The Sky could be imagined
 as an electronic sound
@@ -72,7 +72,7 @@ HELL.`,
                 audio: "audio/audio5.mp3"
             },
             {
-                id: "V",
+                id: "VI",
                 text: `
 On this morning
 that has no fog,
@@ -83,22 +83,22 @@ we wouldn't even know the name.`,
                 audio: "audio/audio6.mp3"
             },
             {
-                id: "VI",
+                id: "VII",
                 text: `
 I had no choice but to open my backpack, take out the revolver, and shoot him exactly below the left eye. The choice of left or right was nothing more than a whim of a lady who wore red pants, a white shirt, black shoes (probably a luxury brand). Nothing more than a dark desire for a problem that began in the third week of the "Day of Dreams and Absurd Games." It's already dinnertime, and the coffee has no sugar. We hope that of the seven songs we chose the night before, all have lyrics that speak of women and forgotten wars. [...]`
             },
             {
-                id: "VII",
+                id: "VIII",
                 text: `
 It was that one could no longer write on the machine in this way because that's what they had told him in that house where everyone wrote like this: "To the rhythm of the triangle to the rhythm of another similar figure (which evidently wasn't a triangle, perhaps it was a black dog or our failure to shine)`
             },
             {
-                id: "VIII",
+                id: "IX",
                 text: `
 If only the Heaven were a bit more sky blue I'd have no reason to live because forms deform in autumns without warning orphanhood that time doesn't return`
             },
             {
-                id: "III X III X",
+                id: "X",
                 text: `
 He seeks God, but doesn't find Him
 Men say that sixteen years have passed
@@ -123,7 +123,7 @@ They'll attend a party and pass a small note under the table, and they'll write 
 They always wondered why this action was performed. "They'll never know," but it has already been told in stories, melodies, and solitary places.`
             },
             {
-                id: "XX",
+                id: "XI",
                 text: `XX
 One cannot articulate language without diagnosis
 nor remedies that store diaries dates and almanacs of years forgotten
@@ -132,7 +132,7 @@ I've learned from the dreams of a cross
 The cross had no name and it was a shameful act`
             },
             {
-                id: "1828",
+                id: "XII",
                 text: `
 Only the eternal dreamer can feel that which they call knowing the demons of Heaven who know how to fly by plane
 Those of dreams, those of traditions, myths or legends
