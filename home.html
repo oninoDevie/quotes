@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplizios enumerados - Home</title>
+    <title>Supplizios enumerados</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -11,126 +11,148 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <nav class="main-nav">
-            <div class="nav-brand">
-                <h1>Supplizios enumerados</h1>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <a href="home.html" class="brand-link">
+                <span class="brand-emoji">✨</span>
+                Supplizios
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link active">
+                <i data-feather="home"></i>
+                <span>Home</span>
+            </a>
+            <a href="quotes.html" class="nav-link">
+                <i data-feather="book-open"></i>
+                <span>Quotes</span>
+            </a>
+            <a href="progress.html" class="nav-link">
+                <i data-feather="trending-up"></i>
+                <span>Progress</span>
+            </a>
+            <a href="#" class="nav-link" id="settingsLink">
+                <i data-feather="settings"></i>
+                <span>Settings</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <h1 class="welcome-title">Welcome to Your Journey</h1>
+                <p class="welcome-subtitle">Track your progress, find inspiration, and grow every day</p>
             </div>
-            <div class="nav-links">
-                <a href="home.html" class="nav-link active">
-                    <i data-feather="home"></i>
-                    <span>Home</span>
-                </a>
-                <a href="quotes.html" class="nav-link">
-                    <i data-feather="book"></i>
-                    <span>Quotes</span>
-                </a>
-                <a href="progress.html" class="nav-link">
-                    <i data-feather="trending-up"></i>
-                    <span>Progress</span>
-                </a>
-                <a href="settings.html" class="nav-link">
-                    <i data-feather="settings"></i>
-                    <span>Settings</span>
-                </a>
+        </section>
+
+        <section class="progress-overview">
+            <div class="section-header">
+                <h2>Your Progress</h2>
+                <p class="section-subtitle">Track your achievements across different areas</p>
             </div>
-        </nav>
-
-        <main class="main-content">
-            <section class="welcome-section">
-                <h2>Welcome to Supplizios enumerados</h2>
-                <p>Track your progress and explore literary quotes</p>
-            </section>
-
-            <section class="progress-overview">
-                <h3>Your Progress</h3>
-                <div class="progress-cards">
-                    <div class="progress-card reading">
-                        <div class="card-icon">
-                            <i data-feather="book-open"></i>
-                        </div>
-                        <div class="card-content">
-                            <h4>Reading</h4>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 75%"></div>
-                            </div>
-                            <span class="progress-text">75% Complete</span>
-                        </div>
-                    </div>
-
-                    <div class="progress-card running">
-                        <div class="card-icon">
-                            <i data-feather="activity"></i>
-                        </div>
-                        <div class="card-content">
-                            <h4>Running</h4>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 60%"></div>
-                            </div>
-                            <span class="progress-text">60% Complete</span>
-                        </div>
-                    </div>
-
-                    <div class="progress-card sports">
-                        <div class="card-icon">
-                            <i data-feather="award"></i>
-                        </div>
-                        <div class="card-content">
-                            <h4>Sports</h4>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 45%"></div>
-                            </div>
-                            <span class="progress-text">45% Complete</span>
-                        </div>
-                    </div>
-
-                    <div class="progress-card entertainment">
-                        <div class="card-icon">
-                            <i data-feather="film"></i>
-                        </div>
-                        <div class="card-content">
-                            <h4>Entertainment</h4>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 90%"></div>
-                            </div>
-                            <span class="progress-text">90% Complete</span>
-                        </div>
-                    </div>
-
-                    <div class="progress-card productivity">
-                        <div class="card-icon">
-                            <i data-feather="check-circle"></i>
-                        </div>
-                        <div class="card-content">
-                            <h4>Productivity</h4>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 85%"></div>
-                            </div>
-                            <span class="progress-text">85% Complete</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="quick-actions">
-                <h3>Quick Actions</h3>
-                <div class="action-buttons">
-                    <a href="quotes.html" class="action-button">
+            
+            <div class="progress-grid">
+                <div class="progress-card" data-category="reading">
+                    <div class="card-icon">
                         <i data-feather="book"></i>
-                        <span>Read Quotes</span>
-                    </a>
-                    <a href="progress.html" class="action-button">
-                        <i data-feather="trending-up"></i>
-                        <span>Update Progress</span>
-                    </a>
-                    <a href="settings.html" class="action-button">
-                        <i data-feather="settings"></i>
-                        <span>Settings</span>
-                    </a>
+                    </div>
+                    <div class="card-content">
+                        <h3>Reading</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                    </div>
                 </div>
-            </section>
-        </main>
-    </div>
+
+                <div class="progress-card" data-category="running">
+                    <div class="card-icon">
+                        <i data-feather="activity"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Running</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                    </div>
+                </div>
+
+                <div class="progress-card" data-category="sports">
+                    <div class="card-icon">
+                        <i data-feather="award"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Sports</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                    </div>
+                </div>
+
+                <div class="progress-card" data-category="entertainment">
+                    <div class="card-icon">
+                        <i data-feather="film"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Entertainment</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                    </div>
+                </div>
+
+                <div class="progress-card" data-category="productivity">
+                    <div class="card-icon">
+                        <i data-feather="check-circle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Productivity</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-actions">
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+                <p class="section-subtitle">Start your journey with these quick actions</p>
+            </div>
+            
+            <div class="actions-grid">
+                <a href="quotes.html" class="action-card">
+                    <div class="action-icon">
+                        <i data-feather="book-open"></i>
+                    </div>
+                    <h3>Read Quotes</h3>
+                    <p>Find inspiration in curated quotes</p>
+                </a>
+
+                <a href="progress.html" class="action-card">
+                    <div class="action-icon">
+                        <i data-feather="trending-up"></i>
+                    </div>
+                    <h3>Update Progress</h3>
+                    <p>Track your achievements</p>
+                </a>
+
+                <a href="#" class="action-card" id="settingsAction">
+                    <div class="action-icon">
+                        <i data-feather="settings"></i>
+                    </div>
+                    <h3>Settings</h3>
+                    <p>Customize your experience</p>
+                </a>
+            </div>
+        </section>
+    </main>
 
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="home.js"></script>
