@@ -29,18 +29,26 @@ class HomePage {
             await window.Clerk.load({
                 publishableKey: window.clerkPublishableKey,
             });
-
-            const authContainer = document.getElementById('clerkAuthContainer');
-            if (authContainer) {
-                // Render the Clerk sign-in component
-                window.Clerk.mountSignIn(authContainer);
-            }
         } catch (error) {
             console.error("Error initializing Clerk:", error);
         }
     }
 
     bindEvents() {
+        const accederBtn = document.getElementById('accederBtn');
+        if (accederBtn) {
+            accederBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.Clerk.user) {
+                    // User is signed in, perhaps redirect to a dashboard or show user options
+                    window.Clerk.openUserProfile(); // Example: Open user profile
+                } else {
+                    // User is signed out, open sign-in flow
+                    window.Clerk.openSignIn();
+                }
+            });
+        }
+
         // Settings link handler
         const settingsLink = document.getElementById('settingsLink');
         const settingsAction = document.getElementById('settingsAction');

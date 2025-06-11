@@ -20,166 +20,23 @@
         </div>
         <div class="nav-links">
             <a href="home.html" class="nav-link active">
-                <i data-feather="home"></i>
-                <span>Home</span>
+                <span>Inicio</span>
             </a>
-            <a href="quotes.html" class="nav-link">
-                <i data-feather="book-open"></i>
-                <span>Citas</span>
-            </a>
-            <a href="progress.html" class="nav-link">
-                <i data-feather="trending-up"></i>
-                <span>Progreso</span>
-            </a>
-            <a href="#" class="nav-link" id="settingsLink">
-                <i data-feather="settings"></i>
-                <span>Ajustes</span>
-            </a>
-            <a href="#" class="nav-link" id="themeToggleBtn">
-                <i data-feather="sun"></i>
-                <span>Tema</span>
+            <a href="#" class="nav-link">
+                <span>Planes</span>
             </a>
         </div>
-        <div id="clerkAuthContainer" class="clerk-auth-container"></div>
+        <div class="nav-auth">
+            <button class="btn-acceder" id="accederBtn">Acceder</button>
+        </div>
     </header>
 
     <div class="layout-wrapper">
-        <aside class="main-sidebar">
-            <!-- Sidebar content goes here -->
-            <div class="sidebar-section">
-                <h3>Navegación Rápida</h3>
-                <ul>
-                    <li><a href="home.html">Inicio</a></li>
-                    <li><a href="quotes.html">Citas</a></li>
-                    <li><a href="progress.html">Progreso</a></li>
-                </ul>
-            </div>
-            <div class="sidebar-section">
-                <h3>Recursos</h3>
-                <p>Enlaces útiles y herramientas.</p>
-            </div>
-        </aside>
-
         <main class="main-content">
             <section class="welcome-section">
                 <div class="welcome-content">
                     <h1 class="welcome-title">Tu Chispa Diaria</h1>
                     <p class="welcome-subtitle">Descubre la sabiduría que impulsa tu crecimiento. Cada día, una nueva perspectiva.</p>
-                </div>
-            </section>
-
-            <section class="progress-overview">
-                <div class="section-header">
-                    <h2>Visualiza Tu Ascenso</h2>
-                    <p class="section-subtitle">Tu viaje de crecimiento, paso a paso.</p>
-                </div>
-                
-                <div class="progress-grid">
-                    <div class="progress-card" data-category="reading">
-                        <div class="card-icon">
-                            <i data-feather="book"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Reading</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                            <p class="progress-text">0% Complete</p>
-                        </div>
-                    </div>
-
-                    <div class="progress-card" data-category="running">
-                        <div class="card-icon">
-                            <i data-feather="activity"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Running</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                            <p class="progress-text">0% Complete</p>
-                        </div>
-                    </div>
-
-                    <div class="progress-card" data-category="sports">
-                        <div class="card-icon">
-                            <i data-feather="award"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Sports</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                            <p class="progress-text">0% Complete</p>
-                        </div>
-                    </div>
-
-                    <div class="progress-card" data-category="entertainment">
-                        <div class="card-icon">
-                            <i data-feather="film"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Entertainment</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                            <p class="progress-text">0% Complete</p>
-                        </div>
-                    </div>
-
-                    <div class="progress-card" data-category="productivity">
-                        <div class="card-icon">
-                            <i data-feather="check-circle"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Productivity</h3>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                            <p class="progress-text">0% Complete</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="quick-actions">
-                <div class="section-header">
-                    <h2>Desbloquea Tu Potencial</h2>
-                    <p class="section-subtitle">Acciones clave para transformar tu día.</p>
-                </div>
-                
-                <div class="actions-grid">
-                    <a href="quotes.html" class="action-card">
-                        <div class="action-icon">
-                            <i data-feather="book-open"></i>
-                        </div>
-                        <h3>Inspírate Ahora</h3>
-                        <p>Descubre citas que te impulsan</p>
-                    </a>
-
-                    <a href="progress.html" class="action-card">
-                        <div class="action-icon">
-                            <i data-feather="trending-up"></i>
-                        </div>
-                        <h3>Mide Tu Avance</h3>
-                        <p>Registra tus logros y métricas</p>
-                    </a>
-
-                    <a href="#" class="action-card" id="settingsAction">
-                        <div class="action-icon">
-                            <i data-feather="settings"></i>
-                        </div>
-                        <h3>Personaliza Tu Viaje</h3>
-                        <p>Ajusta tu experiencia</p>
-                    </a>
-
-                    <a href="quotes.html" class="action-card">
-                        <div class="action-icon">
-                            <i data-feather="volume-2"></i>
-                        </div>
-                        <h3>Escucha la Sabiduría</h3>
-                        <p>Citas con audio para reflexionar</p>
-                    </a>
                 </div>
             </section>
         </main>
