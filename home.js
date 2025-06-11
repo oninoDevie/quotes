@@ -32,12 +32,8 @@ class HomePage {
 
             const authContainer = document.getElementById('clerkAuthContainer');
             if (authContainer) {
-                // Render the Clerk user button (for signed-in users) or sign-in button (for signed-out users)
-                window.Clerk.mountUserButton(authContainer);
-
-                // You might want to also render a sign-in button if the user is not signed in
-                // Example: if (!window.Clerk.user) { window.Clerk.mountSignInButton(authContainer); }
-                // However, mountUserButton usually handles signed-out state by showing sign-in/sign-up flow
+                // Render the Clerk sign-in component
+                window.Clerk.mountSignIn(authContainer);
             }
         } catch (error) {
             console.error("Error initializing Clerk:", error);
