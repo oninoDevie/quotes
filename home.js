@@ -70,6 +70,11 @@ class HomePage {
                 card.style.transform = 'translateY(0)';
             });
         });
+
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
     }
 
     loadProgress() {
@@ -184,8 +189,24 @@ class HomePage {
         }
     }
 
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        this.applyTheme(newTheme);
+    }
+
     applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
+        const themeToggleIcon = document.querySelector('#themeToggleBtn i');
+        if (themeToggleIcon) {
+            if (theme === 'dark') {
+                themeToggleIcon.setAttribute('data-feather', 'moon');
+            } else {
+                themeToggleIcon.setAttribute('data-feather', 'sun');
+            }
+            feather.replace({ 'stroke-width': 2, 'width': 24, 'height': 24 });
+        }
     }
 
     applyLanguage(language) {
@@ -196,5 +217,14 @@ class HomePage {
 
 // Initialize the home page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new HomePage();
+    const homePage = new HomePage();
+    // Apply initial theme based on localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        homePage.applyTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        homePage.applyTheme('dark');
+    } else {
+        homePage.applyTheme('light');
+    }
 }); 
