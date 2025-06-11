@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="app-container">
-        <nav class="main-nav">
+        <header class="main-nav">
             <div class="nav-brand">
                 <h1>Supplizios enumerados</h1>
             </div>
@@ -34,70 +34,88 @@
                     <span>Ajustes</span>
                 </a>
             </div>
-        </nav>
+        </header>
 
-        <main class="main-content">
-            <section class="objective-tracker-section">
-                <h1 class="tracker-title">Tracker de Objetivos</h1>
-                <p class="tracker-subtitle">Matriz de Eisenhower - Máximo 3 objetivos por prioridad</p>
-
-                <!-- Filtro de prioridad -->
-                <div class="filter-priority-container">
-                    <label for="filterPriority">Mostrar objetivos de prioridad:</label>
-                    <select id="filterPriority" class="select-field">
-                        <option value="1">1 (Alta)</option>
-                        <option value="2">2 (Media)</option>
-                        <option value="3">3 (Baja)</option>
-                    </select>
+        <div class="layout-wrapper">
+            <aside class="main-sidebar">
+                <!-- Sidebar content for progress page -->
+                <div class="sidebar-section">
+                    <h3>Metas y Objetivos</h3>
+                    <ul>
+                        <li><a href="#">Prioridad 1</a></li>
+                        <li><a href="#">Prioridad 2</a></li>
+                        <li><a href="#">Prioridad 3</a></li>
+                    </ul>
                 </div>
+                <div class="sidebar-section">
+                    <h3>Análisis</h3>
+                    <p>Reportes y estadísticas.</p>
+                </div>
+            </aside>
 
-                <!-- Formulario para agregar -->
-                <form id="addObjectiveForm" class="add-objective-form">
-                    <h2 class="form-title">Agregar Objetivo Nuevo</h2>
-                    <div class="form-fields-grid">
-                        <div>
-                            <label for="priorityForm">Prioridad:</label>
-                            <select id="priorityForm" class="select-field">
-                                <option value="1">1 (Alta)</option>
-                                <option value="2">2 (Media)</option>
-                                <option value="3">3 (Baja)</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="urgencyForm">Urgencia:</label>
-                            <select id="urgencyForm" class="select-field">
-                                <option value="+">+ (Baja)</option>
-                                <option value="++">++ (Media)</option>
-                                <option value="+++">+++ (Alta)</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+            <main class="main-content">
+                <section class="objective-tracker-section">
+                    <h1 class="tracker-title">Tracker de Objetivos</h1>
+                    <p class="tracker-subtitle">Matriz de Eisenhower - Máximo 3 objetivos por prioridad</p>
+
+                    <!-- Filtro de prioridad -->
+                    <div class="filter-priority-container">
+                        <label for="filterPriority">Mostrar objetivos de prioridad:</label>
+                        <select id="filterPriority" class="select-field">
+                            <option value="1">1 (Alta)</option>
+                            <option value="2">2 (Media)</option>
+                            <option value="3">3 (Baja)</option>
+                        </select>
                     </div>
-                </form>
 
-                <!-- Tabla de objetivos filtrados -->
-                <div class="objectives-table-container">
-                    <p id="loadingMessage" class="loading-message" style="display: none;">Cargando objetivos...</p>
-                    <table class="objectives-table">
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Prioridad</th>
-                                <th>Urgencia</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="objectivesTableBody">
-                            <!-- Objectives will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                    <p id="noObjectivesMessage" class="no-objectives-message" style="display: none;">No hay objetivos con esta prioridad</p>
-                </div>
-            </section>
-        </main>
+                    <!-- Formulario para agregar -->
+                    <form id="addObjectiveForm" class="add-objective-form">
+                        <h2 class="form-title">Agregar Objetivo Nuevo</h2>
+                        <div class="form-fields-grid">
+                            <div>
+                                <label for="priorityForm">Prioridad:</label>
+                                <select id="priorityForm" class="select-field">
+                                    <option value="1">1 (Alta)</option>
+                                    <option value="2">2 (Media)</option>
+                                    <option value="3">3 (Baja)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="urgencyForm">Urgencia:</label>
+                                <select id="urgencyForm" class="select-field">
+                                    <option value="+">+ (Baja)</option>
+                                    <option value="++">++ (Media)</option>
+                                    <option value="+++">+++ (Alta)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+
+                    <!-- Tabla de objetivos filtrados -->
+                    <div class="objectives-table-container">
+                        <p id="loadingMessage" class="loading-message" style="display: none;">Cargando objetivos...</p>
+                        <table class="objectives-table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Prioridad</th>
+                                    <th>Urgencia</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="objectivesTableBody">
+                                <!-- Objectives will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <p id="noObjectivesMessage" class="no-objectives-message" style="display: none;">No hay objetivos con esta prioridad</p>
+                    </div>
+                </section>
+            </main>
+        </div>
 
         <!-- Progress Update Modal (Keep this for now, it's not related to objectives directly) -->
         <div class="modal" id="progressModal">
@@ -118,6 +136,15 @@
             </div>
         </div>
     </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Supplizios enumerados. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Privacidad</a>
+            <a href="#">Términos</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="progress.js"></script>

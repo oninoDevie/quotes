@@ -22,6 +22,8 @@ model User {
   updatedAt DateTime @updatedAt
   quotes    Quote[]
   favorites Favorite[]
+  objectives Objective[]
+  userProgresses UserProgress[]
 }
 
 model Quote {
