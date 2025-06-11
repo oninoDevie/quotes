@@ -22,6 +22,8 @@ model User {
   updatedAt DateTime @updatedAt
   quotes    Quote[]
   favorites Favorite[]
+  objectives Objective[]
+  userProgresses UserProgress[]
 }
 
 model Quote {
@@ -46,4 +48,46 @@ model Favorite {
   quote     Quote    @relation(fields: [quoteId], references: [id])
 
   @@unique([userId, quoteId])
+}
+
+model Objective {
+  id        String   @id @default(cuid())
+  titulo    String
+  priority  String // "1", "2", "3"
+  estado    String // "En Progreso", "Pendiente", "Completado"
+  urgency   String // "+", "++", "+++"
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// New model for scraped/public quotes, with Int ID as per user's snippet
+model PublicQuote {
+  id        Int      @id @default(autoincrement())
+  text      String   // Main content of the scraped quote
+  author    String?
+  tags      String[] @default([]) // Added for tags
+  audioUrl  String?   // Optional audio URL from Supabase Storage
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now()) // Added for consistency
+
+  userProgress UserProgress[] // Relation to UserProgress
+}
+
+// New model for tracking user progress on PublicQuotes
+model UserProgress {
+  id         Int      @id @default(autoincrement()) // As per new schema
+  userId     String   // Clerk user ID
+  publicQuoteId    Int      // Renamed to publicQuoteId to link to PublicQuote
+  completed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt @default(now())
+
+  user       User     @relation(fields: [userId], references: [clerkId])
+  publicQuote      PublicQuote    @relation(fields: [publicQuoteId], references: [id])
+
+  @@unique([userId, publicQuoteId]) // Updated unique constraint
+  @@index([userId])
+  @@index([publicQuoteId])
 }

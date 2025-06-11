@@ -13,6 +13,10 @@
 <body>
     <div class="app-container">
         <header class="app-header">
+            <a href="home.html" class="nav-link back-home-btn">
+                <i data-feather="home"></i>
+                <span>Home</span>
+            </a>
             <h1 class="app-title">Supplizios enumerados</h1>
             <div class="quote-counter">
                 <span id="currentQuote">1</span>
@@ -25,77 +29,104 @@
             </button>
         </header>
 
-        <main class="main-content">
-            <div class="quote-container">
-                <div class="quote-header">
-                    <h2 id="quoteTitle" class="quote-title">Loading...</h2>
-                    <div class="reading-progress">
-                        <div id="progressBar" class="progress-bar"></div>
+        <div class="layout-wrapper">
+            <aside class="main-sidebar">
+                <!-- Sidebar content for quotes page -->
+                <div class="sidebar-section">
+                    <h3>Categorías de Citas</h3>
+                    <ul>
+                        <li><a href="#">Sabiduría Antigua</a></li>
+                        <li><a href="#">Motivación</a></li>
+                        <li><a href="#">Filosofía</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Explorar</h3>
+                    <p>Más opciones de navegación aquí.</p>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div class="quote-container">
+                    <div class="quote-header">
+                        <h2 id="quoteTitle" class="quote-title">Loading...</h2>
+                        <div class="reading-progress">
+                            <div id="progressBar" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="quoteDisplay" class="quote-display">
+                        <div class="loading-state">
+                            <div class="loading-spinner"></div>
+                            <p>Loading quotes...</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div id="quoteDisplay" class="quote-display">
-                    <div class="loading-state">
-                        <div class="loading-spinner"></div>
-                        <p>Loading quotes...</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="controls-panel">
-                <div class="audio-controls">
-                    <button id="prevBtn" class="control-btn secondary" aria-label="Previous quote">
-                        <i data-feather="skip-back"></i>
-                    </button>
-                    
-                    <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
-                        <i data-feather="play"></i>
-                    </button>
-                    
-                    <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
-                        <i data-feather="square"></i>
-                    </button>
-                    
-                    <button id="nextBtn" class="control-btn secondary" aria-label="Next quote">
-                        <i data-feather="skip-forward"></i>
-                    </button>
-                </div>
-
-                <div class="settings-panel">
-                    <div class="setting-group">
-                        <button id="smashButton" class="smash-button">
-                            <span class="smash-text">SMASH!</span>
-                            <div class="mascot-container">
-                                <div class="mascot">🤖</div>
-                            </div>
+                <div class="controls-panel">
+                    <div class="audio-controls">
+                        <button id="prevBtn" class="control-btn secondary" aria-label="Previous quote">
+                            <i data-feather="skip-back"></i>
+                        </button>
+                        
+                        <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
+                            <i data-feather="play"></i>
+                        </button>
+                        
+                        <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
+                            <i data-feather="square"></i>
+                        </button>
+                        
+                        <button id="nextBtn" class="control-btn secondary" aria-label="Next quote">
+                            <i data-feather="skip-forward"></i>
                         </button>
                     </div>
-                    <div class="setting-group">
-                        <label for="audioFile" class="setting-label">Sube un mp3 random si es que no se escucha el audio, rufiancito</label>
-                        <input type="file" id="audioFile" accept="audio/*" class="file-input">
-                    </div>
-                    <div class="setting-group">
-                        <label for="highlightColor" class="setting-label">Highlight</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="highlightColor" value="#4f46e5" class="color-picker">
-                            <div class="color-preview"></div>
+
+                    <div class="settings-panel">
+                        <div class="setting-group">
+                            <button id="smashButton" class="smash-button">
+                                <span class="smash-text">SMASH!</span>
+                                <div class="mascot-container">
+                                    <div class="mascot">🤖</div>
+                                </div>
+                            </button>
                         </div>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label for="speechRate" class="setting-label">Speed</label>
-                        <div class="slider-wrapper">
-                            <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" class="speed-slider">
-                            <span id="speedValue" class="speed-value">1.0x</span>
+                        <div class="setting-group">
+                            <label for="audioFile" class="setting-label">Sube un mp3 random si es que no se escucha el audio, rufiancito</label>
+                            <input type="file" id="audioFile" accept="audio/*" class="file-input">
+                        </div>
+                        <div class="setting-group">
+                            <label for="highlightColor" class="setting-label">Highlight</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="highlightColor" value="#4f46e5" class="color-picker">
+                                <div class="color-preview"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="speechRate" class="setting-label">Speed</label>
+                            <div class="slider-wrapper">
+                                <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" class="speed-slider">
+                                <span id="speedValue" class="speed-value">1.0x</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
 
         <audio id="audioPlayer" style="display: none;"></audio>
         <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
     </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Supplizios enumerados. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Privacidad</a>
+            <a href="#">Términos</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="script.js"></script>

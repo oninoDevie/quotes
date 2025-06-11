@@ -3,7 +3,7 @@ class HomePage {
         this.init();
     }
 
-    init() {
+    async init() {
         // Initialize Feather icons
         if (typeof feather !== 'undefined') {
             feather.replace();
@@ -12,11 +12,43 @@ class HomePage {
         // Load progress data
         this.loadProgress();
 
+        // Initialize Clerk authentication
+        await this.initClerk();
+
         // Add event listeners
         this.bindEvents();
     }
 
+    async initClerk() {
+        if (!window.Clerk || !window.clerkPublishableKey) {
+            console.error("Clerk JS SDK or Publishable Key not loaded. Please ensure clerk.browser.js is included and window.clerkPublishableKey is set.");
+            return;
+        }
+
+        try {
+            await window.Clerk.load({
+                publishableKey: window.clerkPublishableKey,
+            });
+        } catch (error) {
+            console.error("Error initializing Clerk:", error);
+        }
+    }
+
     bindEvents() {
+        const accederBtn = document.getElementById('accederBtn');
+        if (accederBtn) {
+            accederBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.Clerk.user) {
+                    // User is signed in, perhaps redirect to a dashboard or show user options
+                    window.Clerk.openUserProfile(); // Example: Open user profile
+                } else {
+                    // User is signed out, open sign-in flow
+                    window.Clerk.openSignIn();
+                }
+            });
+        }
+
         // Settings link handler
         const settingsLink = document.getElementById('settingsLink');
         const settingsAction = document.getElementById('settingsAction');
@@ -46,6 +78,11 @@ class HomePage {
                 card.style.transform = 'translateY(0)';
             });
         });
+
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
     }
 
     loadProgress() {
@@ -160,8 +197,24 @@ class HomePage {
         }
     }
 
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        this.applyTheme(newTheme);
+    }
+
     applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
+        const themeToggleIcon = document.querySelector('#themeToggleBtn i');
+        if (themeToggleIcon) {
+            if (theme === 'dark') {
+                themeToggleIcon.setAttribute('data-feather', 'moon');
+            } else {
+                themeToggleIcon.setAttribute('data-feather', 'sun');
+            }
+            feather.replace({ 'stroke-width': 2, 'width': 24, 'height': 24 });
+        }
     }
 
     applyLanguage(language) {
@@ -172,5 +225,14 @@ class HomePage {
 
 // Initialize the home page when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new HomePage();
+    const homePage = new HomePage();
+    // Apply initial theme based on localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        homePage.applyTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        homePage.applyTheme('dark');
+    } else {
+        homePage.applyTheme('light');
+    }
 }); 
