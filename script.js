@@ -128,10 +128,7 @@ They always wondered why this action was performed. "They'll never know," but it
                 id: "XI",
                 text: `XX
 One cannot articulate language without diagnosis
-nor remedies that store diaries dates and almanacs of years forgotten
-
-I've learned from the dreams of a cross
-The cross had no name and it was a shameful act`
+nor remedies that store diaries dates and almanacs of years forgotten`,
             },
             {
                 id: "XII",
@@ -145,6 +142,118 @@ And how to forget the geniuses of the pyramids who understood Statistics, the rh
 And above all things they found love not in another being (not at all philosophical) but in the rose petals of that tree he planted, the book he didn't write, and the child he didn't have.
 He also emphasized a friend he never got to meet.
 For he always argued that he had already written everything in his notebook and that he also duplicated it like one of those doors everyone knows how to open or (if they don't know how) they open it using Arithmetic like in an American movie heist that even I don't remember.`
+            },
+            {
+                id: "NEW1",
+                text: `They'll attend a party and pass a small note under the table, and they'll write something beautiful. It'll be forbidden to include their name and signature (or any kind of link to the author).
+They always wondered why this action was performed. "They'll never know," but it has already been told in stories, melodies, and solitary places.`
+            },
+            {
+                id: "XX",
+                text: `One cannot articulate language without diagnosis
+nor remedies that store diaries dates and almanacs of years forgotten`
+            },
+            {
+                id: "NEW2",
+                text: `I've learned from the dreams of a cross 
+The cross had no name and it was a shameful act`
+            },
+            {
+                id: "1828",
+                text: `Only the eternal dreamer can feel that which they call knowing the demons of Heaven who know how to fly by plane
+Those of dreams, those of traditions, myths or legends
+Those of phantasmagorical novels of flights from beyond the grave to the Old Continent
+ And how to forget the geniuses of the pyramids who understood Statistics, the rhythm of the air and the sound of silence
+And above all things they found love not in another being (not at all philosophical) but in the rose petals of that tree he planted, the book he didn't write, and the child he didn't have.
+He also emphasized a friend he never got to meet.
+For he always argued that he had already written everything in his notebook and that he also duplicated it like one of those doors everyone knows how to open or (if they don't know how) they open it using Arithmetic like in an American movie heist that even I don't remember.`
+            },
+            {
+                id: "1919",
+                text: `I was writing verses in my room while Mom knitted in the living room, enjoying her senile life which was gradually coming to an end. With the pencil in my left hand and the alcohol in my right, I was finishing a poem for her (and, when I say her, I don't mean my mother, but the girl I met that summer of '16). Sorrow and joy have already befallen me, and I know no one has experienced them as I have. In that somber atmosphere, where a lamp lit my desk and memories caused cataclysms in every corner of my mind, I idealized her and it pleased me; perhaps with tears or joy. "Did you love her and pay her back with evil? If you ever meet her, though it's probable you won't, tell her you love her and that you hoped she wouldn't arrive; because complicated is the situation of one who mistreats with love, cries smiling, and cannot ask for forgiveness." The wind whispered, calm, through the room's window and the alcohol was doing its work: imprisoning the heart. It had been a week since her death; I couldn't bear the guilt any longer. I killed her, yes, and I did it with love. I know it was the best option; no other punishment would pay for what she did to me. Those intense verses caused a vast path of memories, my dementia increased, and death was my escape. And now I don't know from where I'm writing; perhaps from some place in hell where my lost soul wanders. 
+Sweet nightmare of romantic summer, 
+how much I hate you and how much I love you!`
+            },
+            {
+                id: "TWO HELLS",
+                text: `I
+I'll always remember you (just for that special way you cross your fingers)
+                                            and I'll always remember you
+                     (maybe for that absurd sound 
+                                                        of two thousand nine)
+and I'll only remember you because there's little time, little, 
+very little time until they wake up.
+
+           II
+It's hard to forget I've been part of those conversations where we listened to Lucy in the Sky with Diamonds and that also had the smell of burnt pancakes
+and the coffee wasn't sweet and the coffee also had no milk and the coffee wasn't coffee
+                because
+           the bell rang
+           like a ticktock
+             in the hallway
+               and yes
+(I'll repeat seven more times that yes)
+        it was all at six in the morning,
+before the tram passes,
+before the swan cowers and before stomachs dream`
+            },
+            {
+                id: "2000",
+                text: `Gregory is sitting down, but he's hungry and broke (plus he's already morally defeated). It's a quarter past three, and he still hasn't had lunch. He's already been told the same old things more than four times: that he's an idiot, that no one will ever love him, that he's useless, and that when he's an old man, he'll never smile. He won't have hair, and his bones will be just as disgusting as any other disciple's or beginner's.
+"I'm an idiot, yes, I'm the biggest idiot of the 21st century," he told himself. "Look at the clock, it's late, look at the clock, it's awake now."
+
+My fantasy
+takes shape
+      in 4 
+silent spaces`
+            },
+            {
+                id: "1655",
+                text: `I once heard of an ancient theorem that explained why we can still see that same face even if the person no longer exists. Yes, it was also a profound encounter between two souls connecting through sounds. And the other encounter of two ghosts murmuring gothic poems; other men no longer laugh, no longer laugh, no longer dream, because they have lost their voice, and it is autumn, and you do not embrace me.`
+            },
+            {
+                id: "V",
+                text: `
+1
+They swore
+one day
+to reach
+a path
+
+2
+On that path
+color and sounds
+did not exist
+
+3
+Everything
+was already
+interpreted
+
+2
+The real
+problem
+always
+was that 
+there was no message 
+and the interpreter
+could not return
+from their dream
+
+1
+And all that was
+mentioned was lost
+among the
+tears
+of a tree
+
+One, two, three, four, five!
+
+Of some neoclassical tradition
+or some fantastic movement
+it must have learned
+the mastery of equidistant forms.
+Regarding the unresolved process, the woman has not asked about anyone again, neither her daughter nor any specific person. She said she didn't have a phone number, but —in alternate and metaphysical realities— she was in a dream. Her composition has been the greatest enigma of the people, and there was no return.`
             }
         ];
 
@@ -589,3 +698,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
