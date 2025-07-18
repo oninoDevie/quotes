@@ -1,169 +1,30 @@
 class QuotesAudioApp {
     constructor() {
-        // Initialize properties
         this.quotes = [
             {
                 id: "I",
-                text: `Yes, Gregory, yes, it's that face, the faceless body, no, the face without a body, the face you see even at the university, yes, yes, Gregory, that face that no longer belongs to that person, but to your mind. Yes, that's how it is, Gregory.
-
-And it's as if you wanted to stop seeing it in people, but you still see it, it's geometric, yes, indeed it is, but more than that, well, it has the shape of her face (yes, hers, yes, indeed it's hers, Gregory).
-
-And on the wall, in black ink, it read:
-The world
-is crumbling
-but in the shape
-of a square`,
-                audio: "audio/audio1.mp3"
-            },
-            {
-                id: "II",
-                text: `That technique of writing 1 short story,
-then 1 novel,
-and subsequently 1 comedy,
-was a family tradition
-(...)
-Reliable sources say
-(collected from Edmundo's texts in the New World)
-that Wagner's nightmares had been nothing more than an enchantment
-from the non-demiurge and the evils of death,
-and the comedy he didn't write [...]`,
-                audio: "audio/audio2.mp3"
-            },
-            {
-                id: "III",
-                text: `
-The man stated
-that his wife
-had been
-the purest woman
-in the narrative
-According to the Honest Ones,
-that woman knew
-the unknown paths,
-the colors of bottles,
-the flavors of a "Forbidden Kiss"
-(which is probably a black and white movie)
-Or simply the variant of a poorly delivered speech`,
-                audio: "audio/audio3.mp3"
-            },
-            {
-                id: "IV",
-                text: `
-The enigma of the just
-was denied by the Heaven's dreamer
-and, after six nights,
-there was no record of fantasies;
-your mother's torments and the cries of the stars
-have not aged like wine,
-neither in Hell nor in our memories.`,
-                audio: "audio/audio4.mp3"
-            },
-            {
-                id: "V",
-                text: `
-The Sky could be imagined
-as an electronic sound
-or, if we are to be fair,
-as something fictitious.
-But solitude cannot be fair,
-because the "Other" exists (who denies it at once)
-and is the most coveted by men:
-HELL.`,
-                audio: "audio/audio5.mp3"
-            },
-            {
-                id: "VI",
-                text: `
-On this morning
-that has no fog,
-we are real
-like an old song,
-but if we awaken
-we wouldn't even know the name.`,
-                audio: "audio/audio6.mp3"
-            },
-            {
-                id: "VII",
-                text: `
-I had no choice but to open my backpack, take out the revolver, and shoot him exactly below the left eye. The choice of left or right was nothing more than a whim of a lady who wore red pants, a white shirt, black shoes (probably a luxury brand). Nothing more than a dark desire for a problem that began in the third week of the "Day of Dreams and Absurd Games." It's already dinnertime, and the coffee has no sugar. We hope that of the seven songs we chose the night before, all have lyrics that speak of women and forgotten wars. [...]`,
-                audio: "audio/audio5.mp3"
-            },
-            {
-                id: "VIII",
-                text: `
-It was that one could no longer write on the machine in this way because that's what they had told him in that house where everyone wrote like this: "To the rhythm of the triangle to the rhythm of another similar figure (which evidently wasn't a triangle, perhaps it was a black dog or our failure to shine)`,
-                audio: "audio/audio6.mp3"
-            },
-            {
-                id: "IX",
-                text: `
-If only the Heaven were a bit more sky blue I'd have no reason to live because forms deform in autumns without warning orphanhood that time doesn't return`
-            },
-            {
-                id: "X",
-                text: `
-He seeks God, but doesn't find Him
-Men say that sixteen years have passed
-since the Creation
-of that rather lucid fragment
-of that quite surreal work for a child his age
-
-COMPLETELY
-FORBIDDEN
-ARE CHRONOLOGIES AND BIBLIOGRAPHIES
-
-The problems
-had nothing to do with Mathematics,
-Physics, or the science that serves
-but is useless for dreams to appear
-and be there at night immediate,
-irresolvable, and architectural
-
-Fiction was necessary Not to die from that illness: reality.
-
-They'll attend a party and pass a small note under the table, and they'll write something beautiful. It'll be forbidden to include their name and signature (or any kind of link to the author).
-They always wondered why this action was performed. "They'll never know," but it has already been told in stories, melodies, and solitary places.`
-            },
-            {
-                id: "XI",
-                text: `XX
-One cannot articulate language without diagnosis
-nor remedies that store diaries dates and almanacs of years forgotten`,
-            },
-            {
-                id: "XII",
-                text: `
-Only the eternal dreamer can feel that which they call knowing the demons of Heaven who know how to fly by plane
-Those of dreams, those of traditions, myths or legends
-
-Those of phantasmagorical novels of flights from beyond the grave to the Old Continent
-And how to forget the geniuses of the pyramids who understood Statistics, the rhythm of the air and the sound of silence
-
-And above all things they found love not in another being (not at all philosophical) but in the rose petals of that tree he planted, the book he didn't write, and the child he didn't have.
-He also emphasized a friend he never got to meet.
-For he always argued that he had already written everything in his notebook and that he also duplicated it like one of those doors everyone knows how to open or (if they don't know how) they open it using Arithmetic like in an American movie heist that even I don't remember.`
-            },
-            {
-                id: "NEW1",
                 text: `They'll attend a party and pass a small note under the table, and they'll write something beautiful. It'll be forbidden to include their name and signature (or any kind of link to the author).
-They always wondered why this action was performed. "They'll never know," but it has already been told in stories, melodies, and solitary places.`
+They always wondered why this action was performed. "They'll never know," but it has already been told in stories, melodies, and solitary places.`,
+                audio: "audio/audio1.mp3"
             },
             {
                 id: "XX",
                 text: `One cannot articulate language without diagnosis
-nor remedies that store diaries dates and almanacs of years forgotten`
+nor remedies that store diaries dates and almanacs of years forgotten`,
+                audio: "audio/audio2.mp3"
             },
             {
-                id: "NEW2",
+                id: "CROSS",
                 text: `I've learned from the dreams of a cross 
-The cross had no name and it was a shameful act`
+The cross had no name and it was a shameful act`,
+                audio: "audio/audio3.mp3"
             },
             {
                 id: "1828",
                 text: `Only the eternal dreamer can feel that which they call knowing the demons of Heaven who know how to fly by plane
 Those of dreams, those of traditions, myths or legends
 Those of phantasmagorical novels of flights from beyond the grave to the Old Continent
- And how to forget the geniuses of the pyramids who understood Statistics, the rhythm of the air and the sound of silence
+And how to forget the geniuses of the pyramids who understood Statistics, the rhythm of the air and the sound of silence
 And above all things they found love not in another being (not at all philosophical) but in the rose petals of that tree he planted, the book he didn't write, and the child he didn't have.
 He also emphasized a friend he never got to meet.
 For he always argued that he had already written everything in his notebook and that he also duplicated it like one of those doors everyone knows how to open or (if they don't know how) they open it using Arithmetic like in an American movie heist that even I don't remember.`
@@ -213,8 +74,7 @@ silent spaces`
             },
             {
                 id: "V",
-                text: `
-1
+                text: `1
 They swore
 one day
 to reach
@@ -254,6 +114,211 @@ or some fantastic movement
 it must have learned
 the mastery of equidistant forms.
 Regarding the unresolved process, the woman has not asked about anyone again, neither her daughter nor any specific person. She said she didn't have a phone number, but —in alternate and metaphysical realities— she was in a dream. Her composition has been the greatest enigma of the people, and there was no return.`
+            },
+            {
+                id: "RAFAELITO",
+                text: `Rafaelito piensa por qué se tiene que justificar una lágrima para cada tristeza que uno enfrenta, él está como confundido, medio loco, medio como que ya quiere desaparecer del mundo. Ha pensado en dos alternativas muy seductoras: o tirarse de un edificio o aventarse a la carretera más cercana 3 segundos antes de que pase el trailer. Sí, realmente está pensando en hacerlo, pero dejará aún que la música suene un poco, un poquitito más, 1 segundo, la música suene y suene, 2 segundos, y la música suena, suena, deja de sonar, deja de sonar, tres segundos.`
+            },
+            {
+                id: "GREGORY",
+                text: `Gregory wonders why a tear must be justified for every sadness one faces. He’s kind of confused, kind of mad, kind of like he already wants to disappear from the world.
+He’s thought of two very tempting options: either jump off a building or throw himself onto the nearest highway three seconds before the truck passes.
+Yes, he’s really thinking about doing it, but he’ll still let the music play a little longer, just a little bit more.
+
+1 second, the music plays and plays,
+2 seconds, and the music plays, plays,
+stops playing, stops playing, 3 seconds.`
+            },
+            {
+                id: "RAFAELITO2",
+                text: `Aunque Rafaelito afirma conocer cada parte de su cuerpo (y sobre todo conocerse a sí mismo), ha llegado a pensar en que sería mejor olvidarse de todo y jugar a la cerveza, sí, el jueguito de la cerveza en la que todos usan el mismo vaso, hacen como una ruleta y sigue el vaso, no tiene rumbo, pero, pero, ese juego de su padre, el juego de su tío y el juego de los hombres de verdad, los hombrecitos que se construyen con celofán y algodones de azúcar, en sonidos de paranoia, sonidos de música sin voz, libros sin palabras y ya no se sabe si realmente el juego de la cerveza ha empezado o ha terminado, el vaso sin rumbo aparece, gira como una ruleta que se desvía, han pasado seis años, Rafaelito, seis años, el tiempo que se fue (el Otro) y aunque pareciese chiste seis años son un mundo para un niño de su edad.`
+            },
+            {
+                id: "1200",
+                text: `Me dan muchas ganas de ir a vivir lejos (ese aislamiento voluntarios que siempre soñamos) y no volver a ver ni París, ni a ella ni al amigo fantasma que abrió los ojos de Silvana. Mucho menos quisiera enamorarme, no, definitivamente que no. Es absurdo seguir escribiendo diálogos, buscar las palabras adecuadas para enamorarte, para hacer que lo feo suene bonito y tal vez querer sentir que "me vuelvo loco por amor" o "quisiera tener sexo contigo hasta morir". Todas esas palabras que a veces soltamos porque las aprendimos en las mesas, sí, en esas mesas donde todo era oscuro a pesar de las luces del invierno.`
+            },
+            {
+                id: "INDIO",
+                text: `Estas preguntas han llevado al señor fantasma a preguntarse sobre el dilema del indio. ¿Y qué mierda nos interesa hoy en día el dilema del indio?`
+            },
+            {
+                id: "NO USES",
+                text: `No uses 
+esas cosas 
+que se puedan
+malinterpretar`
+            },
+            {
+                id: "NADA",
+                text: `"No somos nada, Rafelito, no somos nada".`
+            },
+            {
+                id: "IMPULSOS",
+                text: `Rafelito un día tomó dieciséis cervezas, se sentó en su escrito, tomó el papel y el lápiz  y escribió:
+
+impulsos y deseos ocultos. `.repeat(70)
+            },
+            {
+                id: "CHUPETINES",
+                text: `Es muy probable que le haya recordado a algún deseo desconocido en la etapa esa en la que le gustan los chupetines que le compran los señores de la tienda a una cuadra antes de llegar a la cantina del Negro.`
+            },
+            {
+                id: "VERDAD",
+                text: `El decirles que eso era verdad 
+implicaba llamarlos a recordar algo 
+que no hubieran querido RECORDAR
+si es que es probable amar a dos números al mismo tiempo
+creo que la señora ya ha contado demasiado sobre eso que se conoce como "El Tema Sagrado"
+nunca entendían el porqué de su poca colaboración con la figura
+no pudieron saber
+ni siquiera
+qué ocurría al girar a la derecha
+luego de ver ese número
+luego de ver
+al borracho, 
+al fumón, 
+al marica, 
+al imbécil, 
+al drogata, 
+Sí, la inmundicia, sí, la porquería.  
+    CARLOS VITTERI, 1985`
+            },
+            {
+                id: "TIEMPO",
+                text: `- Cuando pase el tiempo lo entenderás.`
+            },
+            {
+                id: "ARTE",
+                text: `Porque 
+si no tuviera
+el arte
+de amarte
+ya me hubiera suicidado
+por desamores
+de veinticinco
+matrimonios`
+            },
+            {
+                id: "OBRA",
+                text: `la obra 
+ha sido quemada un día
+antes
+de su suicidio`
+            },
+            {
+                id: "RESTOS",
+                text: `- ¿Quedaron los restos?
+- Sí.`
+            },
+            {
+                id: "CRUZ",
+                text: `En la cruz
+y el Cementerio
+porque no tenía
+ni nombre
+ni apellido`
+            },
+            {
+                id: "RUIDO",
+                text: `- Un día antes de su suicido amenazó a todos. Les dijo que apagaría las luces. Que habría mucho ruido. 
+- ¿Hubo ruido?
+- No, no hubo.
+- Triste huevón.`
+            },
+            {
+                id: "GATO",
+                text: `----------------------------------
+|AQUEL                           | 
+|GATO                            |
+|                 que tanto      |
+|             cuidas y proteges  |
+|Un día                          |
+|morirá                          |
+|                                |
+|Y no sabrá que ha muerto        |
+|pero                            |
+|tampoco                         |
+|habrá sonido                    |
+|                                |
+|Y el agua                       |
+|ya no será cristalina           |
+----------------------------------`
+            },
+            {
+                id: "CUENTAS",
+                text: `- ¿Quién ha intentado acceder a mis cuentas bancarias?
+- Creo que ha sido ese hijo de puta.
+- Hay que matarlo.
+- De inmediato.`
+            },
+            {
+                id: "PASTELITO",
+                text: `Dice 
+el Pastelito que
+
+SU
+PROFESOR 
+
+                        LO
+                    HIZO SUFRIR
+
+Pero en los salones, era alumno de Narciso y otros dioses.
+Dioses que él había creado.
+
+                         En su
+                        INFIERNO
+
+No existían ni el fuego ni el agua
+Pero la felicidad era inmediata
+
+Tan inmediata como el reloj que le regaló el coleccionista de la tiendita de antigüedades. `
+            },
+            {
+                id: "ACTIVO",
+                text: `- ¿Activo?
+- Cincuenta de camote y diez de cancha para los zapatones.
+- Uy, viejito. Si te contara. Regreso de unas vacaciones en el extranjero.
+- ¿Allá también saben usar el revólver?
+- Si tan solo te contara, porteño.
+- Ya no me cuentes.
+- No te cuento.`
+            },
+            {
+                id: "VIEJITO",
+                text: `- Si tan solo te contara, viejito.
+- Ya no me cuentes.
+- No te cuento.`
+            },
+            {
+                id: "LIBRO",
+                text: `04:04
+- Dice que no le gustó el libro.
+- Ya lo vivirá
+- ¿El libro?
+- Sí pues.
+
+    Donde 
+       el 
+uso de armas 
+y la discreción 
+son esenciales.`
+            },
+            {
+                id: "INGENIERO",
+                text: `- Yo solo quiero que me digan ingeniero, abuelito.
+- Yo solo quiero que te duermas, hijo.
+- Está bien, pero nos encontraremos en el sueño.
+- No tengas miedo. Ahí estaré puntual.
+- Gracias, abuelito.`
+            },
+            {
+                id: "CHOLITO",
+                text: `- Hará bien, cholito. Usted tiene que pasearse unos días por su tierra y no acabarse la vida en temas que podrían matar a Sísifo.
+
+Sísifo nunca se consideró infeliz. 
+
+Hasta que su hijo le dijo:
+"Papá, no tengo para la universidad".`
             }
         ];
 
@@ -266,10 +331,9 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
         this.currentUtterance = null;
         this.speechRate = 1.0;
         this.highlightColor = '#4f46e5';
-        this.audioTimings = []; // Array to store word timings
+        this.audioTimings = [];
         this.audioPlayer = null;
 
-        // DOM elements
         this.elements = {
             quoteDisplay: document.getElementById('quoteDisplay'),
             quoteTitle: document.getElementById('quoteTitle'),
@@ -293,56 +357,52 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
 
     init() {
         try {
-            // Initialize Feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-
-            // Set total quotes
+            if (typeof feather !== 'undefined') feather.replace();
             this.elements.totalQuotes.textContent = this.quotes.length;
-
-            // Load first quote
             this.loadQuote(this.currentQuoteIndex);
-
-            // Bind event listeners
             this.bindEvents();
-
-            // Check speech synthesis support
             this.checkSpeechSynthesisSupport();
-
-            // Initialize settings
             this.updateHighlightColor();
             this.updateSpeechRate();
-
         } catch (error) {
             this.showError('Failed to initialize application: ' + error.message);
         }
     }
 
     bindEvents() {
-        // Audio controls
         this.elements.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
         this.elements.stopBtn.addEventListener('click', () => this.stopReading());
         this.elements.prevBtn.addEventListener('click', () => this.previousQuote());
         this.elements.nextBtn.addEventListener('click', () => this.nextQuote());
-
-        // Settings
         this.elements.highlightColor.addEventListener('change', () => this.updateHighlightColor());
         this.elements.speechRate.addEventListener('input', () => this.updateSpeechRate());
         this.elements.audioFile.addEventListener('change', (e) => this.handleAudioFile(e));
-
-        // Audio player events
         this.elements.audioPlayer.addEventListener('timeupdate', () => this.updateWordHighlight());
         this.elements.audioPlayer.addEventListener('ended', () => this.stopReading());
         this.elements.audioPlayer.addEventListener('error', (e) => this.showError('Audio playback error: ' + e.message));
-
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => this.handleKeydown(e));
-
-        // Handle speech synthesis events
-        this.speechSynthesis.addEventListener('voiceschanged', () => {
-            this.checkSpeechSynthesisSupport();
-        });
+        this.speechSynthesis.addEventListener('voiceschanged', () => this.checkSpeechSynthesisSupport());
+        const darkModeBtn = document.getElementById('darkModeBtn');
+        if (darkModeBtn) {
+            // Set initial button text/icon
+            function updateDarkBtn() {
+                if (document.body.classList.contains('dark-mode')) {
+                    darkModeBtn.textContent = '☀️ Modo Claro';
+                } else {
+                    darkModeBtn.textContent = '🌙 Modo Oscuro';
+                }
+            }
+            darkModeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+                updateDarkBtn();
+            });
+            // Restore mode and button on load
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            updateDarkBtn();
+        }
     }
 
     checkSpeechSynthesisSupport() {
@@ -356,23 +416,14 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
 
     loadQuote(index) {
         try {
-            if (index < 0 || index >= this.quotes.length) {
-                throw new Error('Quote index out of range');
-            }
-
+            if (index < 0 || index >= this.quotes.length) throw new Error('Quote index out of range');
             const quote = this.quotes[index];
-            
-            // Update title and counter
             this.elements.quoteTitle.textContent = `Quote ${quote.id}`;
             this.elements.currentQuote.textContent = index + 1;
-            
-            // Process and display text
             this.words = this.processText(quote.text);
-            this.elements.quoteDisplay.innerHTML = this.words.map(word => 
+            this.elements.quoteDisplay.innerHTML = this.words.map(word =>
                 `<span class="word">${this.escapeHtml(word)}</span>`
             ).join(' ');
-
-            // Load audio if available
             if (quote.audio) {
                 this.elements.audioPlayer.src = quote.audio;
                 this.loadAudioTimingsFromFile(quote.audio);
@@ -380,24 +431,19 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
                 this.elements.audioPlayer.src = '';
                 this.audioTimings = [];
             }
-
-            // Reset state
             this.currentWordIndex = 0;
             this.clearHighlights();
             this.updateProgress(0);
             this.updateNavigationButtons();
             this.updatePlayButton();
-
         } catch (error) {
             this.showError('Failed to load quote: ' + error.message);
         }
     }
 
     processText(text) {
-        // Clean and split text into words
         const cleanText = text.trim();
-        const words = cleanText.split(/\s+/).filter(word => word.length > 0);
-        return words;
+        return cleanText.split(/\s+/).filter(word => word.length > 0);
     }
 
     escapeHtml(text) {
@@ -417,13 +463,8 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
 
     async loadAudioTimings(file) {
         try {
-            // Here you would implement the logic to load word timings
-            // This could be from a separate JSON file or from the audio file metadata
-            // For now, we'll create dummy timings for demonstration
             const duration = await this.getAudioDuration(file);
-            this.audioTimings = this.words.map((_, index) => {
-                return (duration / this.words.length) * index;
-            });
+            this.audioTimings = this.words.map((_, index) => (duration / this.words.length) * index);
         } catch (error) {
             this.showError('Failed to load audio timings: ' + error.message);
         }
@@ -432,21 +473,16 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     getAudioDuration(file) {
         return new Promise((resolve, reject) => {
             const audio = new Audio();
-            audio.addEventListener('loadedmetadata', () => {
-                resolve(audio.duration);
-            });
+            audio.addEventListener('loadedmetadata', () => resolve(audio.duration));
             audio.addEventListener('error', reject);
             audio.src = URL.createObjectURL(file);
         });
     }
 
     async loadAudioTimingsFromFile(audioPath) {
-        // Dummy timings igual que antes, pero usando el archivo de la ruta
         try {
             const duration = await this.getAudioDurationFromPath(audioPath);
-            this.audioTimings = this.words.map((_, index) => {
-                return (duration / this.words.length) * index;
-            });
+            this.audioTimings = this.words.map((_, index) => (duration / this.words.length) * index);
         } catch (error) {
             this.showError('Failed to load audio timings: ' + error.message);
         }
@@ -455,9 +491,7 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     getAudioDurationFromPath(audioPath) {
         return new Promise((resolve, reject) => {
             const audio = new Audio();
-            audio.addEventListener('loadedmetadata', () => {
-                resolve(audio.duration);
-            });
+            audio.addEventListener('loadedmetadata', () => resolve(audio.duration));
             audio.addEventListener('error', reject);
             audio.src = audioPath;
         });
@@ -466,7 +500,6 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     updateWordHighlight() {
         const currentTime = this.elements.audioPlayer.currentTime;
         const wordIndex = this.audioTimings.findIndex(time => time > currentTime) - 1;
-        
         if (wordIndex >= 0 && wordIndex < this.words.length) {
             this.highlightWord(wordIndex);
             this.updateProgress((wordIndex / this.words.length) * 100);
@@ -475,18 +508,11 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
 
     togglePlayPause() {
         if (this.elements.audioPlayer.src) {
-            if (this.isPlaying) {
-                this.pauseReading();
-            } else {
-                this.startReading();
-            }
+            if (this.isPlaying) this.pauseReading();
+            else this.startReading();
         } else {
-            // Fallback to speech synthesis if no audio file is loaded
-            if (this.isPlaying) {
-                this.pauseReading();
-            } else {
-                this.startReading();
-            }
+            if (this.isPlaying) this.pauseReading();
+            else this.startReading();
         }
     }
 
@@ -497,7 +523,6 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
             this.isPaused = false;
             this.updatePlayButton();
         } else {
-            // Fallback to speech synthesis
             this.startSpeechSynthesis();
         }
     }
@@ -533,20 +558,15 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
         if (index >= 0 && index < this.words.length) {
             const wordElements = this.elements.quoteDisplay.getElementsByClassName('word');
             if (wordElements[index]) {
-                wordElements[index].style.backgroundColor = this.highlightColor;
-                wordElements[index].scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
+                wordElements[index].classList.add('highlighted');
+                wordElements[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     }
 
     clearHighlights() {
         const highlightedWords = document.querySelectorAll('.word.highlighted, .word.current');
-        highlightedWords.forEach(word => {
-            word.classList.remove('highlighted', 'current');
-        });
+        highlightedWords.forEach(word => word.classList.remove('highlighted', 'current'));
     }
 
     updatePlayButton() {
@@ -558,10 +578,7 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
             icon.setAttribute('data-feather', 'play');
             this.elements.playPauseBtn.setAttribute('aria-label', 'Play');
         }
-        
-        if (typeof feather !== 'undefined') {
-            feather.replace();
-        }
+        if (typeof feather !== 'undefined') feather.replace();
     }
 
     updateProgress(percentage) {
@@ -595,36 +612,25 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     updateSpeechRate() {
         this.speechRate = parseFloat(this.elements.speechRate.value);
         this.elements.speedValue.textContent = `${this.speechRate.toFixed(1)}x`;
-        
-        // Update current utterance if playing
-        if (this.currentUtterance && this.isPlaying) {
-            // Note: Rate change during playback requires stopping and restarting
-            // This is a limitation of the Web Speech API
-        }
     }
 
-    handleKeydown(event) {
-        // Prevent action if user is typing in an input
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            return;
-        }
-
-        switch (event.key) {
+    handleKeydown(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        switch (e.key) {
             case ' ':
-            case 'Enter':
-                event.preventDefault();
+                e.preventDefault();
                 this.togglePlayPause();
                 break;
             case 'Escape':
-                event.preventDefault();
+                e.preventDefault();
                 this.stopReading();
                 break;
             case 'ArrowLeft':
-                event.preventDefault();
+                e.preventDefault();
                 this.previousQuote();
                 break;
             case 'ArrowRight':
-                event.preventDefault();
+                e.preventDefault();
                 this.nextQuote();
                 break;
         }
@@ -633,29 +639,19 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     showError(message) {
         this.elements.errorMessage.textContent = message;
         this.elements.errorMessage.classList.add('show');
-        
-        // Auto-hide after 5 seconds
         setTimeout(() => {
             this.elements.errorMessage.classList.remove('show');
         }, 5000);
     }
 
     startSpeechSynthesis() {
-        if (!this.checkSpeechSynthesisSupport()) {
-            return;
-        }
-
-        // Cancel any ongoing speech
+        if (!this.checkSpeechSynthesisSupport()) return;
         this.speechSynthesis.cancel();
-
-        // Create new utterance
         const utterance = new SpeechSynthesisUtterance(this.quotes[this.currentQuoteIndex].text);
         utterance.rate = this.speechRate;
-        
-        // Handle word boundaries
         utterance.onboundary = (event) => {
             if (event.name === 'word') {
-                const wordIndex = this.words.findIndex(word => 
+                const wordIndex = this.words.findIndex(word =>
                     event.charIndex >= this.quotes[this.currentQuoteIndex].text.indexOf(word) &&
                     event.charIndex < this.quotes[this.currentQuoteIndex].text.indexOf(word) + word.length
                 );
@@ -665,16 +661,12 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
                 }
             }
         };
-
-        // Handle end of speech
         utterance.onend = () => {
             this.isPlaying = false;
             this.isPaused = false;
             this.updatePlayButton();
             this.updateProgress(100);
         };
-
-        // Start speaking
         this.currentUtterance = utterance;
         this.speechSynthesis.speak(utterance);
         this.isPlaying = true;
@@ -683,14 +675,11 @@ Regarding the unresolved process, the woman has not asked about anyone again, ne
     }
 }
 
-// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     try {
         new QuotesAudioApp();
     } catch (error) {
         console.error('Failed to initialize Quotes Audio App:', error);
-        
-        // Show fallback error message
         const errorDiv = document.getElementById('errorMessage');
         if (errorDiv) {
             errorDiv.textContent = 'Failed to initialize application. Please refresh the page.';
@@ -698,4 +687,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-

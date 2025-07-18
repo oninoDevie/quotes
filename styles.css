@@ -568,6 +568,64 @@ body {
     }
 }
 
+/* Responsive Design */
+@media (max-width: 900px) {
+    .app-container {
+        max-width: 98vw;
+        padding: 1rem;
+    }
+    .main-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .quote-container,
+    .controls-panel,
+    .settings-panel {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    .quote-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .app-title {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    .quote-title {
+        font-size: 1.1rem;
+    }
+    .controls-panel,
+    .settings-panel {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+    .audio-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .quote-container {
+        padding: 0.5rem;
+    }
+    .quote-display {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+    .progress-bar {
+        height: 6px;
+    }
+    .setting-label {
+        font-size: 0.95rem;
+    }
+    .color-picker,
+    .file-input {
+        font-size: 0.95rem;
+    }
+}
+
 /* Focus styles for accessibility */
 .control-btn:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -618,4 +676,127 @@ body {
         color: var(--color-text-primary);
         text-decoration: underline;
     }
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #181820;
+    color: #eaff00;
+}
+body.dark-mode .app-container,
+body.dark-mode .quote-container,
+body.dark-mode .controls-panel,
+body.dark-mode .settings-panel {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #222;
+}
+body.dark-mode .quote-title,
+body.dark-mode .setting-label {
+    color: #eaff00;
+}
+body.dark-mode .progress-bar {
+    background-color: #eaff00;
+}
+body.dark-mode .control-btn.primary {
+    background-color: #eaff00;
+    color: #232336;
+}
+body.dark-mode .control-btn.primary:hover:not(:disabled) {
+    background-color: #fff700;
+    color: #232336;
+}
+body.dark-mode .control-btn.secondary {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #eaff00;
+}
+body.dark-mode .control-btn.secondary:hover:not(:disabled) {
+    background-color: #2c2c44;
+    color: #fff700;
+    border-color: #fff700;
+}
+body.dark-mode .color-picker,
+body.dark-mode .file-input {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #eaff00;
+}
+body.dark-mode .error-message {
+    background-color: #dc2626;
+    color: #fff700;
+}
+/* DARK MODE ONLY */
+body {
+    background-color: #181820;
+    color: #eaff00;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.app-container,
+.quote-container,
+.controls-panel,
+.settings-panel {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #222;
+}
+
+.app-title,
+.quote-title,
+.setting-label {
+    color: #eaff00;
+}
+
+.progress-bar {
+    background-color: #eaff00;
+}
+
+.control-btn.primary {
+    background-color: #eaff00;
+    color: #232336;
+}
+
+.control-btn.primary:hover:not(:disabled) {
+    background-color: #fff700;
+    color: #232336;
+}
+
+.control-btn.secondary {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #eaff00;
+}
+
+.control-btn.secondary:hover:not(:disabled) {
+    background-color: #2c2c44;
+    color: #fff700;
+    border-color: #fff700;
+}
+
+.color-picker,
+.file-input {
+    background-color: #232336;
+    color: #eaff00;
+    border-color: #eaff00;
+}
+
+.error-message {
+    background-color: #dc2626;
+    color: #fff700;
+}
+
+.quote-display {
+    color: #eaff00;
+    background: #232336;
+}
+
+.quote-display .word.highlighted {
+    background-color: #eaff00;
+    color: #232336;
+}
+
+.quote-display .word.current {
+    background-color: #fff700;
+    color: #232336;
 }
