@@ -384,7 +384,6 @@ Hasta que su hijo le dijo:
         this.speechSynthesis.addEventListener('voiceschanged', () => this.checkSpeechSynthesisSupport());
         const darkModeBtn = document.getElementById('darkModeBtn');
         if (darkModeBtn) {
-            // Set initial button text/icon
             function updateDarkBtn() {
                 if (document.body.classList.contains('dark-mode')) {
                     darkModeBtn.textContent = '☀️ Modo Claro';
