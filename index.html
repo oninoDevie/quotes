@@ -5,30 +5,34 @@
   <title>Quotes Audio App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button id="darkModeBtn">🌙 Modo Oscuro</button>
+  <button id="darkModeBtn">✨ Light</button>
+  
   <div class="app-container">
     <header class="app-header">
       <h1 class="app-title">Quotes Audio App</h1>
       <span class="quote-counter">
         <span id="currentQuote">1</span>
-        <span class="counter-separator">of</span>
-        <span id="totalQuotes">0</span>
+        <span class="counter-separator">/</span>
+        <span id="totalQuotes">3</span>
       </span>
     </header>
+
     <main class="main-content">
       <div class="quote-container">
         <h2 id="quoteTitle" class="quote-title"></h2>
         <div class="reading-progress">
-          <div id="progressBar" class="progress-bar"></div>
+          <progress id="progressBar" value="0" max="100"></progress>
         </div>
         <div id="quoteDisplay" class="quote-display"></div>
       </div>
+
       <div class="controls-panel">
         <div class="audio-controls">
-          <button id="prevBtn" class="control-btn secondary" aria-label="Previous quote">
+          <button id="prevBtn" class="control-btn secondary" aria-label="Previous">
             <i data-feather="skip-back"></i>
           </button>
           <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
@@ -37,50 +41,35 @@
           <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
             <i data-feather="square"></i>
           </button>
-          <button id="nextBtn" class="control-btn secondary" aria-label="Next quote">
+          <button id="nextBtn" class="control-btn secondary" aria-label="Next">
             <i data-feather="skip-forward"></i>
           </button>
         </div>
       </div>
+
       <div class="settings-panel">
         <div class="setting-group">
-          <label for="audioFile" class="setting-label">Audio File</label>
+          <label for="audioFile" class="setting-label">Audio local</label>
           <input type="file" id="audioFile" accept="audio/*" class="file-input">
         </div>
         <div class="setting-group">
-          <label for="highlightColor" class="setting-label">Highlight</label>
-          <div class="color-picker-wrapper">
-            <input type="color" id="highlightColor" value="#4f46e5" class="color-picker">
-          </div>
+          <label for="highlightColor" class="setting-label">Color</label>
+          <input type="color" id="highlightColor" value="#6366f1" class="color-picker">
         </div>
         <div class="setting-group">
-          <label for="speechRate" class="setting-label">Speed</label>
+          <label for="speechRate" class="setting-label">Velocidad</label>
           <div class="slider-wrapper">
-            <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" class="speed-slider">
-            <span id="speedValue" class="speed-value">1.0x</span>
+            <input type="range" id="speechRate" min="0.6" max="2" step="0.1" value="1">
+            <span id="speedValue">1.0×</span>
           </div>
         </div>
       </div>
-      <audio id="audioPlayer" style="display: none;"></audio>
-      <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
     </main>
   </div>
-  <script src="script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        new QuotesAudioApp();
-      } catch (error) {
-        console.error('Failed to initialize Quotes Audio App:', error);
-        const errorDiv = document.getElementById('errorMessage');
-        if (errorDiv) {
-          errorDiv.textContent = 'Failed to initialize application. Please refresh the page.';
-          errorDiv.classList.add('show');
-        }
-      }
-    });
-  </script>
 
-  
+  <audio id="audioPlayer" style="display: none;"></audio>
+  <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
