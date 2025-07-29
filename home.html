@@ -1,78 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Quotes Audio App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://unpkg.com/feather-icons"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All-in-One Science Tools</title>
+  <style>
+    :root {
+      --bg1: url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1920&q=80');
+      --bg2: url('https://images.unsplash.com/photo-1602526216438-2f6c5c5c7b63?auto=format&fit=crop&w=1920&q=80');
+      --bg3: url('https://images.unsplash.com/photo-1549887534-223d10c1f4e1?auto=format&fit=crop&w=1920&q=80');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      background-color: #121212;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      transition: background-image 0.5s ease;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background-color: #1f1f1f;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    button:hover {
+      background-color: #333333;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.2rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <button id="darkModeBtn">✨ Light</button>
-  
-  <div class="app-container">
-    <header class="app-header">
-      <h1 class="app-title">Quotes Audio App</h1>
-      <span class="quote-counter">
-        <span id="currentQuote">1</span>
-        <span class="counter-separator">/</span>
-        <span id="totalQuotes">3</span>
-      </span>
-    </header>
 
-    <main class="main-content">
-      <div class="quote-container">
-        <h2 id="quoteTitle" class="quote-title"></h2>
-        <div class="reading-progress">
-          <progress id="progressBar" value="0" max="100"></progress>
-        </div>
-        <div id="quoteDisplay" class="quote-display"></div>
-      </div>
-
-      <div class="controls-panel">
-        <div class="audio-controls">
-          <button id="prevBtn" class="control-btn secondary" aria-label="Previous">
-            <i data-feather="skip-back"></i>
-          </button>
-          <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
-            <i data-feather="play"></i>
-          </button>
-          <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
-            <i data-feather="square"></i>
-          </button>
-          <button id="nextBtn" class="control-btn secondary" aria-label="Next">
-            <i data-feather="skip-forward"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="settings-panel">
-        <div class="setting-group">
-          <label for="audioFile" class="setting-label">Audio local</label>
-          <input type="file" id="audioFile" accept="audio/*" class="file-input">
-        </div>
-        <div class="setting-group">
-          <label for="highlightColor" class="setting-label">Color</label>
-          <input type="color" id="highlightColor" value="#6366f1" class="color-picker">
-        </div>
-        <div class="setting-group">
-          <label for="speechRate" class="setting-label">Velocidad</label>
-          <div class="slider-wrapper">
-            <input type="range" id="speechRate" min="0.6" max="2" step="0.1" value="1">
-            <span id="speedValue">1.0×</span>
-          </div>
-        </div>
-      </div>
-    </main>
+  <div class="container">
+    <h1>🧪 All-in-One Science Tools</h1>
+    <p>Diseñado para estudio, productividad y ciencia.</p>
+    <button onclick="cambiarFondo()">Cambiar fondo</button>
   </div>
 
-  <audio id="audioPlayer" style="display: none;"></audio>
-  <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
+  <script>
+    const fondos = [
+      getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
+      getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
+      getComputedStyle(document.documentElement).getPropertyValue('--bg3')
+    ];
 
-  <script src="script.js"></script>
+    let fondoIndex = localStorage.getItem('bgIndex') || 0;
+    document.body.style.backgroundImage = fondos[fondoIndex];
 
-  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
+    function cambiarFondo() {
+      fondoIndex = (parseInt(fondoIndex) + 1) % fondos.length;
+      document.body.style.backgroundImage = fondos[fondoIndex];
+      localStorage.setItem('bgIndex', fondoIndex);
+    }
+  </script>
+<h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
 
   <div class="ranking-section">
     <!-- Ranking y gamificación existentes -->
