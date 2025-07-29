@@ -7,6 +7,96 @@
   <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/feather-icons"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+   <style>
+    /* Paleta CH + CE: azul, verde neón, gris oscuro, blanco */
+    :root {
+      --azul: #007FFF;
+      --verde-neon: #39FF14;
+      --gris-oscuro: #1a1f2b;
+      --gris-texto: #d3d3d3;
+      --blanco: #ffffff;
+      --fondo: #0d1117;
+      --borde: #2c313a;
+    }
+
+    body {
+      background-color: var(--fondo);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--blanco);
+      padding: 2rem;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--verde-neon);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .ranking {
+      max-width: 700px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .student {
+      display: flex;
+      align-items: center;
+      background-color: var(--gris-oscuro);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .student:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .medal {
+      width: 64px;
+      margin-right: 1.5rem;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--azul);
+    }
+
+    .info p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+      color: var(--gris-texto);
+    }
+
+    .info em {
+      color: var(--verde-neon);
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .student {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .medal {
+        margin: 0 0 1rem 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <button id="darkModeBtn">✨ Light</button>
@@ -94,6 +184,53 @@
       <p id="resultado"></p>
     </div>
 
+
+
+
+<h1>🏆 Top Estudiantes - Semana</h1>
+
+  <div class="ranking">
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
+      <div class="info">
+        <h2>🥇 Valeria Ríos</h2>
+        <p>🎯 Puntaje: 980 pts</p>
+        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
+        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
+      </div>
+    </div>
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
+      <div class="info">
+        <h2>🥈 Andrés León</h2>
+        <p>🎯 Puntaje: 910 pts</p>
+        <p>📘 Título: <em>Analista Avanzado</em></p>
+        <p>🎁 Recompensa: Pase extra para simulacro</p>
+      </div>
+    </div>
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
+      <div class="info">
+        <h2>🥉 Fiorella Martínez</h2>
+        <p>🎯 Puntaje: 880 pts</p>
+        <p>📘 Título: <em>Exploradora del Saber</em></p>
+        <p>🎁 Recompensa: Sticker digital exclusivo</p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
     <div class="mini-game">
       <h2 class="section-title">🎮 Juego: Click Rápido</h2>
       <p>Haz clic lo más rápido posible en 5 segundos.</p>
@@ -162,5 +299,54 @@
       }
     }
   </script>
+   <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
+
+  <div class="ranking-section">
+
+    <div class="medal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Gold_medal_icon.svg/240px-Gold_medal_icon.svg.png" alt="Oro" />
+      <div>
+        <h2 class="gold">🥇 Primer lugar – Valeria Ríos</h2>
+        <p>🎯 Puntaje: 980 pts</p>
+        <p>💡 Bonus: Acceso anticipado a nuevas lecciones</p>
+        <p>🔥 Título desbloqueado: "Maestra del Razonamiento"</p>
+      </div>
+    </div>
+
+    <div class="medal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Silver_medal_icon.svg/240px-Silver_medal_icon.svg.png" alt="Plata" />
+      <div>
+        <h2 class="silver">🥈 Segundo lugar – Andrés León</h2>
+        <p>🎯 Puntaje: 910 pts</p>
+        <p>🎁 Bonus: 1 pase extra para simulacro</p>
+        <p>📘 Título desbloqueado: "Analista Avanzado"</p>
+      </div>
+    </div>
+
+    <div class="medal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bronze_medal_icon.svg/240px-Bronze_medal_icon.svg.png" alt="Bronce" />
+      <div>
+        <h2 class="bronze">🥉 Tercer lugar – Fiorella Martínez</h2>
+        <p>🎯 Puntaje: 880 pts</p>
+        <p>🎁 Bonus: Sticker digital exclusivo</p>
+        <p>📘 Título desbloqueado: "Exploradora del Saber"</p>
+      </div>
+    </div>
+
+    <div class="section-title">🎯 Sistema de puntuación</div>
+    <ul>
+      <li>+10 pts por clase completada</li>
+      <li>+15 pts por test aprobado</li>
+      <li>+20 pts por participación en desafíos</li>
+      <li>+50 pts por primer lugar en simulacro</li>
+    </ul>
+
+    <div class="section-title">🎮 Gamificación adicional</div>
+    <ul>
+      <li>🎖️ Logros: por rachas, horas de estudio, preguntas sin error.</li>
+      <li>🧩 Misiones diarias/semanales: “Estudia 3 días seguidos”, “Gana 2 retos”.</li>
+      <li>📈 Niveles por experiencia: Novato → Avanzado → Prodigio → Leyenda.</li>
+    </ul>
+  </div>
 </body>
 </html>
