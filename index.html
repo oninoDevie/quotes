@@ -125,6 +125,107 @@
     <p>Sincroniza texto + audio, con modo oscuro y diseño responsive.</p>
   </header>
 
+  <h2>🌎 Geografía: Las 8 Regiones Naturales del Perú</h2>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center;">
+    <div style="flex:1; min-width:250px; max-width:400px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Regiones_naturales_del_Per%C3%BA.svg/1200px-Regiones_naturales_del_Per%C3%BA.svg.png" 
+           alt="Mapa Regiones Naturales" 
+           style="width:100%; border-radius:12px; box-shadow:0 0 10px #333;">
+    </div>
+    <div style="flex:1; min-width:250px; padding:1rem;">
+      <label>Selecciona una región:</label>
+      <select id="regiones" onchange="mostrarRegion()" style="width:100%; padding:0.6rem; margin-bottom:1rem;">
+        <option value="">-- Elegir región --</option>
+        <option value="janca">🗻 Janca (Cordillera)</option>
+        <option value="puna">🏔️ Puna (Jalca)</option>
+        <option value="suni">🌤️ Suni</option>
+        <option value="quechua">🏞️ Quechua</option>
+        <option value="yunga">🍇 Yunga</option>
+        <option value="chala">🌅 Costa o Chala</option>
+        <option value="rupa">🌳 Selva Alta (Rupa Rupa)</option>
+        <option value="omagua">🌴 Selva Baja (Omagua)</option>
+      </select>
+
+      <div id="infoRegion" style="background:#1e1e1e; border-radius:10px; padding:1rem;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const regiones = {
+    janca: {
+      nombre: "Región Janca (Cordillera)",
+      altitud: "más de 4,800 m",
+      clima: "Glacial o muy frío",
+      fauna: "Cóndor, vicuña, vizcacha",
+      extra: "Zona de nieves perpetuas y picos nevados de la cordillera de los Andes."
+    },
+    puna: {
+      nombre: "Región Puna o Jalca",
+      altitud: "4,000 – 4,800 m",
+      clima: "Frío",
+      fauna: "Llama, alpaca, puma",
+      extra: "Amplias mesetas y pastizales andinos."
+    },
+    suni: {
+      nombre: "Región Suni",
+      altitud: "3,500 – 4,000 m",
+      clima: "Templado frío",
+      fauna: "Zorrino, perdiz",
+      extra: "Cultivo de papa, olluco, oca."
+    },
+    quechua: {
+      nombre: "Región Quechua",
+      altitud: "2,300 – 3,500 m",
+      clima: "Templado",
+      fauna: "Zorro andino",
+      extra: "Zona de mayor población rural en los Andes."
+    },
+    yunga: {
+      nombre: "Región Yunga",
+      altitud: "500 – 2,300 m",
+      clima: "Templado-cálido",
+      fauna: "Gallito de las rocas, orquídeas",
+      extra: "Dividida en marítima y fluvial. Rica en frutas tropicales."
+    },
+    chala: {
+      nombre: "Región Costa o Chala",
+      altitud: "0 – 500 m",
+      clima: "Cálido y árido",
+      fauna: "Pelícano, lobo marino",
+      extra: "Zona costera donde se desarrollan las principales ciudades."
+    },
+    rupa: {
+      nombre: "Selva Alta o Rupa Rupa",
+      altitud: "400 – 2,000 m",
+      clima: "Cálido húmedo",
+      fauna: "Jaguar, oso de anteojos",
+      extra: "Zona de ceja de selva y abundantes lluvias."
+    },
+    omagua: {
+      nombre: "Selva Baja u Omagua",
+      altitud: "80 – 400 m",
+      clima: "Muy cálido y húmedo",
+      fauna: "Anaconda, delfín rosado",
+      extra: "Ríos navegables y densa vegetación amazónica."
+    }
+  };
+
+  function mostrarRegion() {
+    const sel = document.getElementById("regiones").value;
+    const info = document.getElementById("infoRegion");
+    if (!sel) return (info.innerHTML = "");
+    const r = regiones[sel];
+    info.innerHTML = `
+      <h3>${r.nombre}</h3>
+      <p><strong>Altitud:</strong> ${r.altitud}</p>
+      <p><strong>Clima:</strong> ${r.clima}</p>
+      <p><strong>Fauna/Flora:</strong> ${r.fauna}</p>
+      <p><strong>Curiosidad:</strong> ${r.extra}</p>
+    `;
+  }
+</script>
+
   <!-- MAIN -->
   <main class="shell">
     <!-- Quote Card -->
