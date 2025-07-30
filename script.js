@@ -688,4 +688,70 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+  const input = document.getElementById("taskInput");
+  const list = document.getElementById("taskList");
 
+  function saveTasks() {
+    const tasks = [];
+    list.querySelectorAll("li").forEach(li => {
+      tasks.push({ text: li.dataset.text, done: li.classList.contains("done") });
+    });
+    localStorage.setItem("todo_xo", JSON.stringify(tasks));
+  }
+
+  function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("todo_xo")) || [];
+    tasks.forEach(task => addTask(task.text, task.done));
+  }
+
+  function addTask(text = null, done = false) {
+    const value = text || input.value.trim();
+    if (value === "") return;
+
+    const li = document.createElement("li");
+    li.dataset.text = value;
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
+    li.style.padding = "0.5rem";
+    li.style.marginBottom = "0.5rem";
+    li.style.background = "#1a1a2e";
+    li.style.borderRadius = "8px";
+
+    const span = document.createElement("span");
+    span.textContent = value;
+    if (done) span.style.textDecoration = "line-through";
+    li.appendChild(span);
+    if (done) li.classList.add("done");
+
+    const buttons = document.createElement("div");
+
+    const doneBtn = document.createElement("button");
+    doneBtn.textContent = "✅";
+    doneBtn.style.marginRight = "0.5rem";
+    doneBtn.onclick = () => {
+      li.classList.toggle("done");
+      span.style.textDecoration = li.classList.contains("done") ? "line-through" : "none";
+      saveTasks();
+    };
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "XO";
+    deleteBtn.style.color = "#ef5350";
+    deleteBtn.style.fontWeight = "bold";
+    deleteBtn.onclick = () => {
+      li.remove();
+      saveTasks();
+    };
+
+    buttons.appendChild(doneBtn);
+    buttons.appendChild(deleteBtn);
+    li.appendChild(buttons);
+    list.appendChild(li);
+    input.value = "";
+
+    saveTasks();
+  }
+
+  // Inicialización
+  window.onload = loadTasks;
