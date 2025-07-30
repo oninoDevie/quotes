@@ -8,7 +8,6 @@
   <script src="https://unpkg.com/feather-icons"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
    <style>
-    
     /* Paleta CH + CE: azul, verde neón, gris oscuro, blanco */
     :root {
       --azul: #007FFF;
@@ -101,6 +100,13 @@
 </head>
 <body>
   <button id="darkModeBtn">✨ Light</button>
+  <!-- Tarjeta del poema -->
+<div class="poem-card">
+  <div class="poem-title" id="poem-title"></div>
+  <div class="poem-text"  id="poem-text"></div>
+  <button class="next-btn" id="next-btn">Next</button>
+</div>
+
   
   <div class="app-container">
     <header class="app-header">
@@ -120,6 +126,13 @@
         </div>
         <div id="quoteDisplay" class="quote-display"></div>
       </div>
+
+      <!-- Tarjeta del poema -->
+<div class="poem-card">
+  <div class="poem-title" id="poem-title"></div>
+  <div class="poem-text"  id="poem-text"></div>
+  <button class="next-btn" id="next-btn">Next</button>
+</div>
 
       <div class="controls-panel">
         <div class="audio-controls">
@@ -163,74 +176,92 @@
 
   <script src="script.js"></script>
 
+  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
 
-  <style>
-:root{
-  --bg-dark:#0d0d0d;
-  --txt-light:#f5f5f5;
-  --accent:#6366f1;
-}
+  <div class="ranking-section">
+    <!-- Ranking y gamificación existentes -->
+    <!-- ... contenido anterior ... -->
 
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg-dark) center/cover fixed;
-  color:var(--txt-light);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  transition:background-image 1s ease-in-out;
-}
+    <div class="phase-sim">
+      <h2 class="section-title">⚛️ Simulador de Cambios de Estado</h2>
+      <label for="estado">Estado actual:</label>
+      <select id="estado">
+        <option value="sólido">Sólido</option>
+        <option value="líquido">Líquido</option>
+        <option value="gas">Gas</option>
+      </select>
 
-/* ---------- UI ---------- */
-.lang-switcher{
-  position:fixed;top:1rem;right:1rem;
-  background:rgba(0,0,0,.55);
-  padding:0.4rem 0.7rem;
-  border-radius:999px;
-  display:flex;gap:0.4rem;
-  z-index:10;
-}
-.lang-switcher button{
-  border:none;background:transparent;
-  color:var(--txt-light);font-weight:600;
-  padding:0.35rem 0.9rem;border-radius:999px;
-  cursor:pointer;transition:.25s;
-}
-.lang-switcher button:hover,
-.lang-switcher button.active{
-  background:var(--txt-light);color:#000;
-}
+      <label for="temperatura">Temperatura (°C):</label>
+      <input type="number" id="temperatura" value="25" />
 
-.poem-card{
-  max-width:600px;text-align:center;
-  background:rgba(0,0,0,.6);
-  padding:2.2rem 2rem;border-radius:1rem;
-  backdrop-filter:blur(8px);
-  box-shadow:0 0 24px rgba(255,255,255,.1);
-  transition:transform .4s ease;
-}
-.poem-card:hover{transform:scale(1.02)}
+      <button onclick="simularCambio()">Simular</button>
+      <p id="resultado"></p>
+    </div>
 
-.poem-title{font-size:1.9rem;font-weight:700;margin-bottom:1rem}
-.poem-text{font-size:1.2rem;font-style:italic;line-height:1.55;margin-bottom:2rem}
 
-.next-btn{
-  background:var(--accent);color:#fff;
-  border:none;border-radius:999px;
-  padding:0.75rem 2.4rem;cursor:pointer;
-  font-size:1rem;font-weight:600;
-  transition:.3s;
-}
-.next-btn:hover{background:#4f46e5;transform:translateY(-2px)}
-.next-btn:active{transform:translateY(0)}
-</style>
-</head>
-<body class="bg-misty">
 
-<!-- Selector de idioma -->
+
+<h1>🏆 Top Estudiantes - Semana</h1>
+
+  <div class="ranking">
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
+      <div class="info">
+        <h2>🥇 Valeria Ríos</h2>
+        <p>🎯 Puntaje: 980 pts</p>
+        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
+        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
+      </div>
+    </div>
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
+      <div class="info">
+        <h2>🥈 Andrés León</h2>
+        <p>🎯 Puntaje: 910 pts</p>
+        <p>📘 Título: <em>Analista Avanzado</em></p>
+        <p>🎁 Recompensa: Pase extra para simulacro</p>
+      </div>
+    </div>
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
+      <div class="info">
+        <h2>🥉 Fiorella Martínez</h2>
+        <p>🎯 Puntaje: 880 pts</p>
+        <p>📘 Título: <em>Exploradora del Saber</em></p>
+        <p>🎁 Recompensa: Sticker digital exclusivo</p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+<div class="ranking">
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
+      <div class="info">
+        <h2>🥇 Valeria Ríos</h2>
+        <p>🎯 Puntaje: 980 pts</p>
+        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
+        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
+      </div>
+    </div>
+
+    <div class="student">
+      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
+      <div class="info">
+        <h2>🥈 Andrés León</h2>
+        <p>🎯 Puntaje: 910 pts</p>
+        <p>📘 Título: <em>Analista Avanzado</em></p>
+        <p>🎁 Recompensa: Pase extra para simulacro</p>
+      </div>
+    </div>
+  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
+
 <div class="lang-switcher">
   <button data-lang="es" class="active">ES</button>
   <button data-lang="en">EN</button>
@@ -299,9 +330,6 @@ langBtns.forEach(b=>b.addEventListener('click',switchLang));
 render();
 </script>
 
-
-  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
-
   <div class="ranking-section">
     <!-- Ranking y gamificación existentes -->
     <!-- ... contenido anterior ... -->
@@ -322,32 +350,75 @@ render();
       <p id="resultado"></p>
     </div>
 
-
-
-
-<h1>🏆 Top Estudiantes - Semana</h1>
-
-  <div class="ranking">
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
-      <div class="info">
-        <h2>🥇 Valeria Ríos</h2>
-        <p>🎯 Puntaje: 980 pts</p>
-        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
-        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
-      </div>
+    <div class="mini-game">
+      <h2 class="section-title">🎮 Juego: Click Rápido</h2>
+      <p>Haz clic lo más rápido posible en 5 segundos.</p>
+      <button onclick="startGame()">Iniciar juego</button>
+      <p id="gameScore"></p>
+      <canvas id="gameCanvas" width="200" height="200"></canvas>
     </div>
+  </div>
 
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
-      <div class="info">
-        <h2>🥈 Andrés León</h2>
-        <p>🎯 Puntaje: 910 pts</p>
-        <p>📘 Título: <em>Analista Avanzado</em></p>
-        <p>🎁 Recompensa: Pase extra para simulacro</p>
-      </div>
-    </div>
+  <script>
+    function simularCambio() {
+      const estado = document.getElementById("estado").value;
+      const temp = parseFloat(document.getElementById("temperatura").value);
+      let nuevoEstado = estado;
+
+      if (estado === "sólido") {
+        if (temp >= 0 && temp < 100) nuevoEstado = "líquido";
+        else if (temp >= 100) nuevoEstado = "gas";
+      } else if (estado === "líquido") {
+        if (temp < 0) nuevoEstado = "sólido";
+        else if (temp >= 100) nuevoEstado = "gas";
+      } else if (estado === "gas") {
+        if (temp < 100 && temp >= 0) nuevoEstado = "líquido";
+        else if (temp < 0) nuevoEstado = "sólido";
+      }
+
+      document.getElementById("resultado").innerText = `Nuevo estado: ${nuevoEstado}`;
+    }
+
+    // Mini juego click rápido
+    let clickCount = 0;
+    let timer;
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function startGame() {
+      clickCount = 0;
+      document.getElementById("gameScore").innerText = "¡Haz clic en el círculo!";
+      ctx.clearRect(0, 0, 200, 200);
+      canvas.addEventListener("click", countClick);
+      drawCircle();
+
+      timer = setTimeout(() => {
+        canvas.removeEventListener("click", countClick);
+        ctx.clearRect(0, 0, 200, 200);
+        document.getElementById("gameScore").innerText = `Puntaje final: ${clickCount}`;
+      }, 5000);
+    }
+
+    function drawCircle() {
+      ctx.fillStyle = "#39FF14";
+      ctx.beginPath();
+      ctx.arc(100, 100, 30, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function countClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dx = x - 100;
+      const dy = y - 100;
+      if (Math.sqrt(dx * dx + dy * dy) <= 30) {
+        clickCount++;
+        drawCircle();
+      }
+    }
+  </script>
+
 
     <div class="student">
       <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
@@ -360,9 +431,6 @@ render();
     </div>
 
   </div>
-
-
-
 
 
 
