@@ -85,6 +85,73 @@
       <li>🥉 <strong>Fiorella Martínez</strong> — 880 pts</li>
     </ul>
 
+     <div class="card">
+    <h1>Be Verb & Subject Game</h1>
+    <div class="question" id="questionText">Carlos and I study English. Replace with a pronoun:</div>
+    <div class="options" id="optionsContainer"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" onclick="nextQuestion()">Next</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "Carlos and I study English. Replace with a pronoun:",
+        options: ["I", "You", "We", "They", "He"],
+        answer: "We"
+      },
+      {
+        text: "She ___ at the party last night. Choose the correct verb form:",
+        options: ["be", "was", "were", "been", "being"],
+        answer: "was"
+      },
+      {
+        text: "They ___ happy to help. Choose the correct verb form:",
+        options: ["was", "were", "been", "be", "being"],
+        answer: "were"
+      },
+      {
+        text: "He has ___ very kind lately. Choose the correct form:",
+        options: ["was", "were", "be", "being", "been"],
+        answer: "been"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      document.getElementById("questionText").textContent = q.text;
+      const optionsDiv = document.getElementById("optionsContainer");
+      optionsDiv.innerHTML = '';
+      document.getElementById("feedback").textContent = '';
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+          if (option === q.answer) {
+            btn.classList.add("correct");
+            document.getElementById("feedback").textContent = "✅ Correct!";
+          } else {
+            btn.classList.add("wrong");
+            document.getElementById("feedback").textContent = "❌ Try again.";
+          }
+          Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+        };
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function nextQuestion() {
+      currentIndex = (currentIndex + 1) % questions.length;
+      renderQuestion();
+    }
+
+    // Initial render
+    renderQuestion();
+  </script>
+  
     <!-- Simulador cambios de estado -->
     <div class="phase-sim">
       <h3 class="section-title">⚛️ Simulador de Cambios de Estado</h3>
