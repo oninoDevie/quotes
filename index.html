@@ -235,6 +235,423 @@
   </div>
 </div>
 
+ <h1>🎮 Juegos Interactivos de Aprendizaje</h1>
+
+  <!-- Juego 1: Verbos Irregulares -->
+  <div class="card">
+    <h2>🎯 Verbos Irregulares en Inglés</h2>
+    <div class="question" id="q1">Cargando pregunta...</div>
+    <div id="o1"></div>
+    <button class="next-btn" onclick="loadVerbo()">Siguiente</button>
+  </div>
+
+  <!-- Juego 2: Saber Filosófico -->
+  <div class="card">
+    <h2>🧠 Saber Filosófico</h2>
+    <div class="question" id="q2">Cargando pregunta...</div>
+    <div id="o2"></div>
+    <button class="next-btn" onclick="loadSaber()">Siguiente</button>
+  </div>
+
+  <script>
+    // Juego 1: Verbos Irregulares
+    const verbs = [
+      {inf: "be", part: "been"},
+      {inf: "begin", part: "begun"},
+      {inf: "break", part: "broken"},
+      {inf: "choose", part: "chosen"},
+      {inf: "drink", part: "drunk"},
+      {inf: "eat", part: "eaten"},
+      {inf: "go", part: "gone"},
+      {inf: "see", part: "seen"},
+      {inf: "write", part: "written"},
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadVerbo() {
+      const q = document.getElementById("q1");
+      const o = document.getElementById("o1");
+      o.innerHTML = "";
+      const v = verbs[Math.floor(Math.random() * verbs.length)];
+      const opts = shuffle([
+        v.part,
+        ...shuffle(verbs.filter(x => x.part !== v.part)).slice(0, 3).map(x => x.part)
+      ]);
+      q.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${v.inf}</i>"?`;
+      opts.forEach(opt => {
+        const b = document.createElement("button");
+        b.className = "option";
+        b.innerText = opt;
+        b.onclick = () => {
+          b.classList.add(opt === v.part ? "correct" : "incorrect");
+          document.querySelectorAll("#o1 .option").forEach(btn => btn.disabled = true);
+        };
+        o.appendChild(b);
+      });
+    }
+
+    // Juego 2: Saber Filosófico
+    const preguntas = [
+      {
+        pregunta: "¿Qué tipo de saber es sistemático, metódico y riguroso según Platón?",
+        correcta: "Científico",
+        opciones: ["Técnico", "Experiencial", "Científico", "Filosófico"]
+      },
+      {
+        pregunta: "¿Qué actitud busca principios últimos y el sentido del mundo?",
+        correcta: "Filosófica",
+        opciones: ["Científica", "Espontánea", "Técnica", "Filosófica"]
+      },
+      {
+        pregunta: "¿Qué filósofo definió la filosofía como 'el saber efectivo de lo que es'?",
+        correcta: "Hegel",
+        opciones: ["Aristóteles", "Kant", "Hegel", "Marx"]
+      },
+      {
+        pregunta: "¿Qué es la gnoseología?",
+        correcta: "Estudio del conocimiento humano",
+        opciones: ["Estudio del alma", "Estudio del arte", "Estudio de Dios", "Estudio del conocimiento humano"]
+      },
+      {
+        pregunta: "¿Cuál es la disciplina que estudia los valores como lo bueno, justo o bello?",
+        correcta: "Axiología",
+        opciones: ["Teodicea", "Estética", "Antropología", "Axiología"]
+      },
+    ];
+
+    function loadSaber() {
+      const q = document.getElementById("q2");
+      const o = document.getElementById("o2");
+      o.innerHTML = "";
+      const p = preguntas[Math.floor(Math.random() * preguntas.length)];
+      q.innerText = p.pregunta;
+      shuffle(p.opciones).forEach(opt => {
+        const b = document.createElement("button");
+        b.className = "option";
+        b.innerText = opt;
+        b.onclick = () => {
+          b.classList.add(opt === p.correcta ? "correct" : "incorrect");
+          document.querySelectorAll("#o2 .option").forEach(btn => btn.disabled = true);
+        };
+        o.appendChild(b);
+      });
+    }
+
+    // Iniciar ambos juegos
+    loadVerbo();
+    loadSaber();
+  </script>
+  
+<div id="quoteContainer">
+  <h2 id="quoteTitle">Quote</h2>
+  <p><span id="currentQuote">1</span> / <span id="totalQuotes">0</span></p>
+  <div id="quoteDisplay" class="quote-text"></div>
+  
+  <audio id="audioPlayer" controls hidden></audio>
+
+  <div class="controls">
+    <button id="prevBtn">⏮️</button>
+    <button id="playPauseBtn" aria-label="Play"><i data-feather="play"></i></button>
+    <button id="stopBtn">⏹️</button>
+    <button id="nextBtn">⏭️</button>
+  </div>
+<section class="literary-text">
+    <h2 class="section-title">⏳ Tabla Evolutiva (modo oscuro)</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>ERA</th>
+            <th>PERÍODO</th>
+            <th>ESPECIES</th>
+            <th>ESTADIO EVOLUTIVO</th>
+            <th>Reloj de 24 horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">PROTOZOICA</td><td>Arcaico</td><td>🌋</td><td>No existe la vida; erupciones volcánicas</td><td>00:00</td></tr>
+          <tr><td>Precámbrico</td><td>🦠🟢</td><td>Procariontes, cianobacterias, oxígeno en el aire</td><td>04:00</td></tr>
+          <tr><td rowspan="2">PROTOZOICA</td><td>Criogénico</td><td>🧬❄️</td><td>Células complejas (eucariotas), Tierra helada</td><td>15:00</td></tr>
+          <tr><td>Ediacárico</td><td>🪱</td><td>Criaturas pluricelulares</td><td>20:50</td></tr>
+          <tr><td rowspan="6">PALEOZOICA</td><td>Cámbrico</td><td>🐚🦐</td><td>Conchas, huesos, dientes</td><td rowspan="6">21:50</td></tr>
+          <tr><td>Ordovícico</td><td>🦈</td><td>Vertebrados</td></tr>
+          <tr><td>Silúrico</td><td>🌿🪰</td><td>Plantas primitivas, gusanos</td></tr>
+          <tr><td>Devónico</td><td>🐟🐛</td><td>Peces óseos, tetrápodos</td></tr>
+          <tr><td>Carbonífero</td><td>🦗🦎</td><td>Anfibios, reptiles, hongos</td></tr>
+          <tr><td>Pérmico</td><td>🦎🌍</td><td>Reptiles medio mamíferos, Pangea</td></tr>
+          <tr><td rowspan="3">MESOZOICA</td><td>Triásico</td><td>🐊🦣</td><td>Primeros dinosaurios, pequeños mamíferos</td><td rowspan="3">22:50 → 23:40</td></tr>
+          <tr><td>Jurásico</td><td>🦕🦖</td><td>Dinosaurios dominan tierra, pterosaurios el cielo</td></tr>
+          <tr><td>Cretácico</td><td>🐱🌺</td><td>Últimos dinosaurios, flores, aves</td></tr>
+          <tr><td rowspan="5">CENOZOICA</td><td>Paleoceno</td><td>🐁🦣</td><td>Mamíferos aumentan tamaño</td><td>23:40</td></tr>
+          <tr><td>Eoceno</td><td>🐬</td><td>Ballenas regresan al océano</td><td></td></tr>
+          <tr><td>Oligoceno</td><td>🐎</td><td>Caballos evolucionan</td><td></td></tr>
+          <tr><td>Mioceno</td><td>🦧</td><td>Simios migran</td><td></td></tr>
+          <tr><td>Plioceno</td><td>🧍‍♂️</td><td>Primeros homínidos</td><td>23:57</td></tr>
+          <tr><td rowspan="3">HISTÓRICA</td><td>Pleistoceno</td><td>🧑‍🦲🛠️</td><td>Cazadores recolectores, Edad de Hielo</td><td>23:59</td></tr>
+          <tr><td>Holoceno</td><td>🧑‍🎓</td><td>Agricultura, domesticación, escritura</td><td></td></tr>
+          <tr><td>Antropoceno</td><td>🌍🛰️</td><td>Revolución industrial, CO₂, calentamiento global</td><td>24:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div id="quoteDisplay"></div>
+<audio id="audioPlayer" controls></audio>
+
+
+  <div class="card">
+    <h1>🎯 Juego de Verbos Irregulares</h1>
+    <div class="question" id="question">Cargando pregunta...</div>
+    <div id="options"></div>
+    <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
+  </div>
+
+  <script>
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
+
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === verb.part) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+          }
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    // Iniciar juego
+    loadQuestion();
+  </script>
+
+   <div class="card">
+    <h1>Be Verb & Subject Game</h1>
+    <div class="question" id="questionText">Carlos and I study English. Replace with a pronoun:</div>
+    <div class="options" id="optionsContainer"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" onclick="nextQuestion()">Next</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "Carlos and I study English. Replace with a pronoun:",
+        options: ["I", "You", "We", "They", "He"],
+        answer: "We"
+      },
+      {
+        text: "She ___ at the party last night. Choose the correct verb form:",
+        options: ["be", "was", "were", "been", "being"],
+        answer: "was"
+      },
+      {
+        text: "They ___ happy to help. Choose the correct verb form:",
+        options: ["was", "were", "been", "be", "being"],
+        answer: "were"
+      },
+      {
+        text: "He has ___ very kind lately. Choose the correct form:",
+        options: ["was", "were", "be", "being", "been"],
+        answer: "been"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      document.getElementById("questionText").textContent = q.text;
+      const optionsDiv = document.getElementById("optionsContainer");
+      optionsDiv.innerHTML = '';
+      document.getElementById("feedback").textContent = '';
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+          if (option === q.answer) {
+            btn.classList.add("correct");
+            document.getElementById("feedback").textContent = "✅ Correct!";
+          } else {
+            btn.classList.add("wrong");
+            document.getElementById("feedback").textContent = "❌ Try again.";
+          }
+          Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+        };
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function nextQuestion() {
+      currentIndex = (currentIndex + 1) % questions.length;
+      renderQuestion();
+    }
+
+    // Initial render
+    renderQuestion();
+  </script>
+  </main>
+ 
+
+   <script>
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
+
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === verb.part) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+          }
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    // Iniciar juego
+    loadQuestion();
+  </script>
+
+  <!-- ERROR BANNER -->
+  <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
+
+  <!-- ————————————  LOGIC  ————————————-->
+  <script>
+  (()=>{
+    /* Simple helper */
+    const $=sel=>document.querySelector(sel);
+
+    /* Dark mode persist */
+    const darkBtn=$('#darkModeBtn');
+    const toggleDark=()=>{
+      document.body.classList.toggle('dark');
+      localStorage.setItem('dark',document.body.classList.contains('dark'));
+      darkBtn.textContent=document.body.classList.contains('dark')?'☀️ Modo Claro':'🌙 Modo Oscuro';
+    };
+    if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
+    toggleDark(); // update label first time
+    darkBtn.addEventListener('click',toggleDark);
+
+    /* Quotes Dataset (trimmed) */
+    const quotes=[
+      {id:'I',text:`They'll attend a party and pass a small note under the table, and they'll write something beautiful…`},
+      {id:'XX',text:`One cannot articulate language without diagnosis nor remedies…`},
+      {id:'CROSS',text:`I've learned from the dreams of a cross…`}
+    ];
+
+    /* State */
+    let idx=0,isPlaying=false,words=[];
+
+    /* Elements */
+    const quoteTitle=$('#quoteTitle');
+    const quoteDisplay=$('#quoteDisplay');
+    const audio=$('#audioPlayer');
+    const bar=$('#progressBar');
+    const playBtn=$('#playPauseBtn');
+
+    /* Feather refresh helper */
+    const refreshIcons=()=>{ if(window.feather) feather.replace(); };
+
+    /* Render quote */
+    function loadQuote(i){
+      idx=i;const q=quotes[i];quoteTitle.textContent=`Quote ${q.id}`;
+      words=q.text.split(/\s+/);
+      quoteDisplay.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');
+      bar.style.width='0%';
+      highlight(-1);
+      updateNav();
+    }
+
+  <div>
+    <label for="speechRate">Speed:</label>
+    <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+    <span id="speedValue">1.0x</span>
+  </div>
+
+  <div>
+    <label for="highlightColor">Highlight color:</label>
+    <input type="color" id="highlightColor" value="#4f46e5">
+  </div>
+
+  <div class="progress-bar-container">
+    <div id="progressBar" style="height: 5px; background: var(--highlight-color); width: 0%;"></div>
+  </div>
+
+  <input type="file" id="audioFile" accept="audio/*">
+
+  <div id="errorMessage" class="error-message"></div>
+</div>
+
 
   <div class="grammar">
   <h2>🧠 Freud's Psychoanalytic Theory (English A2)</h2>
