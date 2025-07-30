@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quotes Audio App – Responsive Edition</title>
+  <title>Quotes & Study App – Gamified Edition</title>
   
   <!-- Inter & Feather -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -12,10 +12,8 @@
   <!-- ————————————  GLOBAL STYLES  ————————————-->  
   <style>
     :root{
-      /* Palette */
       --primary:#6366f1;--primary-light:#a5b4ff;--surface:#fff;--surface-2:#f9fafb;--border:#e5e7eb;
       --text:#111827;--text-2:#6b7280;--radius:1rem;--shadow:0 4px 6px rgba(0,0,0,.05);
-      /* Dark Mode overrides (filled via JS) */
     }
     @media (prefers-color-scheme:dark){
       :root{--surface:#1f2937;--surface-2:#111827;--border:#374151;--text:#f3f4f6;--text-2:#9ca3af}
@@ -23,24 +21,25 @@
     body{margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--surface-2);color:var(--text);transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
     .shell{max-width:960px;margin:auto;padding:2rem 1rem;display:grid;gap:2rem}
     h1{font-size:1.75rem;font-weight:600;margin:0}
-    /* Cards */
     .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;display:flex;flex-direction:column;gap:1rem}
-    /* Controls */
-    .controls{display:flex;justify-content:center;gap:1rem;margin-top:1rem}
     .btn{display:grid;place-items:center;width:56px;height:56px;border:2px solid var(--primary);border-radius:18px;background:#fff;color:var(--text);font-size:1.5rem;cursor:pointer;transition:background .2s}
     .btn.primary{background:var(--primary);color:#fff}
     .btn:active{transform:scale(.95)}
-    /* Quote content */
     .quote-title{font-weight:600;font-size:1.25rem;margin:0}
     .quote-display{min-height:140px;line-height:1.6}
     .word{transition:all .15s;padding:0 2px;border-radius:4px}
     .word.highlighted{background:var(--primary);color:#fff}
-    /* Progress */
     .progress{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
     .bar{height:100%;width:0;background:var(--primary);transition:width .25s}
-    /* Dark mode toggle */
     #darkModeBtn{position:fixed;top:1rem;right:1rem;padding:.5rem .75rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:500;cursor:pointer;z-index:20}
-    /* Responsive */
+    /* Study Section */
+    .answers{display:grid;gap:.75rem;margin-top:1rem}
+    .answer-btn{background:#06b6d4;color:#fff;border:none;border-radius:8px;padding:.5rem 1rem;font-size:1rem;cursor:pointer;transition:filter .15s}
+    .answer-btn:hover{filter:brightness(1.1)}
+    .answer-btn.correct{background:#059669}
+    .answer-btn.wrong{background:#dc2626}
+    .feedback{min-height:24px;font-weight:500;margin-top:.5rem}
+    .status{display:flex;justify-content:space-between;font-size:.95rem;margin-top:1rem}
     @media(max-width:600px){.btn{width:46px;height:46px}}
   </style>
 </head>
@@ -49,8 +48,8 @@
 
   <!-- HEADER -->
   <header class="shell" style="gap:.5rem 1rem">
-    <h1>🧪 Quotes Audio App</h1>
-    <p>Sincroniza texto + audio, con modo oscuro y diseño responsive.</p>
+    <h1>🧪 Quotes & Study App</h1>
+    <p>Texto‑audio sincronizado + prácticas lúdicas con emotional design.</p>
   </header>
 
   <!-- MAIN -->
@@ -62,11 +61,7 @@
         <div class="progress"><span class="bar" id="progressBar"></span></div>
       </header>
       <article class="quote-display" id="quoteDisplay"></article>
-
-      <!-- Audio element (hidden) -->
       <audio id="audioPlayer" preload="metadata"></audio>
-
-      <!-- Controls -->
       <div class="controls">
         <button class="btn" id="prevBtn" aria-label="Prev"><i data-feather="rewind"></i></button>
         <button class="btn primary" id="playPauseBtn" aria-label="Play"><i data-feather="play"></i></button>
@@ -75,322 +70,78 @@
       </div>
     </section>
 
-    <section class="literary-text">
-    <h2 class="section-title">⏳ Tabla Evolutiva (modo oscuro)</h2>
-    <div style="overflow-x:auto">
-      <table>
-        <thead>
-          <tr>
-            <th>ERA</th>
-            <th>PERÍODO</th>
-            <th>ESPECIES</th>
-            <th>ESTADIO EVOLUTIVO</th>
-            <th>Reloj de 24 horas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td rowspan="2">PROTOZOICA</td><td>Arcaico</td><td>🌋</td><td>No existe la vida; erupciones volcánicas</td><td>00:00</td></tr>
-          <tr><td>Precámbrico</td><td>🦠🟢</td><td>Procariontes, cianobacterias, oxígeno en el aire</td><td>04:00</td></tr>
-          <tr><td rowspan="2">PROTOZOICA</td><td>Criogénico</td><td>🧬❄️</td><td>Células complejas (eucariotas), Tierra helada</td><td>15:00</td></tr>
-          <tr><td>Ediacárico</td><td>🪱</td><td>Criaturas pluricelulares</td><td>20:50</td></tr>
-          <tr><td rowspan="6">PALEOZOICA</td><td>Cámbrico</td><td>🐚🦐</td><td>Conchas, huesos, dientes</td><td rowspan="6">21:50</td></tr>
-          <tr><td>Ordovícico</td><td>🦈</td><td>Vertebrados</td></tr>
-          <tr><td>Silúrico</td><td>🌿🪰</td><td>Plantas primitivas, gusanos</td></tr>
-          <tr><td>Devónico</td><td>🐟🐛</td><td>Peces óseos, tetrápodos</td></tr>
-          <tr><td>Carbonífero</td><td>🦗🦎</td><td>Anfibios, reptiles, hongos</td></tr>
-          <tr><td>Pérmico</td><td>🦎🌍</td><td>Reptiles medio mamíferos, Pangea</td></tr>
-          <tr><td rowspan="3">MESOZOICA</td><td>Triásico</td><td>🐊🦣</td><td>Primeros dinosaurios, pequeños mamíferos</td><td rowspan="3">22:50 → 23:40</td></tr>
-          <tr><td>Jurásico</td><td>🦕🦖</td><td>Dinosaurios dominan tierra, pterosaurios el cielo</td></tr>
-          <tr><td>Cretácico</td><td>🐱🌺</td><td>Últimos dinosaurios, flores, aves</td></tr>
-          <tr><td rowspan="5">CENOZOICA</td><td>Paleoceno</td><td>🐁🦣</td><td>Mamíferos aumentan tamaño</td><td>23:40</td></tr>
-          <tr><td>Eoceno</td><td>🐬</td><td>Ballenas regresan al océano</td><td></td></tr>
-          <tr><td>Oligoceno</td><td>🐎</td><td>Caballos evolucionan</td><td></td></tr>
-          <tr><td>Mioceno</td><td>🦧</td><td>Simios migran</td><td></td></tr>
-          <tr><td>Plioceno</td><td>🧍‍♂️</td><td>Primeros homínidos</td><td>23:57</td></tr>
-          <tr><td rowspan="3">HISTÓRICA</td><td>Pleistoceno</td><td>🧑‍🦲🛠️</td><td>Cazadores recolectores, Edad de Hielo</td><td>23:59</td></tr>
-          <tr><td>Holoceno</td><td>🧑‍🎓</td><td>Agricultura, domesticación, escritura</td><td></td></tr>
-          <tr><td>Antropoceno</td><td>🌍🛰️</td><td>Revolución industrial, CO₂, calentamiento global</td><td>24:00</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <div class="card">
-    <h1>🎯 Juego de Verbos Irregulares</h1>
-    <div class="question" id="question">Cargando pregunta...</div>
-    <div id="options"></div>
-    <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
-  </div>
-
-  <script>
-    const verbs = [
-      {inf: "be", past: "was/were", part: "been"},
-      {inf: "begin", past: "began", part: "begun"},
-      {inf: "break", past: "broke", part: "broken"},
-      {inf: "choose", past: "chose", part: "chosen"},
-      {inf: "come", past: "came", part: "come"},
-      {inf: "do", past: "did", part: "done"},
-      {inf: "drink", past: "drank", part: "drunk"},
-      {inf: "eat", past: "ate", part: "eaten"},
-      {inf: "go", past: "went", part: "gone"},
-      {inf: "see", past: "saw", part: "seen"},
-      {inf: "write", past: "wrote", part: "written"},
-    ];
-
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
-
-    function loadQuestion() {
-      const questionEl = document.getElementById("question");
-      const optionsEl = document.getElementById("options");
-      optionsEl.innerHTML = "";
-
-      const verb = verbs[Math.floor(Math.random() * verbs.length)];
-      const options = shuffle([
-        verb.part,
-        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
-      ]);
-
-      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
-
-      options.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = opt;
-        btn.onclick = () => {
-          if (opt === verb.part) {
-            btn.classList.add("correct");
-          } else {
-            btn.classList.add("incorrect");
-          }
-          document.querySelectorAll(".option").forEach(b => b.disabled = true);
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    // Iniciar juego
-    loadQuestion();
-  </script>
-
-   <div class="card">
-    <h1>Be Verb & Subject Game</h1>
-    <div class="question" id="questionText">Carlos and I study English. Replace with a pronoun:</div>
-    <div class="options" id="optionsContainer"></div>
-    <div class="feedback" id="feedback"></div>
-    <button class="next-btn" onclick="nextQuestion()">Next</button>
-  </div>
-
-  <script>
-    const questions = [
-      {
-        text: "Carlos and I study English. Replace with a pronoun:",
-        options: ["I", "You", "We", "They", "He"],
-        answer: "We"
-      },
-      {
-        text: "She ___ at the party last night. Choose the correct verb form:",
-        options: ["be", "was", "were", "been", "being"],
-        answer: "was"
-      },
-      {
-        text: "They ___ happy to help. Choose the correct verb form:",
-        options: ["was", "were", "been", "be", "being"],
-        answer: "were"
-      },
-      {
-        text: "He has ___ very kind lately. Choose the correct form:",
-        options: ["was", "were", "be", "being", "been"],
-        answer: "been"
-      }
-    ];
-
-    let currentIndex = 0;
-
-    function renderQuestion() {
-      const q = questions[currentIndex];
-      document.getElementById("questionText").textContent = q.text;
-      const optionsDiv = document.getElementById("optionsContainer");
-      optionsDiv.innerHTML = '';
-      document.getElementById("feedback").textContent = '';
-
-      q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => {
-          if (option === q.answer) {
-            btn.classList.add("correct");
-            document.getElementById("feedback").textContent = "✅ Correct!";
-          } else {
-            btn.classList.add("wrong");
-            document.getElementById("feedback").textContent = "❌ Try again.";
-          }
-          Array.from(optionsDiv.children).forEach(b => b.disabled = true);
-        };
-        optionsDiv.appendChild(btn);
-      });
-    }
-
-    function nextQuestion() {
-      currentIndex = (currentIndex + 1) % questions.length;
-      renderQuestion();
-    }
-
-    // Initial render
-    renderQuestion();
-  </script>
+    <!-- STUDY SECTION  (lúdica + emotional design) -->
+    <section class="card" id="studySection">
+      <h2 class="quote-title">🎯 Zona de Estudio Interactiva</h2>
+      <div class="quiz-card">
+        <p id="questionText"></p>
+        <div id="answers" class="answers"></div>
+        <p id="feedback" class="feedback"></p>
+      </div>
+      <div class="status">
+        <span>XP 💡 <strong id="xpDisplay">0</strong></span>
+        <span>Personajes 🔥 <strong id="charsDisplay">Ninguno</strong></span>
+      </div>
+    </section>
   </main>
- 
 
-   <script>
-    const verbs = [
-      {inf: "be", past: "was/were", part: "been"},
-      {inf: "begin", past: "began", part: "begun"},
-      {inf: "break", past: "broke", part: "broken"},
-      {inf: "choose", past: "chose", part: "chosen"},
-      {inf: "come", past: "came", part: "come"},
-      {inf: "do", past: "did", part: "done"},
-      {inf: "drink", past: "drank", part: "drunk"},
-      {inf: "eat", past: "ate", part: "eaten"},
-      {inf: "go", past: "went", part: "gone"},
-      {inf: "see", past: "saw", part: "seen"},
-      {inf: "write", past: "wrote", part: "written"},
-    ];
-
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
-
-    function loadQuestion() {
-      const questionEl = document.getElementById("question");
-      const optionsEl = document.getElementById("options");
-      optionsEl.innerHTML = "";
-
-      const verb = verbs[Math.floor(Math.random() * verbs.length)];
-      const options = shuffle([
-        verb.part,
-        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
-      ]);
-
-      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
-
-      options.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = opt;
-        btn.onclick = () => {
-          if (opt === verb.part) {
-            btn.classList.add("correct");
-          } else {
-            btn.classList.add("incorrect");
-          }
-          document.querySelectorAll(".option").forEach(b => b.disabled = true);
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    // Iniciar juego
-    loadQuestion();
-  </script>
-
-  <!-- ERROR BANNER -->
   <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
 
   <!-- ————————————  LOGIC  ————————————-->
   <script>
   (()=>{
-    /* Simple helper */
     const $=sel=>document.querySelector(sel);
-
-    /* Dark mode persist */
+    /* Dark mode */
     const darkBtn=$('#darkModeBtn');
-    const toggleDark=()=>{
-      document.body.classList.toggle('dark');
-      localStorage.setItem('dark',document.body.classList.contains('dark'));
-      darkBtn.textContent=document.body.classList.contains('dark')?'☀️ Modo Claro':'🌙 Modo Oscuro';
-    };
-    if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
-    toggleDark(); // update label first time
-    darkBtn.addEventListener('click',toggleDark);
+    const applyDark=()=>{document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'));darkBtn.textContent=document.body.classList.contains('dark')?'☀️ Modo Claro':'🌙 Modo Oscuro';};
+    if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');applyDark();darkBtn.onclick=applyDark;
 
-    /* Quotes Dataset (trimmed) */
-    const quotes=[
-      {id:'I',text:`They'll attend a party and pass a small note under the table, and they'll write something beautiful…`},
-      {id:'XX',text:`One cannot articulate language without diagnosis nor remedies…`},
-      {id:'CROSS',text:`I've learned from the dreams of a cross…`}
+    /* Feather refresh */
+    const icons=()=>{if(window.feather)feather.replace();};
+
+    /* Quotes dataset */
+    const quotes=[{id:'I',text:`They'll attend a party and pass a small note under the table, and they'll write something beautiful…`},{id:'XX',text:`One cannot articulate language without diagnosis nor remedies…`},{id:'CROSS',text:`I've learned from the dreams of a cross…`}];
+    let qIdx=0,words=[],isPlaying=false,currentWord=0;
+    const synth=window.speechSynthesis;let utterance;
+    const quoteTitle=$('#quoteTitle'),quoteDisplay=$('#quoteDisplay'),bar=$('#progressBar');
+
+    function loadQuote(i){qIdx=i;const q=quotes[i];quoteTitle.textContent=`Quote ${q.id}`;words=q.text.split(/\s+/);quoteDisplay.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');bar.style.width='0%';highlight(-1);updateNav();}
+    function highlight(i){quoteDisplay.querySelectorAll('.word').forEach((w,k)=>w.classList.toggle('highlighted',k===i));}
+    function play(){isPlaying=true;$('#playPauseBtn i').dataset.feather='pause';icons();utterance=new SpeechSynthesisUtterance(quotes[qIdx].text);utterance.rate=1;utterance.onboundary=e=>{if(e.name==='word'){currentWord++;highlight(currentWord-1);bar.style.width=`${(currentWord/words.length)*100}%`;}};utterance.onend=stop;synth.speak(utterance);}
+    function stop(){isPlaying=false;currentWord=0;highlight(-1);bar.style.width='0%';synth.cancel();$('#playPauseBtn i').dataset.feather='play';icons();}
+    $('#playPauseBtn').onclick=()=>isPlaying?stop():play();$('#stopBtn').onclick=stop;
+    $('#prevBtn').onclick=()=>{if(qIdx>0){stop();loadQuote(--qIdx);}};
+    $('#nextBtn').onclick=()=>{if(qIdx<quotes.length-1){stop();loadQuote(++qIdx);}};
+    function updateNav(){$('#prevBtn').disabled=qIdx===0;$('#nextBtn').disabled=qIdx===quotes.length-1;}
+    loadQuote(0);icons();
+
+    /* ——— STUDY QUIZ ——— */
+    const quiz=[
+      {q:'¿Cuál es la capital de Francia?',a:['París','Madrid','Roma'],correct:0,emoji:'🎉'},
+      {q:'2 × 3 = ?',a:['5','6','8'],correct:1,emoji:'🚀'},
+      {q:'Color del cielo despejado',a:['Azul','Verde','Rojo'],correct:0,emoji:'☁️'}
     ];
+    let cur=0,xp=parseInt(localStorage.getItem('xp')||'0');
+    const unlocked=JSON.parse(localStorage.getItem('chars')||'[]');
+    const xpDisplay=$('#xpDisplay'),charsDisplay=$('#charsDisplay');
+    xpDisplay.textContent=xp;
+    charsDisplay.textContent=unlocked.length?unlocked.join(', '):'Ninguno';
 
-    /* State */
-    let idx=0,isPlaying=false,words=[];
+    function renderQuestion(){const data=quiz[cur];$('#questionText').textContent='Pregunta: '+data.q;const ans=$('#answers');ans.innerHTML='';data.a.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='answer-btn';btn.textContent=opt;btn.onclick=()=>check(i);ans.appendChild(btn);});$('#feedback').textContent='';}
 
-    /* Elements */
-    const quoteTitle=$('#quoteTitle');
-    const quoteDisplay=$('#quoteDisplay');
-    const audio=$('#audioPlayer');
-    const bar=$('#progressBar');
-    const playBtn=$('#playPauseBtn');
-
-    /* Feather refresh helper */
-    const refreshIcons=()=>{ if(window.feather) feather.replace(); };
-
-    /* Render quote */
-    function loadQuote(i){
-      idx=i;const q=quotes[i];quoteTitle.textContent=`Quote ${q.id}`;
-      words=q.text.split(/\s+/);
-      quoteDisplay.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');
-      bar.style.width='0%';
-      highlight(-1);
-      updateNav();
+    function confetti(){// simple emoji burst
+      const burst=document.createElement('div');burst.textContent='✨';burst.style.position='fixed';burst.style.left=Math.random()*100+'vw';burst.style.top='-2rem';burst.style.fontSize='2rem';burst.style.animation='fall 1s ease-out forwards';document.body.appendChild(burst);setTimeout(()=>burst.remove(),1000);
     }
+    const style=document.createElement('style');style.textContent='@keyframes fall{to{transform:translateY(100vh);opacity:0}}';document.head.appendChild(style);
 
-    /* Highlight helper */
-    const highlight=i=>{
-      quoteDisplay.querySelectorAll('.word').forEach((w,k)=>w.classList.toggle('highlighted',k===i));
-    };
-
-    /* Navigation buttons */
-    const prevBtn=$('#prevBtn'),nextBtn=$('#nextBtn');
-    function updateNav(){prevBtn.disabled=idx===0;nextBtn.disabled=idx===quotes.length-1;}
-    prevBtn.onclick=()=>{if(idx>0){stop();loadQuote(idx-1);}};
-    nextBtn.onclick=()=>{if(idx<quotes.length-1){stop();loadQuote(idx+1);}};
-
-    /* Speech synthesis */
-    const synth=window.speechSynthesis;
-    let utterance,currentWord=0;
-
-    function speak(){
-      if(!('speechSynthesis'in window))return err('Speech synthesis not supported');
-      utterance=new SpeechSynthesisUtterance(quotes[idx].text);
-      utterance.rate=1;
-      utterance.onboundary=e=>{
-        if(e.name==='word'){
-          currentWord++;
-          highlight(currentWord-1);
-          bar.style.width=`${(currentWord/words.length)*100}%`;
-        }
-      };
-      utterance.onend=stop;
-      synth.speak(utterance);
+    function check(idx){const data=quiz[cur];const buttons=document.querySelectorAll('.answer-btn');buttons.forEach(b=>b.disabled=true);
+      if(idx===data.correct){buttons[idx].classList.add('correct');$('#feedback').textContent=data.emoji+' ¡Correcto!';xp+=20;xpDisplay.textContent=xp;localStorage.setItem('xp',xp);confetti();
+        if(xp>=60&&unlocked.indexOf('🦸‍♂️')===-1){unlocked.push('🦸‍♂️');charsDisplay.textContent=unlocked.join(', ');localStorage.setItem('chars',JSON.stringify(unlocked));}
+      }else{buttons[idx].classList.add('wrong');$('#feedback').textContent='❌ Incorrecto. Intenta de nuevo.';}
+      setTimeout(()=>{cur=(cur+1)%quiz.length;renderQuestion();},1000);
     }
-
-    /* Play / pause / stop */
-    function play(){isPlaying=true;playBtn.querySelector('i').dataset.feather='pause';refreshIcons();speak();}
-    function stop(){isPlaying=false;currentWord=0;highlight(-1);bar.style.width='0%';synth.cancel();playBtn.querySelector('i').dataset.feather='play';refreshIcons();}
-    function toggle(){isPlaying?stop():play();}
-    playBtn.onclick=toggle;
-    $('#stopBtn').onclick=stop;
-
-    /* Error helper */
-    function err(msg){const b=$('#errorBanner');b.textContent=msg;b.style.display='block';setTimeout(()=>b.style.display='none',4000);}
-
-    /* Init */
-    loadQuote(0);refreshIcons();
+    renderQuestion();
   })();
   </script>
-
-
-
 </body>
 </html>
