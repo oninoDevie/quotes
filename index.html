@@ -26,6 +26,60 @@
 
 <body class="bg-misty">
 
+      <div class="mini-game">
+      <h3 class="section-title">🎮 Juego: Click Rápido</h3>
+      <p>Haz clic en el círculo tantas veces como puedas (5 s).</p>
+      <button id="btnGame">Iniciar juego</button>
+      <p id="gameScore"></p>
+      <canvas id="gameCanvas" width="200" height="200"></canvas>
+    </div>
+  </section>
+
+  <!-- SCRIPTS UNIFICADOS -->
+  <script>
+  /* ===== Cambio de fondo ===== */
+  const fondos=[getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
+                getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
+                getComputedStyle(document.documentElement).getPropertyValue('--bg3')];
+  let fondoIdx=parseInt(localStorage.getItem('bgIndex')||0);
+  document.body.style.backgroundImage=fondos[fondoIdx];
+  document.getElementById('btnBg').onclick=()=>{fondoIdx=(fondoIdx+1)%fondos.length;
+    document.body.style.backgroundImage=fondos[fondoIdx];
+    localStorage.setItem('bgIndex',fondoIdx);
+  };
+
+  /* ===== Simulador de fases ===== */
+  document.getElementById('btnSim').onclick=function(){
+    const estado=document.getElementById('estado').value;
+    const t=+document.getElementById('temp').value;
+    let nuevo=estado;
+    if(estado==='sólido'){ if(t>=0&&t<100)nuevo='líquido'; else if(t>=100)nuevo='gas'; }
+    else if(estado==='líquido'){ if(t<0)nuevo='sólido'; else if(t>=100)nuevo='gas'; }
+    else if(estado==='gas'){ if(t<100&&t>=0)nuevo='líquido'; else if(t<0)nuevo='sólido'; }
+    document.getElementById('resultado').textContent=`Nuevo estado: ${nuevo}`;
+  };
+
+  /* ===== Mini-juego click rápido ===== */
+  const canvas=document.getElementById('gameCanvas'),ctx=canvas.getContext('2d');
+  let clicks=0,timerId;
+  function drawCircle(){ctx.fillStyle='#39FF14';ctx.beginPath();ctx.arc(100,100,30,0,Math.PI*2);ctx.fill();}
+  function count(e){const r=canvas.getBoundingClientRect(),dx=e.clientX-r.left-100,dy=e.clientY-r.top-100;
+    if(Math.hypot(dx,dy)<=30){clicks++;drawCircle();}
+  }
+  document.getElementById('btnGame').onclick=()=>{
+    clicks=0;document.getElementById('gameScore').textContent='¡A jugar!';
+    ctx.clearRect(0,0,200,200);drawCircle();
+    canvas.addEventListener('click',count);
+    clearTimeout(timerId);
+    timerId=setTimeout(()=>{canvas.removeEventListener('click',count);
+      ctx.clearRect(0,0,200,200);
+      document.getElementById('gameScore').textContent=`Puntaje final: ${clicks}`;
+    },5000);
+  };
+
+  feather.replace(); // icons
+  </script>
+  
 <!-- Selector de idioma -->
 <nav class="lang-switcher">
   <button data-lang="es" class="active">ES</button>
@@ -182,20 +236,20 @@ ni en el Infierno ni en nuestros recuerdos.
 <script>
 // ----- DATA -----
 const poems = [
-  { id:1, bg:'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+  { id:1, bg:'',
     title:{es:'Diez muchachas', en:'Ten girls', it:'Dieci ragazze'},
     text:{es:'En Viena hay diez muchachas, un hombro donde solloza la muerte...',
           en:'In Vienna there are ten girls, a shoulder where death sobs...',
           it:'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte...'}},
-  { id:2, bg:'https://images.unsplash.com/photo-1602524819641-3c89723a87bd?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+  { id:2, bg:'',
     title:{es:'Boca cerrada', en:'Mouth closed', it:'Bocca chiusa'},
     text:{es:'Toma este vals con la boca cerrada.',
           en:'Take this waltz with your mouth closed.',
           it:'Prendi questo valzer con la bocca chiusa.'}},
-  { id:3, bg:'https://images.unsplash.com/photo-1554106273-9e9d22b1a1fc?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+  { id:3, bg:'',
     title:{es:'Ático', en:'Attic', it:'Soffitta'},
     text:{es:'Verso del ático…', en:'Attic verse…', it:'Verso della soffitta…'}},
-  { id:4, bg:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+  { id:4, bg:',
     title:{es:'Tren', en:'Train', it:'Treno'},
     text:{es:'Verso del tren…', en:'Train verse…', it:'Verso del treno…'}},
 ];
