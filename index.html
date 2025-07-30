@@ -302,6 +302,89 @@
   renderBlogs();
 </script>
 
+<div class="card">
+  <h2>🗣️ Traducción Interactiva con Audio</h2>
+
+  <div id="textSync" style="margin-bottom: 1rem; font-size: 1.1rem; line-height: 2; display: flex; flex-wrap: wrap; gap: 0.3rem;">
+    <!-- Las palabras se insertarán aquí -->
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <input type="file" id="customAudio" accept="audio/*" />
+    <input type="color" id="highlightColorSync" value="#ff00ff" />
+    <label>Velocidad:</label>
+    <input type="range" min="0.5" max="2" step="0.1" id="speedRange" value="1" />
+    <span id="speedValue">1.0x</span>
+  </div>
+
+  <audio id="syncAudio" controls style="margin: 1rem 0; width: 100%;"></audio>
+
+  <div style="margin-top: 1.5rem; background: #111; padding: 1rem; border-radius: 8px; color: #e0f7fa;">
+    <strong>📘 Traducción:</strong>
+    <p id="translationOutput">That technique of writing, one short story, then one novel and subsequently one. Comedy was a tradition in his whole family</p>
+  </div>
+</div>
+
+<script>
+  const sentence = "Esa técnica de escribir, cuento corto, luego novela y posteriormente comedia, era una tradición familiar (...) Fuentes confiables dicen";
+  const translation = "That technique of writing, one short story, then one novel and subsequently one. Comedy was a tradition in his whole family";
+  const words = sentence.split(/(\s+)/); // separa por espacios también
+
+  const textSync = document.getElementById("textSync");
+  const highlightColor = document.getElementById("highlightColorSync");
+  const speedRange = document.getElementById("speedRange");
+  const speedValue = document.getElementById("speedValue");
+  const syncAudio = document.getElementById("syncAudio");
+  const fileInput = document.getElementById("customAudio");
+
+  // Renderizado palabra por palabra
+  words.forEach((w, i) => {
+    const span = document.createElement("span");
+    span.textContent = w;
+    span.dataset.index = i;
+    span.style.transition = "background 0.3s, color 0.3s";
+    textSync.appendChild(span);
+  });
+
+  // Simulación de sincronización cada X milisegundos
+  let wordIndex = 0;
+  let syncInterval = null;
+
+  function highlightNextWord() {
+    const all = textSync.querySelectorAll("span");
+    all.forEach(el => el.style.background = "none");
+
+    if (wordIndex < all.length) {
+      all[wordIndex].style.background = highlightColor.value;
+      all[wordIndex].style.color = "#000";
+      wordIndex++;
+    } else {
+      clearInterval(syncInterval);
+    }
+  }
+
+  syncAudio.addEventListener("play", () => {
+    wordIndex = 0;
+    syncInterval = setInterval(highlightNextWord, 600); // ajustable
+  });
+
+  syncAudio.addEventListener("pause", () => clearInterval(syncInterval));
+  syncAudio.addEventListener("ended", () => clearInterval(syncInterval));
+
+  fileInput.addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (file) {
+      syncAudio.src = URL.createObjectURL(file);
+    }
+  });
+
+  speedRange.addEventListener("input", () => {
+    const val = parseFloat(speedRange.value);
+    syncAudio.playbackRate = val;
+    speedValue.textContent = val.toFixed(1) + "x";
+  });
+</script>
+
   <!-- MAIN -->
   <main class="shell">
     <!-- Quote Card -->
