@@ -136,6 +136,171 @@
       <p id="gameScore"></p>
       <canvas id="gameCanvas" width="200" height="200"></canvas>
     </div>
+
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All‑in‑One Science Tools + Poem Experience</title>
+
+  <!-- Fuentes e iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+  /* ───  TOKEN SYSTEM & BASE  ─────────────────────────── */
+  :root{
+    /* Fondos dinámicos */
+    --bg1:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1920&q=80');
+    --bg2:url('https://images.unsplash.com/photo-1602526216438-2f6c5c5c7b63?auto=format&fit=crop&w=1920&q=80');
+    --bg3:url('https://images.unsplash.com/photo-1549887534-223d10c1f4e1?auto=format&fit=crop&w=1920&q=80');
+
+    --clr-bg:#121212;
+    --clr-surface:rgba(0,0,0,.75);
+    --clr-surface-2:rgba(0,0,0,.65);
+    --clr-surface-3:rgba(0,0,0,.82);
+    --clr-text:#ffffff;
+    --clr-accent:#6366f1;
+    --clr-accent-hover:#4f46e5;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',sans-serif;color:var(--clr-text);
+    background:var(--clr-bg) center/cover no-repeat;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:2.5rem;
+    padding:2rem 1.2rem;transition:background-image .6s ease;
+  }
+  h1{font-size:1.9rem;font-weight:600}
+  h2,h3{font-weight:600}
+  .btn{background:#1f1f1f;color:#fff;border:none;border-radius:8px;padding:.75rem 1.6rem;font-size:1rem;cursor:pointer;transition:background .3s}
+  .btn:hover{background:#333}
+
+  /* ───  HEADER CARD  ─────────────────────────────── */
+  .container{background:var(--clr-surface);max-width:600px;width:100%;padding:2rem;border-radius:12px;text-align:center;box-shadow:0 0 22px rgba(0,0,0,.45)}
+
+  /* ───  LANG SWITCHER & POEM  ───────────────────── */
+  .lang-switcher{position:fixed;top:1rem;right:1rem;background:rgba(0,0,0,.6);padding:.35rem .7rem;border-radius:999px;display:flex;gap:.4rem;z-index:20}
+  .lang-switcher button{border:none;background:transparent;color:#fff;font-weight:600;padding:.28rem .9rem;border-radius:999px;cursor:pointer;transition:.25s}
+  .lang-switcher button.active,.lang-switcher button:hover{background:#fff;color:#000}
+
+  .poem-card{max-width:600px;width:100%;background:rgba(0,0,0,.6);padding:2rem;border-radius:1rem;backdrop-filter:blur(8px);box-shadow:0 0 20px rgba(255,255,255,.1);text-align:center;transition:transform .4s}
+  .poem-card:hover{transform:scale(1.02)}
+  .poem-title{font-size:1.8rem;margin-bottom:1rem}
+  .poem-text{font-size:1.15rem;line-height:1.6;font-style:italic;margin-bottom:2rem}
+  .next-btn{background:var(--clr-accent);border:none;border-radius:999px;padding:.75rem 2.3rem;font-weight:600;color:#fff;cursor:pointer}
+  .next-btn:hover{background:var(--clr-accent-hover)}
+
+  /* ───  APPS (ranking / juego / simulador)  ───────── */
+  .section-title{font-size:1.35rem;margin:1.25rem 0}
+  .ranking-section{max-width:600px;width:100%}
+  .phase-sim,.mini-game{background:var(--clr-surface-2);padding:1.5rem;border-radius:10px;margin-top:1.5rem}
+  label{display:block;margin-top:.75rem;font-size:.9rem}
+  select,input[type=number]{width:100%;padding:.45rem;border:none;border-radius:6px;margin-top:.25rem;color:#111;font-size:.9rem}
+  canvas{display:block;margin:1rem auto;border:1px solid #555}
+
+  /* ───  LITERARY BLOCK  ─────────────────────────── */
+  .literary-text{background:var(--clr-surface-3);padding:2rem;border-radius:12px;max-width:800px;width:100%;overflow-x:auto}
+  .literary-text pre{white-space:pre-wrap;line-height:1.45;font-family:'Courier New',monospace;color:#e0e0e0;font-size:1rem}
+
+  /* ───  RESPONSIVE  ─────────────────────────────── */
+  /* Tablets ≤ 900px */
+  @media(max-width:900px){
+    body{gap:2rem}
+    .container,.poem-card,.ranking-section,.literary-text{max-width:90%}
+  }
+  /* Phones ≤ 600px */
+  @media(max-width:600px){
+    body{padding:1.25rem .8rem}
+    h1{font-size:1.55rem}
+    .container{padding:1.4rem}
+    .poem-card{padding:1.6rem 1.1rem;border-radius:.9rem}
+    .poem-title{font-size:1.5rem}
+    .poem-text{font-size:1rem}
+    .next-btn{padding:.6rem 1.8rem;font-size:.95rem}
+    .section-title{font-size:1.15rem}
+    .phase-sim,.mini-game{padding:1.2rem}
+    canvas{width:160px;height:160px}
+    .literary-text{padding:1.25rem;font-size:.9rem}
+    .lang-switcher{top:.5rem;right:.5rem;padding:.25rem .55rem}
+    .lang-switcher button{padding:.25rem .65rem;font-size:.8rem}
+  }
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <div class="container">
+    <h1>🧪 All‑in‑One Science Tools</h1>
+    <p>Diseñado para estudio, productividad y ciencia.</p>
+    <button id="btnBg" class="btn">Cambiar fondo</button>
+  </div>
+
+  <!-- ===== POEM EXPERIENCE ===== -->
+  <nav class="lang-switcher">
+    <button data-lang="es" class="active">ES</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="it">IT</button>
+  </nav>
+  <section class="poem-card">
+    <h2 id="poem-title" class="poem-title"></h2>
+    <p  id="poem-text"  class="poem-text"></p>
+    <button id="next-btn" class="next-btn">Next</button>
+  </section>
+
+  <!-- ===== RANKING & MINI‑APPS ===== -->
+  <section class="ranking-section">
+    <h2 class="section-title">🎓 🏆 Top Estudiantes – Ranking Semanal</h2>
+    <ul style="list-style:none;text-align:left;line-height:1.5;font-size:.95rem;padding-left:1rem">
+      <li>🥇 <strong>Valeria Ríos</strong> — 980 pts</li>
+      <li>🥈 <strong>Andrés León</strong> — 910 pts</li>
+      <li>🥉 <strong>Fiorella Martínez</strong> — 880 pts</li>
+    </ul>
+
+    <!-- Simulador -->
+    <div class="phase-sim">
+      <h3 class="section-title">⚛️ Simulador de Cambios de Estado</h3>
+      <label for="estado">Estado actual:</label>
+      <select id="estado"><option value="sólido">Sólido</option><option value="líquido">Líquido</option><option value="gas">Gas</option></select>
+      <label for="temp">Temperatura (°C):</label>
+      <input type="number" id="temp" value="25" />
+      <button id="btnSim" class="btn" style="margin-top:1rem">Simular</button>
+      <p id="resultado"></p>
+    </div>
+
+    <!-- Mini‑juego -->
+    <div class="mini-game">
+      <h3 class="section-title">🎮 Juego: Click Rápido</h3>
+      <p>Haz clic en el círculo tantas veces como puedas (5 s).</p>
+      <button id="btnGame" class="btn">Iniciar juego</button>
+      <p id="gameScore"></p>
+      <canvas id="gameCanvas" width="200" height="200"></canvas>
+    </div>
+  </section>
+
+  <!-- ===== LITERARY BLOCK ===== -->
+  <section class="literary-text">
+    <h2 class="section-title">Fragmentos & Cronologías Prohibidas</h2>
+<pre><!-- Texto completo proporcionado por el usuario -->
+They'll attend a party and pass a small note under the table, and they'll write something beautiful. …
+(Sweet nightmare of romantic summer, how much I hate you and how much I love you!)
+… "Papá, no tengo para la universidad".
+</pre>
+  </section>
+
+  <script>
+  /* ===== Cambiar fondo ===== */
+  const fondos=[getComputedStyle(document.documentElement).getPropertyValue('--bg1'),getComputedStyle(document.documentElement).getPropertyValue('--bg2'),getComputedStyle(document.documentElement).getPropertyValue('--bg3')];
+  let fondoIdx=parseInt(localStorage.getItem('bgIndex')||0);
+  document.body.style.backgroundImage=fondos[fondoIdx];
+  document.getElementById('btnBg').onclick=()=>{fondoIdx=(fondoIdx+1)%fondos.length;document.body.style.backgroundImage=fondos[fondoIdx];localStorage.setItem('bgIndex',fondoIdx);};
+
+  /* ===== Poem Experience ===== */
+  const poems=[
+    {bg:'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1600&q=80',title:{es:'Diez muchachas',en:'Ten girls',it:'Dieci ragazze'},text:{es:'En Viena hay diez muchachas, un hombro donde solloza la muerte…',en:'In Vienna there are ten girls, a shoulder where death sobs…',it:'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte…'}},
+    {bg:'
+
+
+
   </section>
 
   <!-- ===== LITERARY BLOCK ===== -->
