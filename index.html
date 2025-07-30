@@ -139,7 +139,7 @@
     #darkModeBtn{position:fixed;top:1rem;right:1rem;padding:.5rem .75rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:500;cursor:pointer;z-index:20}
     /* Responsive */
     @media(max-width:600px){.btn{width:46px;height:46px}}
-    
+
   </style>
 </head>
 <body>
@@ -182,6 +182,20 @@
     </div>
   </div>
 </div>
+
+
+<div class="card">
+  <h2>📋 Lista de tareas – To‑Do (XO 🛠️)</h2>
+
+  <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <input id="taskInput" type="text" placeholder="Escribe tu tarea..." style="flex:1; padding: 0.6rem; border-radius: 6px; border: none;">
+    <button onclick="addTask()" style="padding: 0.6rem 1rem; background-color: #00bcd4; color: #000; border: none; border-radius: 6px; font-weight: bold;">➕</button>
+  </div>
+
+  <ul id="taskList" style="list-style: none; padding: 0;"></ul>
+</div>
+
+
 
 <script>
   const regiones = {
