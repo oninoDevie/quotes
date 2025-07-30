@@ -1490,5 +1490,28 @@
 
     loadQuestion();
   </script>
+
+  <script>
+  let totalXP = 180;
+  const xpDisplay = document.getElementById("xpTotal");
+  const xpBar = document.getElementById("xpBar");
+
+  function addXP() {
+    const select = document.getElementById("xpAction");
+    const xpToAdd = parseInt(select.value);
+    totalXP += xpToAdd;
+    if (totalXP > 300) totalXP = 300;
+
+    xpDisplay.textContent = totalXP;
+    xpBar.style.width = (totalXP / 300 * 100) + "%";
+
+    const activityText = select.options[select.selectedIndex].text;
+    const log = document.getElementById("notificationLog");
+    const entry = document.createElement("p");
+    entry.textContent = "✅ " + activityText;
+    log.prepend(entry);
+  }
+</script>
+
 </body>
 </html>
