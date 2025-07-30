@@ -3,223 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All-in-One Science Tools</title>
-
-  <!-- Fuentes & utilidades -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/feather-icons"></script>
-
+  <title>Juego de Verbos Irregulares</title>
   <style>
-  /* ───  FONDOS DINÁMICOS  ─────────────────────────────────────── */
-  :root{
-    --bg1:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1920&q=80');
-    --bg2:url('https://images.unsplash.com/photo-1602526216438-2f6c5c5c7b63?auto=format&fit=crop&w=1920&q=80');
-    --bg3:url('https://images.unsplash.com/photo-1549887534-223d10c1f4e1?auto=format&fit=crop&w=1920&q=80');
-  }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      text-align: center;
+    }
 
-  /* ───  RESET BÁSICO  ─────────────────────────────────────────── */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    .card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px #000;
+    }
 
-  body{
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-    color:#fff;background:#121212 center/cover no-repeat;
-    transition:background-image .5s ease;
-    padding:2rem 1rem;
-  }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
 
-  /* ───  COMPONENTES PRINCIPALES  ──────────────────────────────── */
-  .container{
-    background:rgba(0,0,0,.75);
-    max-width:600px;width:100%;
-    padding:2rem;border-radius:12px;text-align:center;
-    box-shadow:0 0 20px rgba(0,0,0,.5);
-  }
-  h1{font-size:1.8rem;margin-bottom:1rem}
-  button{
-    background:#1f1f1f;color:#fff;border:none;border-radius:8px;
-    padding:.75rem 1.5rem;font-size:1rem;margin-top:1.5rem;cursor:pointer;
-    transition:background .3s;
-  }
-  button:hover{background:#333}
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
 
-  /* Ranking + mini-apps */
-  .ranking-section{margin-top:3rem;max-width:600px;width:100%}
-  .section-title{font-size:1.3rem;font-weight:600;margin:1rem 0}
+    .option {
+      background: #333;
+      border: none;
+      color: white;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+      font-size: 1rem;
+    }
 
-  /* Simulador de fases */
-  .phase-sim,.mini-game{
-    background:rgba(0,0,0,.65);padding:1.5rem;border-radius:10px;margin-top:1.5rem
-  }
-  label{display:block;margin-top:.75rem;font-size:.9rem}
-  select,input[type=number]{width:100%;padding:.4rem;border-radius:6px;border:none;margin-top:.25rem;color:#111}
+    .option.correct {
+      background-color: #2e7d32;
+    }
 
-  /* Mini-game canvas */
-  canvas{display:block;margin:1rem auto;border:1px solid #555}
+    .option.incorrect {
+      background-color: #c62828;
+    }
 
-  /* Responsive */
-  @media(max-width:600px){
-    .container{padding:1.25rem} h1{font-size:1.5rem}
-    .ranking-section{margin-top:2rem}
-  }
+    .next-btn {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
-
 <body>
-  <!-- Bloque principal -->
-  <div class="container">
-    <h1>🧪 All-in-One Science Tools</h1>
-    <p>Diseñado para estudio, productividad y ciencia.</p>
-    <button id="btnBg">Cambiar fondo</button>
-  </div>
-
-  <!-- Ranking + apps educativas -->
-  <section class="ranking-section">
-    <h2 class="section-title">🎓 🏆 Top Estudiantes - Ranking Semanal</h2>
-
-    <!-- Ranking simple ejemplo -->
-    <ul style="list-style:none;text-align:left;line-height:1.5">
-      <li>🥇 <strong>Valeria Ríos</strong> — 980 pts</li>
-      <li>🥈 <strong>Andrés León</strong> — 910 pts</li>
-      <li>🥉 <strong>Fiorella Martínez</strong> — 880 pts</li>
-    </ul>
-
-     <div class="card">
-    <h1>Be Verb & Subject Game</h1>
-    <div class="question" id="questionText">Carlos and I study English. Replace with a pronoun:</div>
-    <div class="options" id="optionsContainer"></div>
-    <div class="feedback" id="feedback"></div>
-    <button class="next-btn" onclick="nextQuestion()">Next</button>
+  <div class="card">
+    <h1>🎯 Juego de Verbos Irregulares</h1>
+    <div class="question" id="question">Cargando pregunta...</div>
+    <div id="options"></div>
+    <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
   </div>
 
   <script>
-    const questions = [
-      {
-        text: "Carlos and I study English. Replace with a pronoun:",
-        options: ["I", "You", "We", "They", "He"],
-        answer: "We"
-      },
-      {
-        text: "She ___ at the party last night. Choose the correct verb form:",
-        options: ["be", "was", "were", "been", "being"],
-        answer: "was"
-      },
-      {
-        text: "They ___ happy to help. Choose the correct verb form:",
-        options: ["was", "were", "been", "be", "being"],
-        answer: "were"
-      },
-      {
-        text: "He has ___ very kind lately. Choose the correct form:",
-        options: ["was", "were", "be", "being", "been"],
-        answer: "been"
-      }
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
     ];
 
-    let currentIndex = 0;
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
 
-    function renderQuestion() {
-      const q = questions[currentIndex];
-      document.getElementById("questionText").textContent = q.text;
-      const optionsDiv = document.getElementById("optionsContainer");
-      optionsDiv.innerHTML = '';
-      document.getElementById("feedback").textContent = '';
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
 
-      q.options.forEach(option => {
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
         const btn = document.createElement("button");
-        btn.textContent = option;
+        btn.className = "option";
+        btn.textContent = opt;
         btn.onclick = () => {
-          if (option === q.answer) {
+          if (opt === verb.part) {
             btn.classList.add("correct");
-            document.getElementById("feedback").textContent = "✅ Correct!";
           } else {
-            btn.classList.add("wrong");
-            document.getElementById("feedback").textContent = "❌ Try again.";
+            btn.classList.add("incorrect");
           }
-          Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
         };
-        optionsDiv.appendChild(btn);
+        optionsEl.appendChild(btn);
       });
     }
 
-    function nextQuestion() {
-      currentIndex = (currentIndex + 1) % questions.length;
-      renderQuestion();
-    }
-
-    // Initial render
-    renderQuestion();
-  </script>
-  
-    <!-- Simulador cambios de estado -->
-    <div class="phase-sim">
-      <h3 class="section-title">⚛️ Simulador de Cambios de Estado</h3>
-      <label for="estado">Estado actual:</label>
-      <select id="estado">
-        <option value="sólido">Sólido</option>
-        <option value="líquido">Líquido</option>
-        <option value="gas">Gas</option>
-      </select>
-      <label for="temp">Temperatura (°C):</label>
-      <input type="number" id="temp" value="25">
-      <button id="btnSim">Simular</button>
-      <p id="resultado"></p>
-    </div>
-
-    <!-- Mini-juego -->
-    <div class="mini-game">
-      <h3 class="section-title">🎮 Juego: Click Rápido</h3>
-      <p>Haz clic en el círculo tantas veces como puedas (5 s).</p>
-      <button id="btnGame">Iniciar juego</button>
-      <p id="gameScore"></p>
-      <canvas id="gameCanvas" width="200" height="200"></canvas>
-    </div>
-  </section>
-
-  <!-- SCRIPTS UNIFICADOS -->
-  <script>
-  /* ===== Cambio de fondo ===== */
-  const fondos=[getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
-                getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
-                getComputedStyle(document.documentElement).getPropertyValue('--bg3')];
-  let fondoIdx=parseInt(localStorage.getItem('bgIndex')||0);
-  document.body.style.backgroundImage=fondos[fondoIdx];
-  document.getElementById('btnBg').onclick=()=>{fondoIdx=(fondoIdx+1)%fondos.length;
-    document.body.style.backgroundImage=fondos[fondoIdx];
-    localStorage.setItem('bgIndex',fondoIdx);
-  };
-
-  /* ===== Simulador de fases ===== */
-  document.getElementById('btnSim').onclick=function(){
-    const estado=document.getElementById('estado').value;
-    const t=+document.getElementById('temp').value;
-    let nuevo=estado;
-    if(estado==='sólido'){ if(t>=0&&t<100)nuevo='líquido'; else if(t>=100)nuevo='gas'; }
-    else if(estado==='líquido'){ if(t<0)nuevo='sólido'; else if(t>=100)nuevo='gas'; }
-    else if(estado==='gas'){ if(t<100&&t>=0)nuevo='líquido'; else if(t<0)nuevo='sólido'; }
-    document.getElementById('resultado').textContent=`Nuevo estado: ${nuevo}`;
-  };
-
-  /* ===== Mini-juego click rápido ===== */
-  const canvas=document.getElementById('gameCanvas'),ctx=canvas.getContext('2d');
-  let clicks=0,timerId;
-  function drawCircle(){ctx.fillStyle='#39FF14';ctx.beginPath();ctx.arc(100,100,30,0,Math.PI*2);ctx.fill();}
-  function count(e){const r=canvas.getBoundingClientRect(),dx=e.clientX-r.left-100,dy=e.clientY-r.top-100;
-    if(Math.hypot(dx,dy)<=30){clicks++;drawCircle();}
-  }
-  document.getElementById('btnGame').onclick=()=>{
-    clicks=0;document.getElementById('gameScore').textContent='¡A jugar!';
-    ctx.clearRect(0,0,200,200);drawCircle();
-    canvas.addEventListener('click',count);
-    clearTimeout(timerId);
-    timerId=setTimeout(()=>{canvas.removeEventListener('click',count);
-      ctx.clearRect(0,0,200,200);
-      document.getElementById('gameScore').textContent=`Puntaje final: ${clicks}`;
-    },5000);
-  };
-
-  feather.replace(); // icons
+    // Iniciar juego
+    loadQuestion();
   </script>
 </body>
 </html>

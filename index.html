@@ -115,6 +115,65 @@
     </div>
   </section>
 
+  <div class="card">
+    <h1>🎯 Juego de Verbos Irregulares</h1>
+    <div class="question" id="question">Cargando pregunta...</div>
+    <div id="options"></div>
+    <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
+  </div>
+
+  <script>
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
+
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === verb.part) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+          }
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    // Iniciar juego
+    loadQuestion();
+  </script>
+
    <div class="card">
     <h1>Be Verb & Subject Game</h1>
     <div class="question" id="questionText">Carlos and I study English. Replace with a pronoun:</div>
@@ -183,6 +242,58 @@
   </script>
   </main>
  
+
+   <script>
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
+
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === verb.part) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+          }
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    // Iniciar juego
+    loadQuestion();
+  </script>
 
   <!-- ERROR BANNER -->
   <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
