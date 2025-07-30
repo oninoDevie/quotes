@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verbos + Gramática</title>
+  <title>Blade Runner English & Psychology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 2rem;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #f1f1f1;
+      font-family: 'Share Tech Mono', monospace;
+      background-color: #0a0a0a;
+      color: #e0f7fa;
+      background-image: radial-gradient(circle at top left, #1a1a2e 10%, #0a0a0a 90%);
     }
 
-    h1, h2 {
+    h1, h2, h3 {
+      color: #90caf9;
+      text-shadow: 0 0 5px #64ffda;
       text-align: center;
     }
 
-    .card {
-      background: #1e1e1e;
-      border-radius: 10px;
+    .card, .grammar {
+      background: rgba(26, 26, 46, 0.9);
+      border-radius: 12px;
       padding: 2rem;
-      max-width: 700px;
+      max-width: 800px;
       margin: 2rem auto;
-      box-shadow: 0 0 10px #000;
+      box-shadow: 0 0 15px #64ffda33;
     }
 
     .question {
@@ -33,83 +37,83 @@
     }
 
     .option {
-      background: #333;
-      border: none;
-      color: white;
+      background: #212121;
+      border: 1px solid #64ffda88;
+      color: #ffffff;
       padding: 0.8rem 1rem;
       margin: 0.5rem auto;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      width: 80%;
-      max-width: 300px;
+      width: 90%;
+      max-width: 350px;
       font-size: 1rem;
       display: block;
+      transition: background 0.2s;
+    }
+
+    .option:hover {
+      background: #263238;
     }
 
     .option.correct {
-      background-color: #2e7d32;
+      background-color: #00e676;
+      color: black;
     }
 
     .option.incorrect {
-      background-color: #c62828;
+      background-color: #ef5350;
+      color: black;
     }
 
     .next-btn {
       margin-top: 1.5rem;
       padding: 0.7rem 1.2rem;
       font-size: 1rem;
-      background-color: #1976d2;
-      color: white;
+      background-color: #00bcd4;
+      color: black;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       display: block;
       margin-left: auto;
       margin-right: auto;
+      box-shadow: 0 0 10px #00bcd4;
     }
 
-    .grammar {
-      background: #1a1a1a;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin: 2rem auto;
-      max-width: 700px;
-      box-shadow: 0 0 10px #000;
-    }
-
-    .grammar table {
+    table {
       width: 100%;
       border-collapse: collapse;
       margin: 1rem 0;
     }
 
-    .grammar th, .grammar td {
-      border: 1px solid #444;
-      padding: 0.5rem;
+    th, td {
+      border: 1px solid #455a64;
+      padding: 0.7rem;
       text-align: center;
     }
 
-    .tag {
-      background: #333;
-      padding: 0.2rem 0.6rem;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      display: inline-block;
-      margin-bottom: 0.5rem;
+    ul {
+      list-style-type: "➤ ";
+      padding-left: 1rem;
+    }
+
+    p, li {
+      line-height: 1.6;
     }
 
     .example {
-      background: #222;
+      background: #111;
       padding: 0.5rem 1rem;
-      border-left: 4px solid #6366f1;
       margin: 0.5rem 0;
+      border-left: 4px solid #64ffda;
+      color: #a7ffeb;
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h1>🎯 Juego de Verbos Irregulares</h1>
+    <h1>🎯 Verbos Irregulares</h1>
     <div class="question" id="question">Cargando pregunta...</div>
     <div id="options"></div>
     <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
@@ -144,25 +148,96 @@
     </table>
 
     <h3>✍️ Práctica rápida:</h3>
-    <p>A. Completa:<br>
-    ___ a spider in the bathroom → ✅ <b>There is</b><br>
-    ___ many tourists → ✅ <b>There are</b></p>
-
-    <p>B. Forma negativa:<br>
-    There is a chair → ❌ <b>There isn’t a chair</b><br>
-    There are apples → ❌ <b>There aren’t apples</b></p>
-
-    <p>C. Preguntas:<br>
-    There is a problem → ❓ <b>Is there a problem?</b><br>
-    There are cookies → ❓ <b>Are there cookies?</b></p>
+    <p>A. Completa:<br>___ a spider in the bathroom → ✅ <b>There is</b><br>___ many tourists → ✅ <b>There are</b></p>
+    <p>B. Forma negativa:<br>There is a chair → ❌ <b>There isn’t a chair</b><br>There are apples → ❌ <b>There aren’t apples</b></p>
+    <p>C. Preguntas:<br>There is a problem → ❓ <b>Is there a problem?</b><br>There are cookies → ❓ <b>Are there cookies?</b></p>
 
     <h3>🧠 Mini resumen:</h3>
     <ul>
-      <li>✅ <b>There is</b> → singular o incontable</li>
-      <li>✅ <b>There are</b> → plural</li>
-      <li>❌ Negativa → <b>isn’t / aren’t</b></li>
-      <li>❓ Pregunta → <b>Is there...? / Are there...?</b></li>
+      <li>✅ There is → singular o incontable</li>
+      <li>✅ There are → plural</li>
+      <li>❌ Negativa → isn’t / aren’t</li>
+      <li>❓ Pregunta → Is there...? / Are there...?</li>
     </ul>
+  </div>
+
+  <div class="grammar">
+    <h2>🧠 1. Desarrollo Cognitivo (Piaget & Elkind)</h2>
+
+    <h3>Operaciones Formales</h3>
+    <ul>
+      <li>Razonamiento hipotético-deductivo</li>
+      <li>Pensamiento abstracto y lógico</li>
+      <li>Capacidad de pensar en lo que no existe</li>
+      <li>Uso de conceptos como libertad, justicia, ética</li>
+    </ul>
+
+    <h3>Egocentrismo Adolescente</h3>
+    <ul>
+      <li>Audiencia imaginaria</li>
+      <li>Fábula personal</li>
+      <li>Fábula de la invencibilidad</li>
+    </ul>
+
+    <h2>💬 2. Desarrollo Emocional</h2>
+    <ul>
+      <li>Autonomía creciente</li>
+      <li>Alta sensibilidad emocional</li>
+      <li>Cambios de humor frecuentes</li>
+      <li>Inseguridad sobre el futuro</li>
+      <li>Presión social y aceptación</li>
+      <li>Rebeldía y cuestionamiento familiar</li>
+    </ul>
+
+    <h2>⚙️ 3. Desarrollo Biológico</h2>
+    <h3>Cambios hormonales</h3>
+    <p>Activación del eje hipotálamo-hipófisis-gónadas.</p>
+    <h3>Caracteres sexuales</h3>
+    <ul>
+      <li>Primarios: testículos, ovarios, útero, pene</li>
+      <li>Secundarios: voz, vello, senos, caderas</li>
+    </ul>
+
+    <h2>👥 4. Dimensión Sociocultural</h2>
+    <h3>Factores</h3>
+    <ul>
+      <li>Grupo de pares > familia</li>
+      <li>Conductas de riesgo: alcohol, drogas</li>
+      <li>Estereotipos y medios</li>
+    </ul>
+    <h3>Enfoques</h3>
+    <ul>
+      <li>Transformación pubertaria</li>
+      <li>Fenómeno de edad</li>
+      <li>Experiencia de desarrollo</li>
+      <li>Transición a la adultez</li>
+    </ul>
+
+    <h2>❤️ 5. Identidad (Erikson)</h2>
+    <p><b>Crisis:</b> Identidad vs. Confusión de roles</p>
+    <ul>
+      <li>¿Quién soy?</li>
+      <li>Unificación de roles</li>
+      <li>Éxito: identidad sólida</li>
+      <li>Fracaso: duda, incoherencia</li>
+    </ul>
+
+    <h2>⚖️ 6. Moral (Kohlberg)</h2>
+    <h3>Posconvencional</h3>
+    <ul>
+      <li>Etapa 5: contrato social</li>
+      <li>Etapa 6: principios éticos universales</li>
+    </ul>
+
+    <h2>🔑 Conceptos Clave</h2>
+    <table>
+      <tr><th>Concepto</th><th>Definición</th></tr>
+      <tr><td>Resiliencia</td><td>Adaptarse a la adversidad</td></tr>
+      <tr><td>Egocentrismo adolescente</td><td>Creerse el centro del mundo</td></tr>
+      <tr><td>Autoconcepto</td><td>Imagen personal interna</td></tr>
+      <tr><td>Pensamiento formal</td><td>Abstracto, lógico y deductivo</td></tr>
+      <tr><td>Grupo de referencia</td><td>Personas que influyen en decisiones</td></tr>
+    </table>
   </div>
 
   <script>
