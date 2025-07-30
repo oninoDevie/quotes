@@ -1,672 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Quotes Audio App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Quotes Audio App + Gamificación</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fuentes y utilidades -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/feather-icons"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-   <style>
-    /* Paleta CH + CE: azul, verde neón, gris oscuro, blanco */
-    :root {
-      --azul: #007FFF;
-      --verde-neon: #39FF14;
-      --gris-oscuro: #1a1f2b;
-      --gris-texto: #d3d3d3;
-      --blanco: #ffffff;
-      --fondo: #0d1117;
-      --borde: #2c313a;
-    }
 
-    body {
-      background-color: var(--fondo);
-      font-family: 'Segoe UI', sans-serif;
-      color: var(--blanco);
-      padding: 2rem;
-      margin: 0;
-    }
+  <!-- Tus estilos externos (token system + media‑queries) -->
+  <link rel="stylesheet" href="styles.css" />
 
-    h1 {
-      text-align: center;
-      color: var(--verde-neon);
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .ranking {
-      max-width: 700px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .student {
-      display: flex;
-      align-items: center;
-      background-color: var(--gris-oscuro);
-      border: 1px solid var(--borde);
-      border-radius: 16px;
-      padding: 1.2rem;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .student:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-    }
-
-    .medal {
-      width: 64px;
-      margin-right: 1.5rem;
-    }
-
-    .info {
-      flex: 1;
-    }
-
-    .info h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: var(--azul);
-    }
-
-    .info p {
-      margin: 0.3rem 0;
-      font-size: 0.95rem;
-      color: var(--gris-texto);
-    }
-
-    .info em {
-      color: var(--verde-neon);
-      font-style: normal;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      .student {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .medal {
-        margin: 0 0 1rem 0;
-      }
-    }
+  <style>
+    /* ----------  mínimos ajustes rápidos  ---------- */
+    body{font-family:'Inter',sans-serif;margin:0;background:#0d0d0d;color:#f5f5f5}
+    img{max-width:100%;display:block}
+    h1,h2{margin:.5rem 0}
+    button{cursor:pointer}
+    .app-container{max-width:960px;margin:auto;padding:1.5rem;display:flex;flex-direction:column;gap:2.5rem}
+    .section-title{font-size:1.2rem;font-weight:600;margin:1rem 0}
+    /* sobrescribe tamaño canvas en móvil */
+    @media(max-width:640px){#gameCanvas{width:160px;height:160px}}
   </style>
 </head>
-<body>
-  <button id="darkModeBtn">✨ Light</button>
-  <!-- Tarjeta del poema -->
-<div class="poem-card">
-  <div class="poem-title" id="poem-title"></div>
-  <div class="poem-text"  id="poem-text"></div>
-  <button class="next-btn" id="next-btn">Next</button>
-</div>
 
-  
-  <div class="app-container">
-    <header class="app-header">
-      <h1 class="app-title">Quotes Audio App</h1>
-      <span class="quote-counter">
-        <span id="currentQuote">1</span>
-        <span class="counter-separator">/</span>
-        <span id="totalQuotes">3</span>
-      </span>
-    </header>
+<body class="bg-misty">
 
-    <div class="container">
-    <h1>🧪 All-in-One Science Tools</h1>
-    <p>Diseñado para estudio, productividad y ciencia.</p>
-    <button onclick="cambiarFondo()">Cambiar fondo</button>
-  </div>
-
-  <script>
-    const fondos = [
-      getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
-      getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
-      getComputedStyle(document.documentElement).getPropertyValue('--bg3')
-    ];
-
-    let fondoIndex = localStorage.getItem('bgIndex') || 0;
-    document.body.style.backgroundImage = fondos[fondoIndex];
-
-    function cambiarFondo() {
-      fondoIndex = (parseInt(fondoIndex) + 1) % fondos.length;
-      document.body.style.backgroundImage = fondos[fondoIndex];
-      localStorage.setItem('bgIndex', fondoIndex);
-    }
-  </script>
-<h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
-
-  <div class="ranking-section">
-    <!-- Ranking y gamificación existentes -->
-    <!-- ... contenido anterior ... -->
-
-    <div class="phase-sim">
-      <h2 class="section-title">⚛️ Simulador de Cambios de Estado</h2>
-      <label for="estado">Estado actual:</label>
-      <select id="estado">
-        <option value="sólido">Sólido</option>
-        <option value="líquido">Líquido</option>
-        <option value="gas">Gas</option>
-      </select>
-
-      <label for="temperatura">Temperatura (°C):</label>
-      <input type="number" id="temperatura" value="25" />
-
-      <button onclick="simularCambio()">Simular</button>
-      <p id="resultado"></p>
-    </div>
-
-    <div class="mini-game">
-      <h2 class="section-title">🎮 Juego: Click Rápido</h2>
-      <p>Haz clic lo más rápido posible en 5 segundos.</p>
-      <button onclick="startGame()">Iniciar juego</button>
-      <p id="gameScore"></p>
-      <canvas id="gameCanvas" width="200" height="200"></canvas>
-    </div>
-  </div>
-
-  <script>
-    function simularCambio() {
-      const estado = document.getElementById("estado").value;
-      const temp = parseFloat(document.getElementById("temperatura").value);
-      let nuevoEstado = estado;
-
-      if (estado === "sólido") {
-        if (temp >= 0 && temp < 100) nuevoEstado = "líquido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "líquido") {
-        if (temp < 0) nuevoEstado = "sólido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "gas") {
-        if (temp < 100 && temp >= 0) nuevoEstado = "líquido";
-        else if (temp < 0) nuevoEstado = "sólido";
-      }
-
-      document.getElementById("resultado").innerText = `Nuevo estado: ${nuevoEstado}`;
-    }
-
-    // Mini juego click rápido
-    let clickCount = 0;
-    let timer;
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    function startGame() {
-      clickCount = 0;
-      document.getElementById("gameScore").innerText = "¡Haz clic en el círculo!";
-      ctx.clearRect(0, 0, 200, 200);
-      canvas.addEventListener("click", countClick);
-      drawCircle();
-
-      timer = setTimeout(() => {
-        canvas.removeEventListener("click", countClick);
-        ctx.clearRect(0, 0, 200, 200);
-        document.getElementById("gameScore").innerText = `Puntaje final: ${clickCount}`;
-      }, 5000);
-    }
-
-    function drawCircle() {
-      ctx.fillStyle = "#39FF14";
-      ctx.beginPath();
-      ctx.arc(100, 100, 30, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function countClick(e) {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const dx = x - 100;
-      const dy = y - 100;
-      if (Math.sqrt(dx * dx + dy * dy) <= 30) {
-        clickCount++;
-        drawCircle();
-      }
-    }
-  </script>
-
-  
-    <main class="main-content">
-      <div class="quote-container">
-        <h2 id="quoteTitle" class="quote-title"></h2>
-        <div class="reading-progress">
-          <progress id="progressBar" value="0" max="100"></progress>
-        </div>
-        <div id="quoteDisplay" class="quote-display"></div>
-      </div>
-
-      <!-- Tarjeta del poema -->
-<div class="poem-card">
-  <div class="poem-title" id="poem-title"></div>
-  <div class="poem-text"  id="poem-text"></div>
-  <button class="next-btn" id="next-btn">Next</button>
-</div>
-
-      <div class="controls-panel">
-        <div class="audio-controls">
-          <button id="prevBtn" class="control-btn secondary" aria-label="Previous">
-            <i data-feather="skip-back"></i>
-          </button>
-          <button id="playPauseBtn" class="control-btn primary" aria-label="Play/Pause">
-            <i data-feather="play"></i>
-          </button>
-          <button id="stopBtn" class="control-btn secondary" aria-label="Stop">
-            <i data-feather="square"></i>
-          </button>
-          <button id="nextBtn" class="control-btn secondary" aria-label="Next">
-            <i data-feather="skip-forward"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="settings-panel">
-        <div class="setting-group">
-          <label for="audioFile" class="setting-label">Audio local</label>
-          <input type="file" id="audioFile" accept="audio/*" class="file-input">
-        </div>
-        <div class="setting-group">
-          <label for="highlightColor" class="setting-label">Color</label>
-          <input type="color" id="highlightColor" value="#6366f1" class="color-picker">
-        </div>
-        <div class="setting-group">
-          <label for="speechRate" class="setting-label">Velocidad</label>
-          <div class="slider-wrapper">
-            <input type="range" id="speechRate" min="0.6" max="2" step="0.1" value="1">
-            <span id="speedValue">1.0×</span>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <audio id="audioPlayer" style="display: none;"></audio>
-  <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
-
-  <script src="script.js"></script>
-
-  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
-
-  <div class="ranking-section">
-    <!-- Ranking y gamificación existentes -->
-    <!-- ... contenido anterior ... -->
-
-    <div class="phase-sim">
-      <h2 class="section-title">⚛️ Simulador de Cambios de Estado</h2>
-      <label for="estado">Estado actual:</label>
-      <select id="estado">
-        <option value="sólido">Sólido</option>
-        <option value="líquido">Líquido</option>
-        <option value="gas">Gas</option>
-      </select>
-
-      <label for="temperatura">Temperatura (°C):</label>
-      <input type="number" id="temperatura" value="25" />
-
-      <button onclick="simularCambio()">Simular</button>
-      <p id="resultado"></p>
-    </div>
-
-
-
-
-<h1>🏆 Top Estudiantes - Semana</h1>
-
-  <div class="ranking">
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
-      <div class="info">
-        <h2>🥇 Valeria Ríos</h2>
-        <p>🎯 Puntaje: 980 pts</p>
-        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
-        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
-      </div>
-    </div>
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
-      <div class="info">
-        <h2>🥈 Andrés León</h2>
-        <p>🎯 Puntaje: 910 pts</p>
-        <p>📘 Título: <em>Analista Avanzado</em></p>
-        <p>🎁 Recompensa: Pase extra para simulacro</p>
-      </div>
-    </div>
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
-      <div class="info">
-        <h2>🥉 Fiorella Martínez</h2>
-        <p>🎯 Puntaje: 880 pts</p>
-        <p>📘 Título: <em>Exploradora del Saber</em></p>
-        <p>🎁 Recompensa: Sticker digital exclusivo</p>
-      </div>
-    </div>
-
-  </div>
-
-
-
-<div class="ranking">
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
-      <div class="info">
-        <h2>🥇 Valeria Ríos</h2>
-        <p>🎯 Puntaje: 980 pts</p>
-        <p>🔥 Título: <em>Maestra del Razonamiento</em></p>
-        <p>🎁 Recompensa: Acceso a nuevas lecciones</p>
-      </div>
-    </div>
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
-      <div class="info">
-        <h2>🥈 Andrés León</h2>
-        <p>🎯 Puntaje: 910 pts</p>
-        <p>📘 Título: <em>Analista Avanzado</em></p>
-        <p>🎁 Recompensa: Pase extra para simulacro</p>
-      </div>
-    </div>
-  <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
-
-<div class="lang-switcher">
+<!-- Selector de idioma -->
+<nav class="lang-switcher">
   <button data-lang="es" class="active">ES</button>
   <button data-lang="en">EN</button>
   <button data-lang="it">IT</button>
-</div>
+</nav>
 
-<!-- Tarjeta del poema -->
-<div class="poem-card">
-  <div class="poem-title" id="poem-title"></div>
-  <div class="poem-text"  id="poem-text"></div>
+<!-- Tarjeta de Poema -->
+<section class="poem-card">
+  <h2 class="poem-title" id="poem-title"></h2>
+  <p  class="poem-text"  id="poem-text"></p>
   <button class="next-btn" id="next-btn">Next</button>
+</section>
+
+<div class="app-container">
+
+  <!-- Cabecera principal -->
+  <header class="app-header">
+    <h1 class="app-title">Quotes Audio App</h1>
+    <span class="quote-counter"><span id="currentQuote">1</span>/<span id="totalQuotes">3</span></span>
+  </header>
+
+  <!-- QUOTE + PROGRESO -->
+  <main class="main-content">
+    <div class="quote-container">
+      <h2 id="quoteTitle" class="quote-title">Título de la cita</h2>
+      <div class="reading-progress">
+        <progress id="progressBar" value="0" max="100"></progress>
+      </div>
+      <div id="quoteDisplay" class="quote-display">Aquí aparecerá el texto sincronizado…</div>
+    </div>
+
+    <!-- CONTROLES AUDIO -->
+    <div class="controls-panel">
+      <div class="audio-controls">
+        <button id="prevBtn"  class="control-btn secondary" aria-label="Anterior"><i data-feather="skip-back"></i></button>
+        <button id="playPauseBtn" class="control-btn primary"   aria-label="Play/Pause"><i data-feather="play"></i></button>
+        <button id="stopBtn"      class="control-btn secondary" aria-label="Stop"><i data-feather="square"></i></button>
+        <button id="nextBtn"      class="control-btn secondary" aria-label="Siguiente"><i data-feather="skip-forward"></i></button>
+      </div>
+    </div>
+
+    <!-- AJUSTES -->
+    <div class="settings-panel">
+      <div class="setting-group">
+        <label class="setting-label" for="audioFile">Audio local</label>
+        <input type="file" id="audioFile" accept="audio/*" class="file-input" />
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="highlightColor">Color</label>
+        <input type="color" id="highlightColor" value="#6366f1" class="color-picker" />
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="speechRate">Velocidad</label>
+        <div class="slider-wrapper">
+          <input type="range" id="speechRate" min="0.6" max="2" step="0.1" value="1" class="speed-slider" />
+          <span id="speedValue">1.0×</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RANKING & GAMIFICACIÓN -->
+    <section class="ranking-section">
+      <h2 class="section-title">🏆 Top Estudiantes – Semana</h2>
+      <div class="ranking">
+        <!-- Estudiante 1 -->
+        <div class="student">
+          <img src="https://em-content.zobj.net/thumbs/120/google/350/1st-place-medal_1f947.png" alt="Oro" class="medal" />
+          <div class="info">
+            <h3>🥇 Valeria Ríos</h3>
+            <p>🎯 980 pts · 🔥 Maestra del Razonamiento</p>
+          </div>
+        </div>
+        <!-- Estudiante 2 -->
+        <div class="student">
+          <img src="https://em-content.zobj.net/thumbs/120/google/350/2nd-place-medal_1f948.png" alt="Plata" class="medal" />
+          <div class="info">
+            <h3>🥈 Andrés León</h3>
+            <p>🎯 910 pts · 📘 Analista Avanzado</p>
+          </div>
+        </div>
+        <!-- Estudiante 3 -->
+        <div class="student">
+          <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
+          <div class="info">
+            <h3>🥉 Fiorella Martínez</h3>
+            <p>🎯 880 pts · 🎁 Sticker digital</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulador de cambios de estado -->
+      <div class="phase-sim">
+        <h3 class="section-title">⚛️ Simulador de Cambios de Estado</h3>
+        <label for="estado">Estado actual:</label>
+        <select id="estado">
+          <option value="sólido">Sólido</option>
+          <option value="líquido">Líquido</option>
+          <option value="gas">Gas</option>
+        </select>
+        <label for="temperatura">Temperatura (°C):</label>
+        <input type="number" id="temperatura" value="25" />
+        <button onclick="simularCambio()">Simular</button>
+        <p id="resultado"></p>
+      </div>
+
+      <!-- Mini‑juego -->
+      <div class="mini-game">
+        <h3 class="section-title">🎮 Juego: Click Rápido</h3>
+        <p>Haz clic lo más rápido posible en 5 segundos.</p>
+        <button onclick="startGame()">Iniciar juego</button>
+        <p id="gameScore"></p>
+        <canvas id="gameCanvas" width="200" height="200"></canvas>
+      </div>
+    </section>
+  </main>
 </div>
 
+<audio id="audioPlayer" hidden></audio>
+<div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
+
+<!-- ==========  SCRIPTS  ========== -->
 <script>
-// ----- DATA -----
-const poems = [
-  { id:1, bg:'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
-    title:{es:'Diez muchachas', en:'Ten girls', it:'Dieci ragazze'},
-    text:{es:'En Viena hay diez muchachas, un hombro donde solloza la muerte...',
-          en:'In Vienna there are ten girls, a shoulder where death sobs...',
-          it:'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte...'}},
-  { id:2, bg:'https://images.unsplash.com/photo-1602524819641-3c89723a87bd?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
-    title:{es:'Boca cerrada', en:'Mouth closed', it:'Bocca chiusa'},
-    text:{es:'Toma este vals con la boca cerrada.',
-          en:'Take this waltz with your mouth closed.',
-          it:'Prendi questo valzer con la bocca chiusa.'}},
-  { id:3, bg:'https://images.unsplash.com/photo-1554106273-9e9d22b1a1fc?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
-    title:{es:'Ático', en:'Attic', it:'Soffitta'},
-    text:{es:'Verso del ático…', en:'Attic verse…', it:'Verso della soffitta…'}},
-  { id:4, bg:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
-    title:{es:'Tren', en:'Train', it:'Treno'},
-    text:{es:'Verso del tren…', en:'Train verse…', it:'Verso del treno…'}},
+/* ----------  POEMA + FONDOS  ---------- */
+const poems=[
+  {bg:'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1600&q=80',
+   title:{es:'Diez muchachas',en:'Ten girls',it:'Dieci ragazze'},
+   text:{es:'En Viena hay diez muchachas, un hombro donde solloza la muerte…',
+         en:'In Vienna there are ten girls, a shoulder where death sobs…',
+         it:'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte…'}},
+  {bg:'https://images.unsplash.com/photo-1602524819641-3c89723a87bd?auto=format&fit=crop&w=1600&q=80',
+   title:{es:'Boca cerrada',en:'Mouth closed',it:'Bocca chiusa'},
+   text:{es:'Toma este vals con la boca cerrada.',
+         en:'Take this waltz with your mouth closed.',
+         it:'Prendi questo valzer con la bocca chiusa.'}},
+  {bg:'https://images.unsplash.com/photo-1554106273-9e9d22b1a1fc?auto=format&fit=crop&w=1600&q=80',
+   title:{es:'Ático',en:'Attic',it:'Soffitta'},
+   text:{es:'Verso del ático…',en:'Attic verse…',it:'Verso della soffitta…'}},
+  {bg:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=80',
+   title:{es:'Tren',en:'Train',it:'Treno'},
+   text:{es:'Verso del tren…',en:'Train verse…',it:'Verso del treno…'}}
 ];
-
-let lang='es';
-let idx=0;
-
-// ----- ELEMENTOS -----
+let idx=0,lang='es';
 const titleEl=document.getElementById('poem-title');
 const textEl =document.getElementById('poem-text');
 const nextBtn=document.getElementById('next-btn');
 const langBtns=document.querySelectorAll('.lang-switcher button');
-
-// ----- FUNCIONES -----
-function render(){
+function renderPoem(){
   const {title,text,bg}=poems[idx];
   titleEl.textContent=title[lang];
   textEl.textContent =text[lang];
   document.body.style.backgroundImage=`url('${bg}')`;
 }
-function nextVerse(){
-  idx = (idx+1) % poems.length;
-  render();
-}
-function switchLang(e){
+nextBtn.addEventListener('click',()=>{idx=(idx+1)%poems.length;renderPoem()});
+langBtns.forEach(b=>b.addEventListener('click',e=>{
   lang=e.target.dataset.lang;
-  langBtns.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
-  render();
+  langBtns.forEach(btn=>btn.classList.toggle('active',btn===e.target));
+  renderPoem();
+}));
+renderPoem();
+
+/* ----------  SIMULADOR FASES  ---------- */
+function simularCambio(){
+  const estado=document.getElementById('estado').value;
+  const temp=parseFloat(document.getElementById('temperatura').value);
+  let nuevo=estado;
+  if(estado==='sólido'){ if(temp>=0&&temp<100)nuevo='líquido'; else if(temp>=100)nuevo='gas'; }
+  else if(estado==='líquido'){ if(temp<0)nuevo='sólido'; else if(temp>=100)nuevo='gas'; }
+  else if(estado==='gas'){ if(temp<100&&temp>=0)nuevo='líquido'; else if(temp<0)nuevo='sólido'; }
+  document.getElementById('resultado').textContent=`Nuevo estado: ${nuevo}`;
 }
 
-// ----- LISTENERS -----
-nextBtn.addEventListener('click',nextVerse);
-langBtns.forEach(b=>b.addEventListener('click',switchLang));
+/* ----------  MINI GAME  ---------- */
+let clickCount=0,timer;
+const canvas=document.getElementById('gameCanvas');
+const ctx=canvas.getContext('2d');
+function drawCircle(){
+  ctx.fillStyle='#39FF14';
+  ctx.beginPath();ctx.arc(100,100,30,0,Math.PI*2);ctx.fill();
+}
+function countClick(e){
+  const {left,top}=canvas.getBoundingClientRect();
+  const dx=e.clientX-left-100,dy=e.clientY-top-100;
+  if(Math.hypot(dx,dy)<=30){clickCount++;drawCircle();}
+}
+function startGame(){
+  clickCount=0;
+  document.getElementById('gameScore').textContent='¡Haz clic en el círculo!';
+  ctx.clearRect(0,0,200,200);
+  drawCircle();
+  canvas.addEventListener('click',countClick);
+  clearTimeout(timer);
+  timer=setTimeout(()=>{
+    canvas.removeEventListener('click',countClick);
+    ctx.clearRect(0,0,200,200);
+    document.getElementById('gameScore').textContent=`Puntaje final: ${clickCount}`;
+  },5000);
+}
 
-// ----- INIT -----
-render();
+/* ----------  Feather Icons  ---------- */
+feather.replace();
 </script>
-
-  <div class="ranking-section">
-    <!-- Ranking y gamificación existentes -->
-    <!-- ... contenido anterior ... -->
-
-    <div class="phase-sim">
-      <h2 class="section-title">⚛️ Simulador de Cambios de Estado</h2>
-      <label for="estado">Estado actual:</label>
-      <select id="estado">
-        <option value="sólido">Sólido</option>
-        <option value="líquido">Líquido</option>
-        <option value="gas">Gas</option>
-      </select>
-
-      <label for="temperatura">Temperatura (°C):</label>
-      <input type="number" id="temperatura" value="25" />
-
-      <button onclick="simularCambio()">Simular</button>
-      <p id="resultado"></p>
-    </div>
-
-    <div class="mini-game">
-      <h2 class="section-title">🎮 Juego: Click Rápido</h2>
-      <p>Haz clic lo más rápido posible en 5 segundos.</p>
-      <button onclick="startGame()">Iniciar juego</button>
-      <p id="gameScore"></p>
-      <canvas id="gameCanvas" width="200" height="200"></canvas>
-    </div>
-  </div>
-
-  <script>
-    function simularCambio() {
-      const estado = document.getElementById("estado").value;
-      const temp = parseFloat(document.getElementById("temperatura").value);
-      let nuevoEstado = estado;
-
-      if (estado === "sólido") {
-        if (temp >= 0 && temp < 100) nuevoEstado = "líquido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "líquido") {
-        if (temp < 0) nuevoEstado = "sólido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "gas") {
-        if (temp < 100 && temp >= 0) nuevoEstado = "líquido";
-        else if (temp < 0) nuevoEstado = "sólido";
-      }
-
-      document.getElementById("resultado").innerText = `Nuevo estado: ${nuevoEstado}`;
-    }
-
-    // Mini juego click rápido
-    let clickCount = 0;
-    let timer;
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    function startGame() {
-      clickCount = 0;
-      document.getElementById("gameScore").innerText = "¡Haz clic en el círculo!";
-      ctx.clearRect(0, 0, 200, 200);
-      canvas.addEventListener("click", countClick);
-      drawCircle();
-
-      timer = setTimeout(() => {
-        canvas.removeEventListener("click", countClick);
-        ctx.clearRect(0, 0, 200, 200);
-        document.getElementById("gameScore").innerText = `Puntaje final: ${clickCount}`;
-      }, 5000);
-    }
-
-    function drawCircle() {
-      ctx.fillStyle = "#39FF14";
-      ctx.beginPath();
-      ctx.arc(100, 100, 30, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function countClick(e) {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const dx = x - 100;
-      const dy = y - 100;
-      if (Math.sqrt(dx * dx + dy * dy) <= 30) {
-        clickCount++;
-        drawCircle();
-      }
-    }
-  </script>
-
-
-    <div class="student">
-      <img src="https://em-content.zobj.net/thumbs/120/google/350/3rd-place-medal_1f949.png" alt="Bronce" class="medal" />
-      <div class="info">
-        <h2>🥉 Fiorella Martínez</h2>
-        <p>🎯 Puntaje: 880 pts</p>
-        <p>📘 Título: <em>Exploradora del Saber</em></p>
-        <p>🎁 Recompensa: Sticker digital exclusivo</p>
-      </div>
-    </div>
-
-  </div>
-
-
-
-
-
-
-    <div class="mini-game">
-      <h2 class="section-title">🎮 Juego: Click Rápido</h2>
-      <p>Haz clic lo más rápido posible en 5 segundos.</p>
-      <button onclick="startGame()">Iniciar juego</button>
-      <p id="gameScore"></p>
-      <canvas id="gameCanvas" width="200" height="200"></canvas>
-    </div>
-  </div>
-
-  <script>
-    function simularCambio() {
-      const estado = document.getElementById("estado").value;
-      const temp = parseFloat(document.getElementById("temperatura").value);
-      let nuevoEstado = estado;
-
-      if (estado === "sólido") {
-        if (temp >= 0 && temp < 100) nuevoEstado = "líquido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "líquido") {
-        if (temp < 0) nuevoEstado = "sólido";
-        else if (temp >= 100) nuevoEstado = "gas";
-      } else if (estado === "gas") {
-        if (temp < 100 && temp >= 0) nuevoEstado = "líquido";
-        else if (temp < 0) nuevoEstado = "sólido";
-      }
-
-      document.getElementById("resultado").innerText = `Nuevo estado: ${nuevoEstado}`;
-    }
-
-    // Mini juego click rápido
-    let clickCount = 0;
-    let timer;
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    function startGame() {
-      clickCount = 0;
-      document.getElementById("gameScore").innerText = "¡Haz clic en el círculo!";
-      ctx.clearRect(0, 0, 200, 200);
-      canvas.addEventListener("click", countClick);
-      drawCircle();
-
-      timer = setTimeout(() => {
-        canvas.removeEventListener("click", countClick);
-        ctx.clearRect(0, 0, 200, 200);
-        document.getElementById("gameScore").innerText = `Puntaje final: ${clickCount}`;
-      }, 5000);
-    }
-
-    function drawCircle() {
-      ctx.fillStyle = "#39FF14";
-      ctx.beginPath();
-      ctx.arc(100, 100, 30, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function countClick(e) {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const dx = x - 100;
-      const dy = y - 100;
-      if (Math.sqrt(dx * dx + dy * dy) <= 30) {
-        clickCount++;
-        drawCircle();
-      }
-    }
-  </script>
-   <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
-
-  <div class="ranking-section">
-
-    <div class="medal">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Gold_medal_icon.svg/240px-Gold_medal_icon.svg.png" alt="Oro" />
-      <div>
-        <h2 class="gold">🥇 Primer lugar – Valeria Ríos</h2>
-        <p>🎯 Puntaje: 980 pts</p>
-        <p>💡 Bonus: Acceso anticipado a nuevas lecciones</p>
-        <p>🔥 Título desbloqueado: "Maestra del Razonamiento"</p>
-      </div>
-    </div>
-
-    <div class="medal">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Silver_medal_icon.svg/240px-Silver_medal_icon.svg.png" alt="Plata" />
-      <div>
-        <h2 class="silver">🥈 Segundo lugar – Andrés León</h2>
-        <p>🎯 Puntaje: 910 pts</p>
-        <p>🎁 Bonus: 1 pase extra para simulacro</p>
-        <p>📘 Título desbloqueado: "Analista Avanzado"</p>
-      </div>
-    </div>
-
-    <div class="medal">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bronze_medal_icon.svg/240px-Bronze_medal_icon.svg.png" alt="Bronce" />
-      <div>
-        <h2 class="bronze">🥉 Tercer lugar – Fiorella Martínez</h2>
-        <p>🎯 Puntaje: 880 pts</p>
-        <p>🎁 Bonus: Sticker digital exclusivo</p>
-        <p>📘 Título desbloqueado: "Exploradora del Saber"</p>
-      </div>
-    </div>
-
-    <div class="section-title">🎯 Sistema de puntuación</div>
-    <ul>
-      <li>+10 pts por clase completada</li>
-      <li>+15 pts por test aprobado</li>
-      <li>+20 pts por participación en desafíos</li>
-      <li>+50 pts por primer lugar en simulacro</li>
-    </ul>
-
-    <div class="section-title">🎮 Gamificación adicional</div>
-    <ul>
-      <li>🎖️ Logros: por rachas, horas de estudio, preguntas sin error.</li>
-      <li>🧩 Misiones diarias/semanales: “Estudia 3 días seguidos”, “Gana 2 retos”.</li>
-      <li>📈 Niveles por experiencia: Novato → Avanzado → Prodigio → Leyenda.</li>
-    </ul>
-  </div>
 </body>
 </html>
