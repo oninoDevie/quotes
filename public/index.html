@@ -119,6 +119,35 @@
     <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
   </div>
 
+  <!-- HEADER -->
+  <header class="shell" style="gap:.5rem 1rem">
+    <h1>🧪 Quotes Audio App</h1>
+    <p>Sincroniza texto + audio, con modo oscuro y diseño responsive.</p>
+  </header>
+
+  <!-- MAIN -->
+  <main class="shell">
+    <!-- Quote Card -->
+    <section class="card" id="quoteCard">
+      <header>
+        <h2 class="quote-title" id="quoteTitle">Quote I</h2>
+        <div class="progress"><span class="bar" id="progressBar"></span></div>
+      </header>
+      <article class="quote-display" id="quoteDisplay"></article>
+
+      <!-- Audio element (hidden) -->
+      <audio id="audioPlayer" preload="metadata"></audio>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button class="btn" id="prevBtn" aria-label="Prev"><i data-feather="rewind"></i></button>
+        <button class="btn primary" id="playPauseBtn" aria-label="Play"><i data-feather="play"></i></button>
+        <button class="btn" id="stopBtn" aria-label="Stop"><i data-feather="square"></i></button>
+        <button class="btn" id="nextBtn" aria-label="Next"><i data-feather="fast-forward"></i></button>
+      </div>
+    </section>
+
+    
   <div class="grammar">
     <h2>🔍 ¿Qué es “There is / There are”?</h2>
     <p>Se usa para decir que algo existe o está presente en un lugar.</p>
@@ -585,7 +614,7 @@
   <!-- ERROR BANNER -->
   <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
 
-  <!-- ————————————  LOGIC  ————————————-->
+  <!--————————————  LOGIC  ————————————-->
   <script>
   (()=>{
     /* Simple helper */
