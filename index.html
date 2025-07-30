@@ -8,6 +8,7 @@
   <script src="https://unpkg.com/feather-icons"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
    <style>
+    
     /* Paleta CH + CE: azul, verde neón, gris oscuro, blanco */
     :root {
       --azul: #007FFF;
@@ -161,6 +162,143 @@
   <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
 
   <script src="script.js"></script>
+
+
+  <style>
+:root{
+  --bg-dark:#0d0d0d;
+  --txt-light:#f5f5f5;
+  --accent:#6366f1;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg-dark) center/cover fixed;
+  color:var(--txt-light);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  transition:background-image 1s ease-in-out;
+}
+
+/* ---------- UI ---------- */
+.lang-switcher{
+  position:fixed;top:1rem;right:1rem;
+  background:rgba(0,0,0,.55);
+  padding:0.4rem 0.7rem;
+  border-radius:999px;
+  display:flex;gap:0.4rem;
+  z-index:10;
+}
+.lang-switcher button{
+  border:none;background:transparent;
+  color:var(--txt-light);font-weight:600;
+  padding:0.35rem 0.9rem;border-radius:999px;
+  cursor:pointer;transition:.25s;
+}
+.lang-switcher button:hover,
+.lang-switcher button.active{
+  background:var(--txt-light);color:#000;
+}
+
+.poem-card{
+  max-width:600px;text-align:center;
+  background:rgba(0,0,0,.6);
+  padding:2.2rem 2rem;border-radius:1rem;
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 24px rgba(255,255,255,.1);
+  transition:transform .4s ease;
+}
+.poem-card:hover{transform:scale(1.02)}
+
+.poem-title{font-size:1.9rem;font-weight:700;margin-bottom:1rem}
+.poem-text{font-size:1.2rem;font-style:italic;line-height:1.55;margin-bottom:2rem}
+
+.next-btn{
+  background:var(--accent);color:#fff;
+  border:none;border-radius:999px;
+  padding:0.75rem 2.4rem;cursor:pointer;
+  font-size:1rem;font-weight:600;
+  transition:.3s;
+}
+.next-btn:hover{background:#4f46e5;transform:translateY(-2px)}
+.next-btn:active{transform:translateY(0)}
+</style>
+</head>
+<body class="bg-misty">
+
+<!-- Selector de idioma -->
+<div class="lang-switcher">
+  <button data-lang="es" class="active">ES</button>
+  <button data-lang="en">EN</button>
+  <button data-lang="it">IT</button>
+</div>
+
+<!-- Tarjeta del poema -->
+<div class="poem-card">
+  <div class="poem-title" id="poem-title"></div>
+  <div class="poem-text"  id="poem-text"></div>
+  <button class="next-btn" id="next-btn">Next</button>
+</div>
+
+<script>
+// ----- DATA -----
+const poems = [
+  { id:1, bg:'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+    title:{es:'Diez muchachas', en:'Ten girls', it:'Dieci ragazze'},
+    text:{es:'En Viena hay diez muchachas, un hombro donde solloza la muerte...',
+          en:'In Vienna there are ten girls, a shoulder where death sobs...',
+          it:'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte...'}},
+  { id:2, bg:'https://images.unsplash.com/photo-1602524819641-3c89723a87bd?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+    title:{es:'Boca cerrada', en:'Mouth closed', it:'Bocca chiusa'},
+    text:{es:'Toma este vals con la boca cerrada.',
+          en:'Take this waltz with your mouth closed.',
+          it:'Prendi questo valzer con la bocca chiusa.'}},
+  { id:3, bg:'https://images.unsplash.com/photo-1554106273-9e9d22b1a1fc?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+    title:{es:'Ático', en:'Attic', it:'Soffitta'},
+    text:{es:'Verso del ático…', en:'Attic verse…', it:'Verso della soffitta…'}},
+  { id:4, bg:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&amp;fit=crop&amp;w=1600&amp;q=80',
+    title:{es:'Tren', en:'Train', it:'Treno'},
+    text:{es:'Verso del tren…', en:'Train verse…', it:'Verso del treno…'}},
+];
+
+let lang='es';
+let idx=0;
+
+// ----- ELEMENTOS -----
+const titleEl=document.getElementById('poem-title');
+const textEl =document.getElementById('poem-text');
+const nextBtn=document.getElementById('next-btn');
+const langBtns=document.querySelectorAll('.lang-switcher button');
+
+// ----- FUNCIONES -----
+function render(){
+  const {title,text,bg}=poems[idx];
+  titleEl.textContent=title[lang];
+  textEl.textContent =text[lang];
+  document.body.style.backgroundImage=`url('${bg}')`;
+}
+function nextVerse(){
+  idx = (idx+1) % poems.length;
+  render();
+}
+function switchLang(e){
+  lang=e.target.dataset.lang;
+  langBtns.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  render();
+}
+
+// ----- LISTENERS -----
+nextBtn.addEventListener('click',nextVerse);
+langBtns.forEach(b=>b.addEventListener('click',switchLang));
+
+// ----- INIT -----
+render();
+</script>
+
 
   <h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
 
