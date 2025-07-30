@@ -118,6 +118,120 @@
       </span>
     </header>
 
+    <div class="container">
+    <h1>🧪 All-in-One Science Tools</h1>
+    <p>Diseñado para estudio, productividad y ciencia.</p>
+    <button onclick="cambiarFondo()">Cambiar fondo</button>
+  </div>
+
+  <script>
+    const fondos = [
+      getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
+      getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
+      getComputedStyle(document.documentElement).getPropertyValue('--bg3')
+    ];
+
+    let fondoIndex = localStorage.getItem('bgIndex') || 0;
+    document.body.style.backgroundImage = fondos[fondoIndex];
+
+    function cambiarFondo() {
+      fondoIndex = (parseInt(fondoIndex) + 1) % fondos.length;
+      document.body.style.backgroundImage = fondos[fondoIndex];
+      localStorage.setItem('bgIndex', fondoIndex);
+    }
+  </script>
+<h1>🎓 🏆 Top Estudiantes - Ranking Semanal</h1>
+
+  <div class="ranking-section">
+    <!-- Ranking y gamificación existentes -->
+    <!-- ... contenido anterior ... -->
+
+    <div class="phase-sim">
+      <h2 class="section-title">⚛️ Simulador de Cambios de Estado</h2>
+      <label for="estado">Estado actual:</label>
+      <select id="estado">
+        <option value="sólido">Sólido</option>
+        <option value="líquido">Líquido</option>
+        <option value="gas">Gas</option>
+      </select>
+
+      <label for="temperatura">Temperatura (°C):</label>
+      <input type="number" id="temperatura" value="25" />
+
+      <button onclick="simularCambio()">Simular</button>
+      <p id="resultado"></p>
+    </div>
+
+    <div class="mini-game">
+      <h2 class="section-title">🎮 Juego: Click Rápido</h2>
+      <p>Haz clic lo más rápido posible en 5 segundos.</p>
+      <button onclick="startGame()">Iniciar juego</button>
+      <p id="gameScore"></p>
+      <canvas id="gameCanvas" width="200" height="200"></canvas>
+    </div>
+  </div>
+
+  <script>
+    function simularCambio() {
+      const estado = document.getElementById("estado").value;
+      const temp = parseFloat(document.getElementById("temperatura").value);
+      let nuevoEstado = estado;
+
+      if (estado === "sólido") {
+        if (temp >= 0 && temp < 100) nuevoEstado = "líquido";
+        else if (temp >= 100) nuevoEstado = "gas";
+      } else if (estado === "líquido") {
+        if (temp < 0) nuevoEstado = "sólido";
+        else if (temp >= 100) nuevoEstado = "gas";
+      } else if (estado === "gas") {
+        if (temp < 100 && temp >= 0) nuevoEstado = "líquido";
+        else if (temp < 0) nuevoEstado = "sólido";
+      }
+
+      document.getElementById("resultado").innerText = `Nuevo estado: ${nuevoEstado}`;
+    }
+
+    // Mini juego click rápido
+    let clickCount = 0;
+    let timer;
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function startGame() {
+      clickCount = 0;
+      document.getElementById("gameScore").innerText = "¡Haz clic en el círculo!";
+      ctx.clearRect(0, 0, 200, 200);
+      canvas.addEventListener("click", countClick);
+      drawCircle();
+
+      timer = setTimeout(() => {
+        canvas.removeEventListener("click", countClick);
+        ctx.clearRect(0, 0, 200, 200);
+        document.getElementById("gameScore").innerText = `Puntaje final: ${clickCount}`;
+      }, 5000);
+    }
+
+    function drawCircle() {
+      ctx.fillStyle = "#39FF14";
+      ctx.beginPath();
+      ctx.arc(100, 100, 30, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function countClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dx = x - 100;
+      const dy = y - 100;
+      if (Math.sqrt(dx * dx + dy * dy) <= 30) {
+        clickCount++;
+        drawCircle();
+      }
+    }
+  </script>
+
+  
     <main class="main-content">
       <div class="quote-container">
         <h2 id="quoteTitle" class="quote-title"></h2>
