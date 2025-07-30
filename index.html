@@ -3,145 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quotes & Study App – Gamified Edition</title>
-  
-  <!-- Inter & Feather -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script defer src="https://unpkg.com/feather-icons"></script>
-
-  <!-- ————————————  GLOBAL STYLES  ————————————-->  
+  <title>Verbos + Gramática</title>
   <style>
-    :root{
-      --primary:#6366f1;--primary-light:#a5b4ff;--surface:#fff;--surface-2:#f9fafb;--border:#e5e7eb;
-      --text:#111827;--text-2:#6b7280;--radius:1rem;--shadow:0 4px 6px rgba(0,0,0,.05);
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
     }
-    @media (prefers-color-scheme:dark){
-      :root{--surface:#1f2937;--surface-2:#111827;--border:#374151;--text:#f3f4f6;--text-2:#9ca3af}
+
+    h1, h2 {
+      text-align: center;
     }
-    body{margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--surface-2);color:var(--text);transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
-    .shell{max-width:960px;margin:auto;padding:2rem 1rem;display:grid;gap:2rem}
-    h1{font-size:1.75rem;font-weight:600;margin:0}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;display:flex;flex-direction:column;gap:1rem}
-    .btn{display:grid;place-items:center;width:56px;height:56px;border:2px solid var(--primary);border-radius:18px;background:#fff;color:var(--text);font-size:1.5rem;cursor:pointer;transition:background .2s}
-    .btn.primary{background:var(--primary);color:#fff}
-    .btn:active{transform:scale(.95)}
-    .quote-title{font-weight:600;font-size:1.25rem;margin:0}
-    .quote-display{min-height:140px;line-height:1.6}
-    .word{transition:all .15s;padding:0 2px;border-radius:4px}
-    .word.highlighted{background:var(--primary);color:#fff}
-    .progress{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-    .bar{height:100%;width:0;background:var(--primary);transition:width .25s}
-    #darkModeBtn{position:fixed;top:1rem;right:1rem;padding:.5rem .75rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:500;cursor:pointer;z-index:20}
-    /* Study Section */
-    .answers{display:grid;gap:.75rem;margin-top:1rem}
-    .answer-btn{background:#06b6d4;color:#fff;border:none;border-radius:8px;padding:.5rem 1rem;font-size:1rem;cursor:pointer;transition:filter .15s}
-    .answer-btn:hover{filter:brightness(1.1)}
-    .answer-btn.correct{background:#059669}
-    .answer-btn.wrong{background:#dc2626}
-    .feedback{min-height:24px;font-weight:500;margin-top:.5rem}
-    .status{display:flex;justify-content:space-between;font-size:.95rem;margin-top:1rem}
-    @media(max-width:600px){.btn{width:46px;height:46px}}
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 2rem auto;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .option {
+      background: #333;
+      border: none;
+      color: white;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem auto;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+      font-size: 1rem;
+      display: block;
+    }
+
+    .option.correct {
+      background-color: #2e7d32;
+    }
+
+    .option.incorrect {
+      background-color: #c62828;
+    }
+
+    .next-btn {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grammar {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 2rem auto;
+      max-width: 700px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .grammar table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .grammar th, .grammar td {
+      border: 1px solid #444;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .tag {
+      background: #333;
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .example {
+      background: #222;
+      padding: 0.5rem 1rem;
+      border-left: 4px solid #6366f1;
+      margin: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
-  <button id="darkModeBtn">🌙 Modo Oscuro</button>
 
-  <!-- HEADER -->
-  <header class="shell" style="gap:.5rem 1rem">
-    <h1>🧪 Quotes & Study App</h1>
-    <p>Texto‑audio sincronizado + prácticas lúdicas con emotional design.</p>
-  </header>
+  <div class="card">
+    <h1>🎯 Juego de Verbos Irregulares</h1>
+    <div class="question" id="question">Cargando pregunta...</div>
+    <div id="options"></div>
+    <button class="next-btn" onclick="loadQuestion()">Siguiente</button>
+  </div>
 
-  <!-- MAIN -->
-  <main class="shell">
-    <!-- Quote Card -->
-    <section class="card" id="quoteCard">
-      <header>
-        <h2 class="quote-title" id="quoteTitle">Quote I</h2>
-        <div class="progress"><span class="bar" id="progressBar"></span></div>
-      </header>
-      <article class="quote-display" id="quoteDisplay"></article>
-      <audio id="audioPlayer" preload="metadata"></audio>
-      <div class="controls">
-        <button class="btn" id="prevBtn" aria-label="Prev"><i data-feather="rewind"></i></button>
-        <button class="btn primary" id="playPauseBtn" aria-label="Play"><i data-feather="play"></i></button>
-        <button class="btn" id="stopBtn" aria-label="Stop"><i data-feather="square"></i></button>
-        <button class="btn" id="nextBtn" aria-label="Next"><i data-feather="fast-forward"></i></button>
-      </div>
-    </section>
+  <div class="grammar">
+    <h2>🔍 ¿Qué es “There is / There are”?</h2>
+    <p>Se usa para decir que algo existe o está presente en un lugar.</p>
 
-    <!-- STUDY SECTION  (lúdica + emotional design) -->
-    <section class="card" id="studySection">
-      <h2 class="quote-title">🎯 Zona de Estudio Interactiva</h2>
-      <div class="quiz-card">
-        <p id="questionText"></p>
-        <div id="answers" class="answers"></div>
-        <p id="feedback" class="feedback"></p>
-      </div>
-      <div class="status">
-        <span>XP 💡 <strong id="xpDisplay">0</strong></span>
-        <span>Personajes 🔥 <strong id="charsDisplay">Ninguno</strong></span>
-      </div>
-    </section>
-  </main>
+    <h3>📋 Estructura básica:</h3>
+    <table>
+      <tr><th>Forma</th><th>Singular / Incontable</th><th>Plural</th></tr>
+      <tr><td>✅ Afirmativa</td><td>There is a cat / some milk</td><td>There are two books</td></tr>
+      <tr><td>❌ Negativa</td><td>There isn’t a chair / any water</td><td>There aren’t apples</td></tr>
+      <tr><td>❓ Interrogativa</td><td>Is there a problem?</td><td>Are there any students?</td></tr>
+    </table>
 
-  <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
+    <h3>📌 Cuándo usar cada uno:</h3>
+    <div class="example">There is → There is a dog / There is some water</div>
+    <div class="example">There are → There are many people</div>
 
-  <!-- ————————————  LOGIC  ————————————-->
+    <h3>❗Palabras clave comunes:</h3>
+    <div class="example">There is some juice / There aren’t any bananas</div>
+    <div class="example">Is there much time? / Are there many students?</div>
+
+    <h3>🔄 Variaciones útiles:</h3>
+    <table>
+      <tr><th>Tiempo verbal</th><th>Ejemplo</th></tr>
+      <tr><td>Futuro</td><td>There will be a test tomorrow</td></tr>
+      <tr><td>Presente perfecto</td><td>There has been a mistake</td></tr>
+      <tr><td>Pasado</td><td>There was a problem / There were books</td></tr>
+    </table>
+
+    <h3>✍️ Práctica rápida:</h3>
+    <p>A. Completa:<br>
+    ___ a spider in the bathroom → ✅ <b>There is</b><br>
+    ___ many tourists → ✅ <b>There are</b></p>
+
+    <p>B. Forma negativa:<br>
+    There is a chair → ❌ <b>There isn’t a chair</b><br>
+    There are apples → ❌ <b>There aren’t apples</b></p>
+
+    <p>C. Preguntas:<br>
+    There is a problem → ❓ <b>Is there a problem?</b><br>
+    There are cookies → ❓ <b>Are there cookies?</b></p>
+
+    <h3>🧠 Mini resumen:</h3>
+    <ul>
+      <li>✅ <b>There is</b> → singular o incontable</li>
+      <li>✅ <b>There are</b> → plural</li>
+      <li>❌ Negativa → <b>isn’t / aren’t</b></li>
+      <li>❓ Pregunta → <b>Is there...? / Are there...?</b></li>
+    </ul>
+  </div>
+
   <script>
-  (()=>{
-    const $=sel=>document.querySelector(sel);
-    /* Dark mode */
-    const darkBtn=$('#darkModeBtn');
-    const applyDark=()=>{document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'));darkBtn.textContent=document.body.classList.contains('dark')?'☀️ Modo Claro':'🌙 Modo Oscuro';};
-    if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');applyDark();darkBtn.onclick=applyDark;
-
-    /* Feather refresh */
-    const icons=()=>{if(window.feather)feather.replace();};
-
-    /* Quotes dataset */
-    const quotes=[{id:'I',text:`They'll attend a party and pass a small note under the table, and they'll write something beautiful…`},{id:'XX',text:`One cannot articulate language without diagnosis nor remedies…`},{id:'CROSS',text:`I've learned from the dreams of a cross…`}];
-    let qIdx=0,words=[],isPlaying=false,currentWord=0;
-    const synth=window.speechSynthesis;let utterance;
-    const quoteTitle=$('#quoteTitle'),quoteDisplay=$('#quoteDisplay'),bar=$('#progressBar');
-
-    function loadQuote(i){qIdx=i;const q=quotes[i];quoteTitle.textContent=`Quote ${q.id}`;words=q.text.split(/\s+/);quoteDisplay.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');bar.style.width='0%';highlight(-1);updateNav();}
-    function highlight(i){quoteDisplay.querySelectorAll('.word').forEach((w,k)=>w.classList.toggle('highlighted',k===i));}
-    function play(){isPlaying=true;$('#playPauseBtn i').dataset.feather='pause';icons();utterance=new SpeechSynthesisUtterance(quotes[qIdx].text);utterance.rate=1;utterance.onboundary=e=>{if(e.name==='word'){currentWord++;highlight(currentWord-1);bar.style.width=`${(currentWord/words.length)*100}%`;}};utterance.onend=stop;synth.speak(utterance);}
-    function stop(){isPlaying=false;currentWord=0;highlight(-1);bar.style.width='0%';synth.cancel();$('#playPauseBtn i').dataset.feather='play';icons();}
-    $('#playPauseBtn').onclick=()=>isPlaying?stop():play();$('#stopBtn').onclick=stop;
-    $('#prevBtn').onclick=()=>{if(qIdx>0){stop();loadQuote(--qIdx);}};
-    $('#nextBtn').onclick=()=>{if(qIdx<quotes.length-1){stop();loadQuote(++qIdx);}};
-    function updateNav(){$('#prevBtn').disabled=qIdx===0;$('#nextBtn').disabled=qIdx===quotes.length-1;}
-    loadQuote(0);icons();
-
-    /* ——— STUDY QUIZ ——— */
-    const quiz=[
-      {q:'¿Cuál es la capital de Francia?',a:['París','Madrid','Roma'],correct:0,emoji:'🎉'},
-      {q:'2 × 3 = ?',a:['5','6','8'],correct:1,emoji:'🚀'},
-      {q:'Color del cielo despejado',a:['Azul','Verde','Rojo'],correct:0,emoji:'☁️'}
+    const verbs = [
+      {inf: "be", past: "was/were", part: "been"},
+      {inf: "begin", past: "began", part: "begun"},
+      {inf: "break", past: "broke", part: "broken"},
+      {inf: "choose", past: "chose", part: "chosen"},
+      {inf: "come", past: "came", part: "come"},
+      {inf: "do", past: "did", part: "done"},
+      {inf: "drink", past: "drank", part: "drunk"},
+      {inf: "eat", past: "ate", part: "eaten"},
+      {inf: "go", past: "went", part: "gone"},
+      {inf: "see", past: "saw", part: "seen"},
+      {inf: "write", past: "wrote", part: "written"},
     ];
-    let cur=0,xp=parseInt(localStorage.getItem('xp')||'0');
-    const unlocked=JSON.parse(localStorage.getItem('chars')||'[]');
-    const xpDisplay=$('#xpDisplay'),charsDisplay=$('#charsDisplay');
-    xpDisplay.textContent=xp;
-    charsDisplay.textContent=unlocked.length?unlocked.join(', '):'Ninguno';
 
-    function renderQuestion(){const data=quiz[cur];$('#questionText').textContent='Pregunta: '+data.q;const ans=$('#answers');ans.innerHTML='';data.a.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='answer-btn';btn.textContent=opt;btn.onclick=()=>check(i);ans.appendChild(btn);});$('#feedback').textContent='';}
-
-    function confetti(){// simple emoji burst
-      const burst=document.createElement('div');burst.textContent='✨';burst.style.position='fixed';burst.style.left=Math.random()*100+'vw';burst.style.top='-2rem';burst.style.fontSize='2rem';burst.style.animation='fall 1s ease-out forwards';document.body.appendChild(burst);setTimeout(()=>burst.remove(),1000);
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
     }
-    const style=document.createElement('style');style.textContent='@keyframes fall{to{transform:translateY(100vh);opacity:0}}';document.head.appendChild(style);
 
-    function check(idx){const data=quiz[cur];const buttons=document.querySelectorAll('.answer-btn');buttons.forEach(b=>b.disabled=true);
-      if(idx===data.correct){buttons[idx].classList.add('correct');$('#feedback').textContent=data.emoji+' ¡Correcto!';xp+=20;xpDisplay.textContent=xp;localStorage.setItem('xp',xp);confetti();
-        if(xp>=60&&unlocked.indexOf('🦸‍♂️')===-1){unlocked.push('🦸‍♂️');charsDisplay.textContent=unlocked.join(', ');localStorage.setItem('chars',JSON.stringify(unlocked));}
-      }else{buttons[idx].classList.add('wrong');$('#feedback').textContent='❌ Incorrecto. Intenta de nuevo.';}
-      setTimeout(()=>{cur=(cur+1)%quiz.length;renderQuestion();},1000);
+    function loadQuestion() {
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      optionsEl.innerHTML = "";
+
+      const verb = verbs[Math.floor(Math.random() * verbs.length)];
+      const options = shuffle([
+        verb.part,
+        ...shuffle(verbs.filter(v => v.part !== verb.part)).slice(0, 3).map(v => v.part)
+      ]);
+
+      questionEl.innerHTML = `¿Cuál es el <b>participio</b> de "<i>${verb.inf}</i>"?`;
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === verb.part) {
+            btn.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+          }
+          document.querySelectorAll(".option").forEach(b => b.disabled = true);
+        };
+        optionsEl.appendChild(btn);
+      });
     }
-    renderQuestion();
-  })();
+
+    loadQuestion();
   </script>
 </body>
 </html>
