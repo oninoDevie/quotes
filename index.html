@@ -3,127 +3,215 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All‑in‑One Science Tools + Poem Experience</title>
+  <title>Quotes Audio App – Responsive Edition</title>
+  
+  <!-- Inter & Feather -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://unpkg.com/feather-icons"></script>
 
-  <!-- Fuentes e iconos -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/feather-icons"></script>
-
-  <!-- Estilos CSS -->
+  <!-- ————————————  GLOBAL STYLES  ————————————-->  
   <style>
-    /* [MISMO STYLE QUE YA TIENES, OMITIDO PARA AHORRAR ESPACIO] */
+    :root{
+      /* Palette */
+      --primary:#6366f1;--primary-light:#a5b4ff;--surface:#fff;--surface-2:#f9fafb;--border:#e5e7eb;
+      --text:#111827;--text-2:#6b7280;--radius:1rem;--shadow:0 4px 6px rgba(0,0,0,.05);
+      /* Dark Mode overrides (filled via JS) */
+    }
+    @media (prefers-color-scheme:dark){
+      :root{--surface:#1f2937;--surface-2:#111827;--border:#374151;--text:#f3f4f6;--text-2:#9ca3af}
+    }
+    body{margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--surface-2);color:var(--text);transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
+    .shell{max-width:960px;margin:auto;padding:2rem 1rem;display:grid;gap:2rem}
+    h1{font-size:1.75rem;font-weight:600;margin:0}
+    /* Cards */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;display:flex;flex-direction:column;gap:1rem}
+    /* Controls */
+    .controls{display:flex;justify-content:center;gap:1rem;margin-top:1rem}
+    .btn{display:grid;place-items:center;width:56px;height:56px;border:2px solid var(--primary);border-radius:18px;background:#fff;color:var(--text);font-size:1.5rem;cursor:pointer;transition:background .2s}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn:active{transform:scale(.95)}
+    /* Quote content */
+    .quote-title{font-weight:600;font-size:1.25rem;margin:0}
+    .quote-display{min-height:140px;line-height:1.6}
+    .word{transition:all .15s;padding:0 2px;border-radius:4px}
+    .word.highlighted{background:var(--primary);color:#fff}
+    /* Progress */
+    .progress{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+    .bar{height:100%;width:0;background:var(--primary);transition:width .25s}
+    /* Dark mode toggle */
+    #darkModeBtn{position:fixed;top:1rem;right:1rem;padding:.5rem .75rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:500;cursor:pointer;z-index:20}
+    /* Responsive */
+    @media(max-width:600px){.btn{width:46px;height:46px}}
   </style>
 </head>
-
 <body>
+  <button id="darkModeBtn">🌙 Modo Oscuro</button>
+
   <!-- HEADER -->
-  <div class="container">
-    <h1>🧪 All‑in‑One Science Tools</h1>
-    <p>Diseñado para estudio, productividad y ciencia.</p>
-    <button id="btnBg" class="btn">Cambiar fondo</button>
-  </div>
+  <header class="shell" style="gap:.5rem 1rem">
+    <h1>🧪 Quotes Audio App</h1>
+    <p>Sincroniza texto + audio, con modo oscuro y diseño responsive.</p>
+  </header>
 
-  <!-- POEM EXPERIENCE -->
-  <nav class="lang-switcher">
-    <button data-lang="es" class="active">ES</button>
-    <button data-lang="en">EN</button>
-    <button data-lang="it">IT</button>
-  </nav>
+  <!-- MAIN -->
+  <main class="shell">
+    <!-- Quote Card -->
+    <section class="card" id="quoteCard">
+      <header>
+        <h2 class="quote-title" id="quoteTitle">Quote I</h2>
+        <div class="progress"><span class="bar" id="progressBar"></span></div>
+      </header>
+      <article class="quote-display" id="quoteDisplay"></article>
 
-  <section class="poem-card">
-    <h2 id="poem-title" class="poem-title"></h2>
-    <p id="poem-text" class="poem-text"></p>
-    <button id="next-btn" class="next-btn">Next</button>
-  </section>
+      <!-- Audio element (hidden) -->
+      <audio id="audioPlayer" preload="metadata"></audio>
 
-  <!-- RANKING Y MINI-APPS -->
-  <section class="ranking-section">
-    <h2 class="section-title">🎓 🏆 Top Estudiantes – Ranking Semanal</h2>
-    <ul style="list-style:none;text-align:left;line-height:1.5;font-size:.95rem;padding-left:1rem">
-      <li>🥇 <strong>Valeria Ríos</strong> — 980 pts</li>
-      <li>🥈 <strong>Andrés León</strong> — 910 pts</li>
-      <li>🥉 <strong>Fiorella Martínez</strong> — 880 pts</li>
-    </ul>
-
-    <div class="phase-sim">
-      <h3 class="section-title">⚛️ Simulador de Cambios de Estado</h3>
-      <label for="estado">Estado actual:</label>
-      <select id="estado">
-        <option value="sólido">Sólido</option>
-        <option value="líquido">Líquido</option>
-        <option value="gas">Gas</option>
-      </select>
-      <label for="temp">Temperatura (°C):</label>
-      <input type="number" id="temp" value="25" />
-      <button id="btnSim" class="btn" style="margin-top:1rem">Simular</button>
-      <p id="resultado"></p>
+      <!-- Controls -->
+      <div class="controls">
+        <button class="btn" id="prevBtn" aria-label="Prev"><i data-feather="rewind"></i></button>
+        <button class="btn primary" id="playPauseBtn" aria-label="Play"><i data-feather="play"></i></button>
+        <button class="btn" id="stopBtn" aria-label="Stop"><i data-feather="square"></i></button>
+        <button class="btn" id="nextBtn" aria-label="Next"><i data-feather="fast-forward"></i></button>
+      </div>
+    </section>
+  </main>
+ <section class="literary-text">
+    <h2 class="section-title">⏳ Tabla Evolutiva (modo oscuro)</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>ERA</th>
+            <th>PERÍODO</th>
+            <th>ESPECIES</th>
+            <th>ESTADIO EVOLUTIVO</th>
+            <th>Reloj de 24 horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">PROTOZOICA</td><td>Arcaico</td><td>🌋</td><td>No existe la vida; erupciones volcánicas</td><td>00:00</td></tr>
+          <tr><td>Precámbrico</td><td>🦠🟢</td><td>Procariontes, cianobacterias, oxígeno en el aire</td><td>04:00</td></tr>
+          <tr><td rowspan="2">PROTOZOICA</td><td>Criogénico</td><td>🧬❄️</td><td>Células complejas (eucariotas), Tierra helada</td><td>15:00</td></tr>
+          <tr><td>Ediacárico</td><td>🪱</td><td>Criaturas pluricelulares</td><td>20:50</td></tr>
+          <tr><td rowspan="6">PALEOZOICA</td><td>Cámbrico</td><td>🐚🦐</td><td>Conchas, huesos, dientes</td><td rowspan="6">21:50</td></tr>
+          <tr><td>Ordovícico</td><td>🦈</td><td>Vertebrados</td></tr>
+          <tr><td>Silúrico</td><td>🌿🪰</td><td>Plantas primitivas, gusanos</td></tr>
+          <tr><td>Devónico</td><td>🐟🐛</td><td>Peces óseos, tetrápodos</td></tr>
+          <tr><td>Carbonífero</td><td>🦗🦎</td><td>Anfibios, reptiles, hongos</td></tr>
+          <tr><td>Pérmico</td><td>🦎🌍</td><td>Reptiles medio mamíferos, Pangea</td></tr>
+          <tr><td rowspan="3">MESOZOICA</td><td>Triásico</td><td>🐊🦣</td><td>Primeros dinosaurios, pequeños mamíferos</td><td rowspan="3">22:50 → 23:40</td></tr>
+          <tr><td>Jurásico</td><td>🦕🦖</td><td>Dinosaurios dominan tierra, pterosaurios el cielo</td></tr>
+          <tr><td>Cretácico</td><td>🐱🌺</td><td>Últimos dinosaurios, flores, aves</td></tr>
+          <tr><td rowspan="5">CENOZOICA</td><td>Paleoceno</td><td>🐁🦣</td><td>Mamíferos aumentan tamaño</td><td>23:40</td></tr>
+          <tr><td>Eoceno</td><td>🐬</td><td>Ballenas regresan al océano</td><td></td></tr>
+          <tr><td>Oligoceno</td><td>🐎</td><td>Caballos evolucionan</td><td></td></tr>
+          <tr><td>Mioceno</td><td>🦧</td><td>Simios migran</td><td></td></tr>
+          <tr><td>Plioceno</td><td>🧍‍♂️</td><td>Primeros homínidos</td><td>23:57</td></tr>
+          <tr><td rowspan="3">HISTÓRICA</td><td>Pleistoceno</td><td>🧑‍🦲🛠️</td><td>Cazadores recolectores, Edad de Hielo</td><td>23:59</td></tr>
+          <tr><td>Holoceno</td><td>🧑‍🎓</td><td>Agricultura, domesticación, escritura</td><td></td></tr>
+          <tr><td>Antropoceno</td><td>🌍🛰️</td><td>Revolución industrial, CO₂, calentamiento global</td><td>24:00</td></tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="mini-game">
-      <h3 class="section-title">🎮 Juego: Click Rápido</h3>
-      <p>Haz clic en el círculo tantas veces como puedas (5 s).</p>
-      <button id="btnGame" class="btn">Iniciar juego</button>
-      <p id="gameScore"></p>
-      <canvas id="gameCanvas" width="200" height="200"></canvas>
-    </div>
   </section>
 
-  <!-- BLOQUE LITERARIO -->
-  <section class="literary-text">
-    <h2 class="section-title">Fragmentos & Cronologías Prohibidas</h2>
-    <pre id="quotes-section">
-// Aquí se insertarán automáticamente todas las citas enumeradas 1, 2, 3, ...
-// (por razones de rendimiento y espacio, el contenido se incluirá desde un archivo externo o módulo JS en la próxima iteración)
-    </pre>
-  </section>
 
-  <!-- SCRIPT FINAL -->
+  <!-- ERROR BANNER -->
+  <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
+
+  <!-- ————————————  LOGIC  ————————————-->
   <script>
-    const fondos = [
-      getComputedStyle(document.documentElement).getPropertyValue('--bg1'),
-      getComputedStyle(document.documentElement).getPropertyValue('--bg2'),
-      getComputedStyle(document.documentElement).getPropertyValue('--bg3')
+  (()=>{
+    /* Simple helper */
+    const $=sel=>document.querySelector(sel);
+
+    /* Dark mode persist */
+    const darkBtn=$('#darkModeBtn');
+    const toggleDark=()=>{
+      document.body.classList.toggle('dark');
+      localStorage.setItem('dark',document.body.classList.contains('dark'));
+      darkBtn.textContent=document.body.classList.contains('dark')?'☀️ Modo Claro':'🌙 Modo Oscuro';
+    };
+    if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
+    toggleDark(); // update label first time
+    darkBtn.addEventListener('click',toggleDark);
+
+    /* Quotes Dataset (trimmed) */
+    const quotes=[
+      {id:'I',text:`They'll attend a party and pass a small note under the table, and they'll write something beautiful…`},
+      {id:'XX',text:`One cannot articulate language without diagnosis nor remedies…`},
+      {id:'CROSS',text:`I've learned from the dreams of a cross…`}
     ];
-    let fondoIdx = parseInt(localStorage.getItem('bgIndex') || 0);
-    document.body.style.backgroundImage = fondos[fondoIdx];
-    document.getElementById('btnBg').onclick = () => {
-      fondoIdx = (fondoIdx + 1) % fondos.length;
-      document.body.style.backgroundImage = fondos[fondoIdx];
-      localStorage.setItem('bgIndex', fondoIdx);
+
+    /* State */
+    let idx=0,isPlaying=false,words=[];
+
+    /* Elements */
+    const quoteTitle=$('#quoteTitle');
+    const quoteDisplay=$('#quoteDisplay');
+    const audio=$('#audioPlayer');
+    const bar=$('#progressBar');
+    const playBtn=$('#playPauseBtn');
+
+    /* Feather refresh helper */
+    const refreshIcons=()=>{ if(window.feather) feather.replace(); };
+
+    /* Render quote */
+    function loadQuote(i){
+      idx=i;const q=quotes[i];quoteTitle.textContent=`Quote ${q.id}`;
+      words=q.text.split(/\s+/);
+      quoteDisplay.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');
+      bar.style.width='0%';
+      highlight(-1);
+      updateNav();
+    }
+
+    /* Highlight helper */
+    const highlight=i=>{
+      quoteDisplay.querySelectorAll('.word').forEach((w,k)=>w.classList.toggle('highlighted',k===i));
     };
 
-    const poems = [
-      {
-        bg: 'https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1600&q=80',
-        title: { es: 'Diez muchachas', en: 'Ten girls', it: 'Dieci ragazze' },
-        text: {
-          es: 'En Viena hay diez muchachas, un hombro donde solloza la muerte…',
-          en: 'In Vienna there are ten girls, a shoulder where death sobs…',
-          it: 'A Vienna ci sono dieci ragazze, una spalla dove singhiozza la morte…'
-        }
-      }
-    ];
+    /* Navigation buttons */
+    const prevBtn=$('#prevBtn'),nextBtn=$('#nextBtn');
+    function updateNav(){prevBtn.disabled=idx===0;nextBtn.disabled=idx===quotes.length-1;}
+    prevBtn.onclick=()=>{if(idx>0){stop();loadQuote(idx-1);}};
+    nextBtn.onclick=()=>{if(idx<quotes.length-1){stop();loadQuote(idx+1);}};
 
-    let currentPoem = 0;
-    function showPoem(idx) {
-      const lang = document.querySelector('.lang-switcher button.active').dataset.lang;
-      const poem = poems[idx];
-      document.getElementById('poem-title').textContent = poem.title[lang];
-      document.getElementById('poem-text').textContent = poem.text[lang];
-      document.body.style.backgroundImage = `url(${poem.bg})`;
+    /* Speech synthesis */
+    const synth=window.speechSynthesis;
+    let utterance,currentWord=0;
+
+    function speak(){
+      if(!('speechSynthesis'in window))return err('Speech synthesis not supported');
+      utterance=new SpeechSynthesisUtterance(quotes[idx].text);
+      utterance.rate=1;
+      utterance.onboundary=e=>{
+        if(e.name==='word'){
+          currentWord++;
+          highlight(currentWord-1);
+          bar.style.width=`${(currentWord/words.length)*100}%`;
+        }
+      };
+      utterance.onend=stop;
+      synth.speak(utterance);
     }
-    document.getElementById('next-btn').addEventListener('click', () => {
-      currentPoem = (currentPoem + 1) % poems.length;
-      showPoem(currentPoem);
-    });
-    document.querySelectorAll('.lang-switcher button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        showPoem(currentPoem);
-      });
-    });
-    showPoem(currentPoem);
+
+    /* Play / pause / stop */
+    function play(){isPlaying=true;playBtn.querySelector('i').dataset.feather='pause';refreshIcons();speak();}
+    function stop(){isPlaying=false;currentWord=0;highlight(-1);bar.style.width='0%';synth.cancel();playBtn.querySelector('i').dataset.feather='play';refreshIcons();}
+    function toggle(){isPlaying?stop():play();}
+    playBtn.onclick=toggle;
+    $('#stopBtn').onclick=stop;
+
+    /* Error helper */
+    function err(msg){const b=$('#errorBanner');b.textContent=msg;b.style.display='block';setTimeout(()=>b.style.display='none',4000);}
+
+    /* Init */
+    loadQuote(0);refreshIcons();
+  })();
   </script>
+
+
+
 </body>
 </html>
