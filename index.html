@@ -143,6 +143,35 @@
   </style>
 </head>
 <body>
+<div class="card">
+  <h2>🔔 Notificaciones + 🧠 Gamificación XP</h2>
+
+  <div id="notificationLog" style="margin-bottom: 1rem; line-height: 1.6;">
+    <p>📌 Has creado 5 tarjetas DECO (+50 XP)</p>
+    <p>📘 Has enseñado un tema en voz alta (+40 XP)</p>
+    <p>🧪 Has hecho un simulacro sin ayuda (+60 XP)</p>
+    <p>✍️ Has dibujado 2 esquemas (+30 XP)</p>
+  </div>
+
+  <div>
+    <label><strong>Elige tu actividad para calcular XP:</strong></label>
+    <select id="xpAction" style="margin: 0.5rem 0; padding: 0.4rem; border-radius: 5px;">
+      <option value="50">Crear tarjeta DECO (+50 XP)</option>
+      <option value="60">Simulacro sin ayuda (+60 XP)</option>
+      <option value="40">Enseñar en voz alta (+40 XP)</option>
+      <option value="30">Dibujar esquema (+30 XP)</option>
+      <option value="20">Reflexión escrita (+20 XP)</option>
+    </select>
+    <button onclick="addXP()" style="padding: 0.5rem 1rem; background: #00bcd4; color: #000; border: none; border-radius: 6px;">➕ Añadir XP</button>
+  </div>
+
+  <div style="margin-top: 1rem;">
+    <p><strong>Total XP:</strong> <span id="xpTotal">180</span> / 300</p>
+    <div style="background: #263238; border-radius: 10px; overflow: hidden;">
+      <div id="xpBar" style="width: 60%; height: 12px; background: linear-gradient(to right, #00e676, #64ffda); transition: width 0.3s;"></div>
+    </div>
+  </div>
+</div>
 
   <div class="card">
     <h1>🎯 Verbos Irregulares</h1>
@@ -340,6 +369,63 @@
   </div>
 
   <ul id="taskList" style="list-style: none; padding: 0;"></ul>
+</div>
+
+<div class="grammar">
+  <h2>📈 Función de la Oferta – Relación entre Variables</h2>
+
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <img src="/mnt/data/94b554b7-1cdb-4f32-8f33-4ed40d658f2d.png" alt="Función de la oferta económica" style="max-width: 100%; border: 2px solid #64ffda; border-radius: 10px; box-shadow: 0 0 15px #64ffda55;">
+  </div>
+
+  <p><strong>Q<sub>o</sub> = f(P<sub>x</sub>, Co, Tec, Ps, Pc, otros)</strong> — Bajo la condición de <em><u>Ceteris Paribus</u></em></p>
+
+  <ul>
+    <li><strong>Co:</strong> Costo de producción ⬇️ ➜ Oferta ⬇️ (Relación <span style="color:#ff5252;">inversa</span>)</li>
+    <li><strong>Tec:</strong> Tecnología ⬆️ ➜ Oferta ⬆️ (Relación <span style="color:#00e676;">directa</span>)</li>
+    <li><strong>Ps:</strong> Precio de sustitutos ⬆️ ➜ Oferta ⬇️ (Relación <span style="color:#ff5252;">inversa</span>)</li>
+    <li><strong>Pc:</strong> Precio de complementarios ⬆️ ➜ Oferta ⬆️ (Relación <span style="color:#00e676;">directa</span>)</li>
+  </ul>
+
+  <div class="example">
+    <strong>Ejemplo práctico:</strong><br>
+    Si el costo de producir laptops baja gracias a nueva tecnología, la oferta de laptops aumentará.
+  </div>
+
+  <h3>🧠 Tips para examen:</h3>
+  <ul>
+    <li>Memoriza el signo (+/−) de cada variable.</li>
+    <li>Relaciona con experiencias reales: ¿Qué pasa si sube el precio de la gasolina? ¿Y si aparece un nuevo software gratuito?</li>
+    <li>Asocia "ceteris paribus" = todo lo demás constante.</li>
+  </ul>
+</div>
+<div class="grammar">
+  <h2>📈 Función de la Oferta – Relación entre Variables</h2>
+
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <img src="/mnt/data/94b554b7-1cdb-4f32-8f33-4ed40d658f2d.png" alt="Función de la oferta económica" style="max-width: 100%; border: 2px solid #64ffda; border-radius: 10px; box-shadow: 0 0 15px #64ffda55;">
+  </div>
+
+  <p><strong>Q<sub>o</sub> = f(P<sub>x</sub>, Co, Tec, Ps, Pc, otros)</strong> — Bajo la condición de <em><u>Ceteris Paribus</u></em></p>
+
+  <ul>
+    <li><strong>Co:</strong> Costo de producción ⬇️ ➜ Oferta ⬇️ (Relación <span style="color:#ff5252;">inversa</span>)</li>
+    <li><strong>Tec:</strong> Tecnología ⬆️ ➜ Oferta ⬆️ (Relación <span style="color:#00e676;">directa</span>)</li>
+    <li><strong>Ps:</strong> Precio de sustitutos ⬆️ ➜ Oferta ⬇️ (Relación <span style="color:#ff5252;">inversa</span>)</li>
+    <li><strong>Pc:</strong> Precio de complementarios ⬆️ ➜ Oferta ⬆️ (Relación <span style="color:#00e676;">directa</span>)</li>
+  </ul>
+
+  <div class="example">
+    <strong>Ejemplo práctico:</strong><br>
+    Si el costo de producir laptops baja gracias a nueva tecnología, la oferta de laptops aumentará.
+  </div>
+
+  <h3>🧠 Tips para examen:</h3>
+  <ul>
+    <li>Memoriza el signo (+/−) de cada variable.</li>
+    <li>Relaciona con experiencias reales: ¿Qué pasa si sube el precio de la gasolina? ¿Y si aparece un nuevo software gratuito?</li>
+    <li>Asocia "ceteris paribus" = todo lo demás constante.</li>
+  </ul>
 </div>
 
 
