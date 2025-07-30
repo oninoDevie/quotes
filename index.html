@@ -225,6 +225,82 @@
     `;
   }
 </script>
+<div class="card" id="blog-section">
+  <h2>📝 Blog: Pensamientos y Análisis</h2>
+
+  <div id="blog-entries"></div>
+
+  <div style="margin-top:2rem; border-top: 1px solid #64ffda55; padding-top:1rem;">
+    <h3>✍️ Escribe tu propio post</h3>
+    <input type="text" id="blogTitle" placeholder="Título del blog" style="width:100%;padding:0.5rem;margin-bottom:0.5rem;border-radius:5px;border:none;background:#121212;color:#fff;">
+    <textarea id="blogContent" rows="4" placeholder="Escribe aquí tu contenido..." style="width:100%;padding:0.5rem;border-radius:5px;border:none;background:#121212;color:#fff;"></textarea>
+    <button onclick="agregarBlog()" class="next-btn">➕ Agregar Entrada</button>
+  </div>
+</div>
+
+<script>
+  const blogEntries = [
+    {
+      titulo: "📽️ Blade Runner y la Identidad Humana",
+      contenido: `
+        <p><b>¿Qué nos hace humanos?</b> En <i>Blade Runner</i>, la línea entre humano y replicante se desdibuja.</p>
+        <p class="example">“Más humanos que los humanos” – Tyrell Corporation</p>
+        <ul>
+          <li>🤖 Tema central: ¿tienen alma los replicantes?</li>
+          <li>🌧️ Estética: oscura, cyberpunk, existencialista</li>
+          <li>🧠 Ideal para clases de filosofía o psicología</li>
+        </ul>`
+    },
+    {
+      titulo: "🧠 Consejos para Memorizar Verbos Irregulares",
+      contenido: `
+        <ul>
+          <li>🧩 Agrupa por similitud sonora: <b>begin–began–begun</b></li>
+          <li>🎧 Escucha canciones en inglés y repite</li>
+          <li>📒 Usa tarjetas con dibujos mentales</li>
+          <li>🎮 Practica con juegos como los de esta app</li>
+        </ul>`
+    },
+    {
+      titulo: "🎓 ¿Cómo estudiar mejor con la Técnica Pomodoro?",
+      contenido: `
+        <p>La técnica Pomodoro se basa en ciclos de 25 minutos de enfoque profundo y 5 de descanso. Ideal para:</p>
+        <ul>
+          <li>📘 Leer textos filosóficos complejos</li>
+          <li>✍️ Hacer prácticas de inglés</li>
+          <li>🧪 Resolver problemas de ciencias</li>
+        </ul>
+        <p class="example">Sugerencia: usa nuestra app con un temporizador y mini test al final de cada pomodoro.</p>`
+    }
+  ];
+
+  function renderBlogs() {
+    const container = document.getElementById("blog-entries");
+    container.innerHTML = "";
+    blogEntries.forEach(entry => {
+      const div = document.createElement("div");
+      div.classList.add("example");
+      div.style.marginBottom = "1.5rem";
+      div.innerHTML = `<h3>${entry.titulo}</h3>${entry.contenido}`;
+      container.appendChild(div);
+    });
+  }
+
+  function agregarBlog() {
+    const title = document.getElementById("blogTitle").value.trim();
+    const content = document.getElementById("blogContent").value.trim();
+    if (!title || !content) {
+      alert("Por favor escribe título y contenido.");
+      return;
+    }
+    blogEntries.unshift({ titulo: title, contenido: `<p>${content}</p>` });
+    document.getElementById("blogTitle").value = "";
+    document.getElementById("blogContent").value = "";
+    renderBlogs();
+  }
+
+  renderBlogs();
+</script>
 
   <!-- MAIN -->
   <main class="shell">
