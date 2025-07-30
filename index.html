@@ -1149,6 +1149,26 @@
     // Iniciar juego
     loadQuestion();
   </script>
+<div class="card">
+  <h2>📊 Calculadora de Puntaje por Áreas A, B, C, D</h2>
+
+  <p>🧠 <strong>Regla:</strong> +4 por buena / –1 por mala / 0 sin responder</p>
+
+  <label for="careerArea"><strong>Selecciona el área de carrera:</strong></label>
+  <select id="careerArea" style="margin: 0.5rem 0; padding: 0.4rem;">
+    <option value="A">Área A – Letras</option>
+    <option value="B">Área B – Ciencias</option>
+    <option value="C">Área C – Salud</option>
+    <option value="D">Área D – Ingeniería</option>
+  </select>
+
+  <label for="targetScore">🎯 Puntaje objetivo (aproximado):</label>
+  <input type="number" id="targetScore" placeholder="Ej: 250" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;"/>
+
+  <button onclick="calculateRequiredAnswers()" style="padding: 0.5rem 1rem; background: #00bcd4; color: black; border: none; border-radius: 6px;">🧮 Calcular</button>
+
+  <div id="scoreResult" style="margin-top: 1rem; background: #111; padding: 1rem; border-radius: 8px;"></div>
+</div>
 
   <!-- ERROR BANNER -->
   <div id="errorBanner" style="position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#dc2626;color:#fff;padding:.75rem 1rem;border-radius:8px;display:none;z-index:50"></div>
@@ -1512,6 +1532,47 @@
     log.prepend(entry);
   }
 </script>
+<script>
+  function calculateRequiredAnswers() {
+    const area = document.getElementById("careerArea").value;
+    const target = parseInt(document.getElementById("targetScore").value);
+    const resultDiv = document.getElementById("scoreResult");
+
+    if (isNaN(target) || target < 0) {
+      resultDiv.innerHTML = "⚠️ Ingrese un puntaje válido.";
+      return;
+    }
+
+    // Asumimos que no deja preguntas en blanco
+    let buenas = 0;
+    let malas = 0;
+    let score = 0;
+
+    for (let i = 0; i <= 100; i++) {
+      const correct = i;
+      const incorrect = 100 - i;
+      const total = (correct * 4) - (incorrect * 1);
+      if (total >= target) {
+        buenas = correct;
+        malas = incorrect;
+        score = total;
+        break;
+      }
+    }
+
+    resultDiv.innerHTML = `
+      <p>✅ Para alcanzar <strong>${target} puntos</strong> en el área <strong>${area}</strong>, necesitas al menos:</p>
+      <ul>
+        <li><strong>${buenas}</strong> respuestas correctas</li>
+        <li><strong>${malas}</strong> respuestas incorrectas</li>
+        <li>🧠 Puntaje estimado: <strong>${score}</strong></li>
+        <li>⏱️ Tiempo promedio: ${(180 / 100).toFixed(1)} min/pregunta</li>
+      </ul>
+      <p style="color:#a7ffeb">🎓 Consejo: Intenta responder al menos 85 preguntas con seguridad para asegurar tu ingreso.</p>
+    `;
+  }
+</script>
+
 
 </body>
 </html>
